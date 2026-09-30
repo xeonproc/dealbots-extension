@@ -1,18 +1,6 @@
 {
-  "generatedAt": "2026-09-30T17:26:15.729Z",
+  "generatedAt": "2026-09-30T17:29:51.293Z",
   "deals": [
-    {
-      "asin": "B0FZ814WTV",
-      "title": "Lexicon Button-Tufted Wingback Accent Chair w/ Reversible Seat Cushion (Blue) $90.80 + Free Shipping",
-      "image": "https://static.slickdealscdn.com/attachment/5/7/4/5/9/6/3/300x300/21761229.thumb",
-      "price": 90.8,
-      "listPrice": null,
-      "discountPct": null,
-      "priceClaim": null,
-      "requiresCode": false,
-      "blurb": "Button-tufted wingback chair with reversible cushion and free shipping, solid construction at clearance price.",
-      "url": "https://www.amazon.com/dp/B0FZ814WTV?tag=dealbots00-20"
-    },
     {
       "asin": "B0GPHTG8M1",
       "title": "DEWALT 3/8-Inch Industrial Air Coupler with 3/8-Inch FNPT (DXCM036-0240) $6.66 + Free Shipping w/ Prime or on $35+",
@@ -22,8 +10,32 @@
       "discountPct": null,
       "priceClaim": null,
       "requiresCode": false,
-      "blurb": "DEWALT industrial air coupler with high flow capacity (75 SCFM) at budget-friendly price with free shipping.",
+      "blurb": "DEWALT 3/8-inch industrial air coupler delivers 75 SCFM at 90 PSI with free Prime shipping.",
       "url": "https://www.amazon.com/dp/B0GPHTG8M1?tag=dealbots00-20"
+    },
+    {
+      "asin": "B0FZ814WTV",
+      "title": "Lexicon Button-Tufted Wingback Accent Chair w/ Reversible Seat Cushion (Blue) $90.80 + Free Shipping",
+      "image": "https://static.slickdealscdn.com/attachment/5/7/4/5/9/6/3/300x300/21761229.thumb",
+      "price": 90.8,
+      "listPrice": null,
+      "discountPct": null,
+      "priceClaim": null,
+      "requiresCode": false,
+      "blurb": "Lexicon button-tufted wingback accent chair with reversible seat cushion, 300 lb capacity, free shipping.",
+      "url": "https://www.amazon.com/dp/B0FZ814WTV?tag=dealbots00-20"
+    },
+    {
+      "asin": "B07DR9CMGZ",
+      "title": "EVERPLUS Home Door Reinforcement Lock (Silver) $6.49 + Free Shipping w/ Prime or on $35+",
+      "image": "https://static.slickdealscdn.com/attachment/3/3/7/1/0/1/3/4/300x300/21761532.thumb",
+      "price": 6.49,
+      "listPrice": 9.98,
+      "discountPct": 35,
+      "priceClaim": null,
+      "requiresCode": true,
+      "blurb": "EVERPLUS door reinforcement lock with code MQPBRW3E at checkout; 35% off, free Prime shipping.",
+      "url": "https://www.amazon.com/dp/B07DR9CMGZ?tag=dealbots00-20"
     },
     {
       "asin": "B0CBNSK6DY",
@@ -34,7 +46,7 @@
       "discountPct": 29,
       "priceClaim": null,
       "requiresCode": false,
-      "blurb": "609-piece Halo Guilty Spark replica with lights and sounds; 29% off previous price, free Prime shipping.",
+      "blurb": "609-piece Mega Halo 343 Guilty Spark replica with lights and sounds, free Prime shipping.",
       "url": "https://www.amazon.com/dp/B0CBNSK6DY?tag=dealbots00-20"
     },
     {
@@ -46,7 +58,7 @@
       "discountPct": 40,
       "priceClaim": null,
       "requiresCode": true,
-      "blurb": "6-piece wheel brush detailing kit, 40% off with code LWIM5GUN at checkout, free Prime shipping.",
+      "blurb": "6-piece YeewayVeh car wheel detailing brush kit with code LWIM5GUN; 40% off, free Prime shipping.",
       "url": "https://www.amazon.com/dp/B0GKX68RXF?tag=dealbots00-20"
     },
     {
@@ -58,20 +70,8 @@
       "discountPct": 20,
       "priceClaim": null,
       "requiresCode": false,
-      "blurb": "1707-piece MEGA Squid Game staircase set with motion feature, 20% below previous price, free Prime shipping.",
+      "blurb": "1707-piece MEGA Squid Game The Staircase building set with motion, free Prime shipping.",
       "url": "https://www.amazon.com/dp/B0DJSM5TKW?tag=dealbots00-20"
-    },
-    {
-      "asin": "B07DR9CMGZ",
-      "title": "EVERPLUS Home Door Reinforcement Lock (Silver) $6.49 + Free Shipping w/ Prime or on $35+",
-      "image": "https://static.slickdealscdn.com/attachment/3/3/7/1/0/1/3/4/300x300/21761532.thumb",
-      "price": 6.49,
-      "listPrice": 9.98,
-      "discountPct": 35,
-      "priceClaim": null,
-      "requiresCode": true,
-      "blurb": "Home door reinforcement lock, 35% off with code MQPBRW3E at checkout, free Prime shipping.",
-      "url": "https://www.amazon.com/dp/B07DR9CMGZ?tag=dealbots00-20"
     },
     {
       "asin": "B0F18YCFDL",
@@ -82,20 +82,20 @@
       "discountPct": 40,
       "priceClaim": null,
       "requiresCode": true,
-      "blurb": "Ceramic butter dish with bamboo lid and knife, 40% off with code B2R9OQPB at checkout.",
+      "blurb": "Vancasso ceramic butter dish with bamboo lid and knife, code B2R9OQPB; 40% off, free shipping.",
       "url": "https://www.amazon.com/dp/B0F18YCFDL?tag=dealbots00-20"
     },
     {
-      "asin": "B08BWTQ9QF",
-      "title": "Makes Women's Backpack Purse (Various Colors) $14.99 + Free Shipping w/ Prime or on $35+",
-      "image": "https://static.slickdealscdn.com/attachment/3/5/8/2/5/6/8/8/300x300/21760791.thumb",
-      "price": 14.99,
+      "asin": "B071CNQ3TG",
+      "title": "Energizer Ultimate Lithium AAA Batteries (8 Pack), Lithium Triple A Batteries $11.39 or less",
+      "image": "https://static.slickdealscdn.com/attachment/1/1/9/9/5/2/5/2/300x300/21761451.thumb",
+      "price": 10.19,
       "listPrice": null,
       "discountPct": null,
       "priceClaim": null,
       "requiresCode": true,
-      "blurb": "Women's backpack purse in multiple colors, code R40YCYEE required, free Prime shipping included.",
-      "url": "https://www.amazon.com/dp/B08BWTQ9QF?tag=dealbots00-20"
+      "blurb": "Energizer Ultimate Lithium AAA batteries 8-pack with 15% Subscribe & Save discount.",
+      "url": "https://www.amazon.com/dp/B071CNQ3TG?tag=dealbots00-20"
     }
   ]
 }

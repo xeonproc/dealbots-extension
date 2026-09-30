@@ -49,7 +49,10 @@ IT (only) to a higher bar. For each pick, return:
   Otherwise null. Never invent a claim the text doesn't make.
 - "requiresCode": true if a promo/coupon code is needed to reach currentPrice, else false
 - "blurb": one short, factual, enthusiasm-free sentence (max 20 words) explaining why it's a
-  good pick today
+  good pick today. Describe ONLY what the text actually says (product features, the stated
+  price, whether a code is needed). Do NOT characterize the price with words like "clearance",
+  "lowest", "great deal", "bargain", etc. unless the text itself uses that framing — factual
+  product description is fine even when there's no price claim to make.
 
 Return ONLY a raw JSON array of those objects, best pick first. No markdown fences, no
 commentary. If NO candidate has any clearly stated, actionable price, return an empty array [].
