@@ -43,6 +43,10 @@ IT (only) to a higher bar. For each pick, return:
   text — otherwise null
 - "discountPct": integer percent off, ONLY if you can compute it from currentPrice and
   listPrice — otherwise null
+- "priceClaim": ONLY when discountPct is null AND the text itself makes a price-superiority
+  claim with no specific comparison number (e.g. "lowest price ever", "price drop", "best price
+  so far", "all-time low") — a short label (max 4 words) capturing that claim, title-cased.
+  Otherwise null. Never invent a claim the text doesn't make.
 - "requiresCode": true if a promo/coupon code is needed to reach currentPrice, else false
 - "blurb": one short, factual, enthusiasm-free sentence (max 20 words) explaining why it's a
   good pick today
@@ -71,6 +75,7 @@ ${JSON.stringify(
       currentPrice: p.currentPrice,
       listPrice: p.listPrice ?? null,
       discountPct: p.discountPct ?? null,
+      priceClaim: p.discountPct ? null : p.priceClaim ?? null,
       requiresCode: p.requiresCode ?? false,
       blurb: p.blurb,
     }));

@@ -5,7 +5,11 @@ function formatMessage(feed) {
   if (!top) return null;
 
   const price = typeof top.price === "number" ? `$${top.price.toFixed(2)}` : top.price;
-  const discount = top.discountPct ? ` (${top.discountPct}% off)` : "";
+  const discount = top.discountPct
+    ? ` (${top.discountPct}% off)`
+    : top.priceClaim
+    ? ` (${top.priceClaim})`
+    : "";
 
   return (
     `🔥 Today's deal: ${top.title}\n` +

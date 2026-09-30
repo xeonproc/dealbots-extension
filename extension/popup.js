@@ -22,6 +22,8 @@ function renderDeal(deal) {
   const discountEl = node.querySelector(".deal-discount");
   if (deal.discountPct) {
     discountEl.textContent = `${deal.discountPct}% off (was ${formatPrice(deal.listPrice)})`;
+  } else if (deal.priceClaim) {
+    discountEl.textContent = `🔥 ${deal.priceClaim}`;
   } else {
     discountEl.remove();
   }

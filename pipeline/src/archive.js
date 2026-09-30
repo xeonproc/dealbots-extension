@@ -23,6 +23,8 @@ function money(v) {
 function cardHTML(deal, featured) {
   const discount = deal.discountPct
     ? `<span class="discount-badge">🔥 ${deal.discountPct}% OFF</span>`
+    : deal.priceClaim
+    ? `<span class="discount-badge">🔥 ${escapeHTML(deal.priceClaim)}</span>`
     : "";
   const listPrice = deal.listPrice
     ? `<span class="list-price">${money(deal.listPrice)}</span>`
