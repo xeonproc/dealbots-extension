@@ -296,7 +296,7 @@
     return `
       <article class="card${featured ? " featured" : ""}">
         ${flag}
-        <div class="card-image-wrap"><img src="${deal.image || ""}" alt="" loading="lazy" /></div>
+        <div class="card-image-wrap"><img src="${deal.image || ""}" alt="" loading="lazy" referrerpolicy="no-referrer" /></div>
         <div class="card-body">
           <h3 class="card-title">${escapeHTML(deal.title || "Untitled product")}</h3>
           <p class="card-blurb">${escapeHTML(deal.blurb || "")}</p>
