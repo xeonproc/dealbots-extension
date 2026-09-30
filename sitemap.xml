@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://xeonproc.github.io/dealbots-extension/</loc>
+    
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>https://xeonproc.github.io/dealbots-extension/privacy.html</loc>
+    
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://xeonproc.github.io/dealbots-extension/deals/2026-09-30.html</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>never</changefreq>
+  </url>
+</urlset>

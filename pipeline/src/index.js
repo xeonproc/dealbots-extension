@@ -11,6 +11,8 @@ import { findCandidates, findManualCandidates } from "./analyze.js";
 import { rankCandidates } from "./rankWithClaude.js";
 import { rankSlickdealsCandidates } from "./rankSlickdeals.js";
 import { buildFeed } from "./buildFeed.js";
+import { writeArchiveAndSitemap } from "./archive.js";
+import { postToChannels } from "./notify.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const outputPath = path.join(__dirname, "..", "..", "extension", "deals.json");
@@ -80,6 +82,9 @@ async function main() {
   for (const deal of feed.deals) {
     console.log(`  - ${deal.title}: $${deal.price} (${deal.discountPct ?? "?"}% off) -> ${deal.url}`);
   }
+
+  await writeArchiveAndSitemap(feed);
+  await postToChannels(feed);
 }
 
 main().catch((err) => {

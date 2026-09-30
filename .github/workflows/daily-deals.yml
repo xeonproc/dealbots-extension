@@ -26,12 +26,19 @@ jobs:
           DATA_SOURCE: "slickdeals"
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           AFFILIATE_TAG: ${{ vars.AFFILIATE_TAG }}
+          # Social posting — optional. Empty/unset secrets mean notify.js
+          # just logs "not configured" and skips that channel; nothing
+          # breaks until you actually add these secrets in repo settings.
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          MASTODON_INSTANCE_URL: ${{ secrets.MASTODON_INSTANCE_URL }}
+          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
         run: node src/index.js
 
-      - name: Commit updated feed
+      - name: Commit updated feed, archive, and sitemap
         run: |
           git config user.name "dealbots-bot"
           git config user.email "actions@github.com"
-          git add extension/deals.json
-          git diff --cached --quiet || git commit -m "chore: update daily deal feed"
+          git add extension/deals.json deals/ sitemap.xml robots.txt
+          git diff --cached --quiet || git commit -m "chore: update daily deal feed and archive"
           git push

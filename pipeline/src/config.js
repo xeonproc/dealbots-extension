@@ -33,4 +33,13 @@ export const config = {
   // deals[0] is the extension's featured pick; the rest populate the "see
   // other deals" page — same daily Claude call powers both surfaces.
   maxDealsPerDay: Number(process.env.MAX_DEALS_PER_DAY || 8),
+
+  moreDealsUrl: process.env.MORE_DEALS_URL || "https://xeonproc.github.io/dealbots-extension/",
+
+  // Daily social posting — both optional. Unset either pair and that
+  // channel is skipped (logged, not an error). See README for setup.
+  telegramBotToken: process.env.TELEGRAM_BOT_TOKEN || "",
+  telegramChatId: process.env.TELEGRAM_CHAT_ID || "",
+  mastodonInstanceUrl: process.env.MASTODON_INSTANCE_URL || "",
+  mastodonAccessToken: process.env.MASTODON_ACCESS_TOKEN || "",
 };

@@ -16,7 +16,9 @@ pipeline/  (run daily, e.g. via GitHub Actions)
   1. Fetch candidate posts        -> sources/slickdeals.js (Slickdeals' public RSS feed)
   2. Pick + extract price + blurb -> rankSlickdeals.js (Claude API, one call returns up to 8 ranked picks)
   3. Write feed                   -> buildFeed.js -> extension/deals.json
-  4. `git push`                   -> GitHub Pages republishes both the feed and the deals page
+  4. Write archive + sitemap      -> archive.js -> deals/<date>.html, sitemap.xml, robots.txt
+  5. Post to socials (optional)   -> notify.js -> Telegram / Mastodon, if configured
+  6. `git push`                   -> GitHub Pages republishes everything
 
 extension/  (Chrome Manifest V3 extension)
   popup.js fetches the live GitHub Pages feed (falls back to the bundled
@@ -26,7 +28,14 @@ extension/  (Chrome Manifest V3 extension)
 
 index.html  (GitHub Pages root, .nojekyll — served directly, not via Jekyll)
   Reads the same deals.json and renders every pick from today's run as a
-  card grid, with deals[0] called out as "Today's Pick".
+  card grid, with deals[0] called out as "Today's Pick". Shares its styling
+  with deals/*.html via assets/deals.css.
+
+deals/<date>.html  (one permanent page per day, e.g. deals/2026-09-30.html)
+  Same design as index.html, but with that day's data embedded directly in
+  the HTML (not fetched via JS) so search crawlers see real content without
+  executing JavaScript, and old pages keep showing their own day's picks
+  forever. This is the SEO acquisition channel — see "Traffic strategy".
 ```
 
 The pipeline never runs inside the browser and the Anthropic API key never
@@ -73,7 +82,11 @@ alongside the blurb, all in one call.
 - ✅ `ANTHROPIC_API_KEY` set as a GitHub Actions repo secret, ready for later
 - ⏳ Amazon PA-API integration (`pipeline/src/sources/keepaLive.js`) — stubbed, throws until implemented (blocked on 3 qualifying sales)
 - ✅ GitHub Actions daily workflow (`.github/workflows/daily-deals.yml`) updated for `DATA_SOURCE=slickdeals`, ready to test via manual `workflow_dispatch`
-- ⏳ Chrome Web Store submission — not started
+- ✅ Chrome Web Store submission — submitted, pending review
+- ✅ Privacy policy page (`privacy.html`) — live, linked from the submission
+- ✅ SEO archive (`deals/<date>.html`) + `sitemap.xml` + `robots.txt` — wired into the daily pipeline run, confirmed working locally
+- ⏳ Telegram / Mastodon auto-posting (`notify.js`) — built and wired in, but skips both until `TELEGRAM_BOT_TOKEN`/`TELEGRAM_CHAT_ID` or `MASTODON_INSTANCE_URL`/`MASTODON_ACCESS_TOKEN` secrets are set — see "Traffic strategy"
+- ⏳ Cross-links from the extension/page to the Telegram channel — not built yet, needs a real channel to exist first
 
 **Gotcha worth knowing if defaults ever seem ignored:** `pipeline/.env` overrides
 `pipeline/src/config.js` defaults for anything it sets, even a var the code
@@ -119,6 +132,74 @@ to hand-pick a specific deal for a day — see git history for how it worked.
 2. Use the product for real for a while — get to 3 Associates sales
 3. Once eligible, implement Amazon PA-API in `pipeline/src/sources/keepaLive.js`, set `DATA_SOURCE=live`, and the Slickdeals-affiliate-tag tradeoff above goes away
 4. Prep the Chrome Web Store listing (icons, screenshots, privacy policy, store description) — see "Compliance notes" below first
+
+## Traffic strategy
+
+The honest starting point: nothing here is a guaranteed traffic engine.
+Autonomous posting solves "produce content reliably," not "get anyone to
+see it" — those are two different problems, and only one of the pieces
+below actually solves the second one. The plan has two halves:
+
+**Acquisition (bring in people who've never heard of Dealbots) — the
+archive + sitemap.** Every pipeline run writes a permanent, dated page
+(`deals/<date>.html`) with that day's picks embedded directly in the HTML,
+and regenerates `sitemap.xml` from every archive page that's ever existed.
+Google's own crawler — not anything we run — periodically reads the
+sitemap and indexes new pages on its own schedule. Over months this
+accumulates into hundreds of unique, genuinely-different pages, each a
+long-tail shot at showing up in search. This is slow (months, not weeks)
+and each page's odds are low, but it's the only piece here that can reach
+someone who's never installed the extension, and it costs nothing beyond
+what already runs daily.
+
+**Retention (keep people who did find it, let them compound it) — Telegram
+and Mastodon auto-posting.** `notify.js` posts the featured pick to both
+once a day, if configured — but a bot posting into an empty channel reaches
+nobody. The actual sequence that matters:
+1. Someone finds the extension (Chrome Web Store search, or eventually an
+   archive page ranking somewhere)
+2. The extension popup / deals page links to the Telegram channel — this
+   is what turns a one-time visitor into someone who'll see tomorrow's
+   deal too, instead of having to rediscover the extension daily
+3. The daily auto-post keeps that channel alive without any ongoing effort
+4. If the deals are good, subscribers forward/share them — the only
+   genuinely free acquisition channel here, but it only starts once there
+   are subscribers to do the sharing
+
+So: archive/sitemap brings people in (slowly), Telegram/Mastodon keep them
+and let word-of-mouth compound (also slowly). Neither is fast; both are
+free and low-risk, which is why they're worth having running regardless.
+
+**Explicitly not doing:** autonomous posting to Reddit or into other
+people's Discord servers. Both have a much higher ban/removal rate for
+automated accounts than Telegram or Mastodon, and inauthentic engagement
+automation (auto-follow/unfollow, auto-DM, mass-commenting) violates
+every major platform's ToS regardless of the marketing tool selling it —
+skip any paid "AI marketing" product whose pitch is autonomous engagement
+at scale, not just content generation.
+
+### Setting up the optional social channels
+
+Both are free and independent — set up either, both, or neither. Neither
+blocks the pipeline; `notify.js` just logs "not configured" and skips a
+channel with no token.
+
+**Telegram:**
+1. Message [@BotFather](https://t.me/BotFather) on Telegram, `/newbot`, follow the prompts — you get a bot token
+2. Create a channel (or use an existing one), add the bot as an admin
+3. Set repo secrets: `TELEGRAM_BOT_TOKEN` (from BotFather), `TELEGRAM_CHAT_ID` (`@yourchannelusername` for a public channel)
+
+**Mastodon:**
+1. Create an account on any instance (e.g. mastodon.social, or a bot-friendly one like botsin.space)
+2. Settings → Development → New Application → grant `write:statuses` → copy the access token
+3. Set repo secrets: `MASTODON_INSTANCE_URL` (e.g. `https://botsin.space`), `MASTODON_ACCESS_TOKEN`
+
+Add secrets via `gh secret set TELEGRAM_BOT_TOKEN --repo xeonproc/dealbots-extension` (or the repo's Settings → Secrets and variables → Actions in the GitHub UI). Once set, the next daily run picks them up automatically — no code or workflow changes needed.
+
+**Still needs doing, not yet built:** the actual cross-links from the
+extension popup / deals page to the Telegram channel (step 2 in the
+sequence above) — that needs a real channel to link to first, so it's
+wired up once the channel exists.
 
 ## Compliance notes (read before submitting to the Chrome Web Store)
 

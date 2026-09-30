@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://xeonproc.github.io/dealbots-extension/sitemap.xml
