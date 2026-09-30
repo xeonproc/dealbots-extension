@@ -1,6 +1,17 @@
 {
-  "generatedAt": "2026-09-30T16:59:08.970Z",
+  "generatedAt": "2026-09-30T17:17:21.730Z",
   "deals": [
+    {
+      "asin": "B0GPHTG8M1",
+      "title": "DEWALT 3/8-Inch Industrial Air Coupler with 3/8-Inch FNPT (DXCM036-0240) $6.66 + Free Shipping w/ Prime or on $35+",
+      "image": "https://static.slickdealscdn.com/attachment/1/5/5/7/3/6/2/300x300/21761241.thumb",
+      "price": 6.66,
+      "listPrice": null,
+      "discountPct": null,
+      "requiresCode": false,
+      "blurb": "DEWALT air coupler with strong airflow at lowest price point and free shipping with Prime.",
+      "url": "https://www.amazon.com/dp/B0GPHTG8M1?tag=dealbots00-20"
+    },
     {
       "asin": "B0CBNSK6DY",
       "title": "$21.99* | 609-Piece Mega Halo 343 Guilty Spark Replica Display Set w/ Lights & Sounds at Amazon",
@@ -9,19 +20,8 @@
       "listPrice": 31,
       "discountPct": 29,
       "requiresCode": false,
-      "blurb": "Halo collectible building set with lights and sounds, down from $31.",
+      "blurb": "609-piece Halo light-up collectible set at 29% off, free Prime shipping.",
       "url": "https://www.amazon.com/dp/B0CBNSK6DY?tag=dealbots00-20"
-    },
-    {
-      "asin": "B0DJSM5TKW",
-      "title": "$23.99* | 1707-Pc MEGA Squid Game The Staircase Building Toy Set w/ Motion at Amazon",
-      "image": "https://static.slickdealscdn.com/attachment/1/1/7/1/5/2/7/300x300/21761172.thumb",
-      "price": 23.99,
-      "listPrice": 30,
-      "discountPct": 20,
-      "requiresCode": false,
-      "blurb": "1707-piece Squid Game building toy with motion, marked down from $30.",
-      "url": "https://www.amazon.com/dp/B0DJSM5TKW?tag=dealbots00-20"
     },
     {
       "asin": "B0FZ814WTV",
@@ -35,26 +35,48 @@
       "url": "https://www.amazon.com/dp/B0FZ814WTV?tag=dealbots00-20"
     },
     {
-      "asin": "B0GPHTG8M1",
-      "title": "DEWALT 3/8-Inch Industrial Air Coupler with 3/8-Inch FNPT (DXCM036-0240) $6.66 + Free Shipping w/ Prime or on $35+",
-      "image": "https://static.slickdealscdn.com/attachment/1/5/5/7/3/6/2/300x300/21761241.thumb",
-      "price": 6.66,
+      "asin": "B0DJSM5TKW",
+      "title": "$23.99* | 1707-Pc MEGA Squid Game The Staircase Building Toy Set w/ Motion at Amazon",
+      "image": "https://static.slickdealscdn.com/attachment/1/1/7/1/5/2/7/300x300/21761172.thumb",
+      "price": 23.99,
+      "listPrice": 30,
+      "discountPct": 20,
+      "requiresCode": false,
+      "blurb": "1707-piece Squid Game staircase building set at 20% off, free Prime shipping.",
+      "url": "https://www.amazon.com/dp/B0DJSM5TKW?tag=dealbots00-20"
+    },
+    {
+      "asin": "B071CNQ3TG",
+      "title": "Energizer Ultimate Lithium AAA Batteries (8 Pack), Lithium Triple A Batteries $11.39 or less",
+      "image": "https://static.slickdealscdn.com/attachment/1/1/9/9/5/2/5/2/300x300/21761451.thumb",
+      "price": 10.19,
       "listPrice": null,
       "discountPct": null,
       "requiresCode": false,
-      "blurb": "DEWALT industrial air coupler, basic hardware tool at budget price.",
-      "url": "https://www.amazon.com/dp/B0GPHTG8M1?tag=dealbots00-20"
+      "blurb": "Energizer Ultimate Lithium AAA 8-pack at lowest price with Subscribe & Save.",
+      "url": "https://www.amazon.com/dp/B071CNQ3TG?tag=dealbots00-20"
     },
     {
-      "asin": "B0C1P649QS",
-      "title": "Soothfeel Men's Joggers with Zipper Pockets Golf Joggers Lightweight Sweatpants Athletic Workout Pants for Men Track 30\" (Black, M) $14.39",
-      "image": "https://static.slickdealscdn.com/attachment/6/2/0/0/0/9/300x300/21761088.thumb",
-      "price": 14.39,
-      "listPrice": null,
-      "discountPct": null,
+      "asin": "B0GKX68RXF",
+      "title": "6-Piece YeewayVeh Car Wheel & Tire Detailing Brush Kit (Purple) $12.59 + Free Shipping w/ Prime or on $35+",
+      "image": "https://static.slickdealscdn.com/attachment/8/3/9/2/300x300/21761415.thumb",
+      "price": 12.59,
+      "listPrice": 20.99,
+      "discountPct": 40,
       "requiresCode": true,
-      "blurb": "Men's joggers with zipper pockets, with promo code at checkout.",
-      "url": "https://www.amazon.com/dp/B0C1P649QS?tag=dealbots00-20"
+      "blurb": "6-piece car wheel brush kit at 40% off with code LWIM5GUN, free Prime shipping.",
+      "url": "https://www.amazon.com/dp/B0GKX68RXF?tag=dealbots00-20"
+    },
+    {
+      "asin": "B0F18YCFDL",
+      "title": "[Prime] 6.5\" Vancasso Ceramic Butter Dish w/ Bamboo Lid & Butter Knife $13.49 + Free Shipping",
+      "image": "https://static.slickdealscdn.com/attachment/3/1/1/9/6/7/1/6/300x300/21761085.thumb",
+      "price": 13.49,
+      "listPrice": 22.49,
+      "discountPct": 40,
+      "requiresCode": true,
+      "blurb": "Ceramic butter dish with bamboo lid at 40% off with code B2R9OQPB, free shipping.",
+      "url": "https://www.amazon.com/dp/B0F18YCFDL?tag=dealbots00-20"
     },
     {
       "asin": "B08BWTQ9QF",
@@ -64,7 +86,7 @@
       "listPrice": null,
       "discountPct": null,
       "requiresCode": true,
-      "blurb": "Women's backpack purse in multiple colors, with promo code at checkout.",
+      "blurb": "Women's backpack purse in multiple colors with code R40YCYEE, free Prime shipping.",
       "url": "https://www.amazon.com/dp/B08BWTQ9QF?tag=dealbots00-20"
     }
   ]
