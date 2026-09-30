@@ -1,7 +1,11 @@
 export const config = {
-  // Defaults to mock fixture data. Set USE_MOCK_DATA=false once real
-  // KEEPA_API_KEY / ANTHROPIC_API_KEY are wired up in sources/keepa*.js.
-  useMock: process.env.USE_MOCK_DATA !== "false",
+  // "manual"  - read pipeline/candidates.json, which you fill in by hand
+  //             each day (default, until you qualify for Amazon PA-API)
+  // "mock"    - read pipeline/fixtures/*.json (for testing the pipeline
+  //             itself, not real deals)
+  // "live"    - call sources/keepaLive.js (not implemented yet, requires a
+  //             paid Keepa plan or a PA-API-eligible Associates account)
+  dataSource: process.env.DATA_SOURCE || "manual",
 
   anthropicApiKey: process.env.ANTHROPIC_API_KEY || "",
   anthropicModel: process.env.ANTHROPIC_MODEL || "claude-sonnet-5",

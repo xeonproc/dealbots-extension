@@ -30,6 +30,23 @@ export function baselinePrice(priceHistory90d) {
   );
 }
 
+// Manual-curation mode: you already did the "trending" discovery yourself
+// (browsing Amazon's public Today's Deals / Best Sellers pages), and you're
+// reporting the price + Amazon's own listed "was" price directly — no
+// Keepa/PA-API history lookup needed. Still enforces the discount floor so
+// a weak "deal" doesn't slip through just because it was hand-picked.
+export function findManualCandidates({ candidates, config }) {
+  return candidates
+    .map((c) => {
+      if (!c.listPrice || c.listPrice <= 0) return null;
+      const discount = Math.round(((c.listPrice - c.currentPrice) / c.listPrice) * 100);
+      return { ...c, discountPct: discount };
+    })
+    .filter(Boolean)
+    .filter((c) => c.discountPct >= config.minDiscountPct)
+    .sort((a, b) => b.discountPct - a.discountPct);
+}
+
 export function findCandidates({ trending, priceHistory, config }) {
   return trending
     .map((product) => {
