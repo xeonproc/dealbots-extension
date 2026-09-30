@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Dealbots — AI Deal of the Day",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "One AI-picked deal a day, sourced from real shopper community posts and filtered for genuine, actionable pricing.",
   "action": {
     "default_popup": "popup.html",
@@ -16,6 +16,5 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "permissions": ["storage"],
   "host_permissions": ["https://xeonproc.github.io/*"]
 }
