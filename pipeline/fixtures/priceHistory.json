@@ -1,0 +1,14 @@
+{
+  "B0H8GKFBCW": {
+    "currentPrice": 45.99,
+    "priceHistory90d": [79.99, 79.99, 74.99, 79.99, 79.99, 76.99, 79.99]
+  },
+  "B09XYZ1234": {
+    "currentPrice": 89.99,
+    "priceHistory90d": [99.99, 99.99, 94.99, 99.99, 99.99, 99.99]
+  },
+  "B0ABCDEF12": {
+    "currentPrice": 11.99,
+    "priceHistory90d": [12.99, 12.99, 11.99, 12.99, 12.99, 12.99]
+  }
+}

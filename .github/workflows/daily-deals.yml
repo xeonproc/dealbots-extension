@@ -1,0 +1,44 @@
+# DRAFT — not wired up yet. This runs the pipeline in "live" mode, which
+# requires keepaLive.js to be implemented and ANTHROPIC_API_KEY / KEEPA_API_KEY
+# secrets to be set on the repo. It also assumes GitHub Pages is configured to
+# serve extension/deals.json (Settings -> Pages -> source: main / root, or
+# copy the file into /docs if you'd rather serve from there). Revisit this
+# once local testing with mock data looks right.
+name: Update daily deal feed
+
+on:
+  schedule:
+    # 13:00 UTC daily (~9am ET). GitHub's free-tier cron can slip by up to
+    # ~15-30 minutes under load; fine for a once-a-day feed.
+    - cron: "0 13 * * *"
+  workflow_dispatch: {} # allows manual "Run workflow" trigger for testing
+
+permissions:
+  contents: write
+
+jobs:
+  build-feed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run deal-sourcing pipeline
+        working-directory: pipeline
+        env:
+          USE_MOCK_DATA: "false"
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          KEEPA_API_KEY: ${{ secrets.KEEPA_API_KEY }}
+          AFFILIATE_TAG: ${{ vars.AFFILIATE_TAG }}
+        run: node src/index.js
+
+      - name: Commit updated feed
+        run: |
+          git config user.name "dealbots-bot"
+          git config user.email "actions@github.com"
+          git add extension/deals.json
+          git diff --cached --quiet || git commit -m "chore: update daily deal feed"
+          git push

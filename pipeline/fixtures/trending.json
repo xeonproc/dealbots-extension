@@ -1,0 +1,35 @@
+[
+  {
+    "asin": "B0H8GKFBCW",
+    "title": "Anker 737 Power Bank (PowerCore 24K)",
+    "category": "Electronics > Portable Power",
+    "image": "https://m.media-amazon.com/images/I/61YZ2z4YzKL._AC_SL1500_.jpg",
+    "rankHistory": [
+      { "daysAgo": 14, "rank": 4200 },
+      { "daysAgo": 7, "rank": 1800 },
+      { "daysAgo": 1, "rank": 340 }
+    ]
+  },
+  {
+    "asin": "B09XYZ1234",
+    "title": "Levoit Core 300 Air Purifier",
+    "category": "Home > Air Quality",
+    "image": "https://m.media-amazon.com/images/I/placeholder2.jpg",
+    "rankHistory": [
+      { "daysAgo": 14, "rank": 9000 },
+      { "daysAgo": 7, "rank": 6100 },
+      { "daysAgo": 1, "rank": 2500 }
+    ]
+  },
+  {
+    "asin": "B0ABCDEF12",
+    "title": "Generic USB-C Cable 3-Pack",
+    "category": "Electronics > Cables",
+    "image": "https://m.media-amazon.com/images/I/placeholder3.jpg",
+    "rankHistory": [
+      { "daysAgo": 14, "rank": 500 },
+      { "daysAgo": 7, "rank": 520 },
+      { "daysAgo": 1, "rank": 510 }
+    ]
+  }
+]

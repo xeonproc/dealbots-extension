@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Deal of the Day</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header>
+    <h1>Deal of the Day</h1>
+    <span id="date"></span>
+  </header>
+
+  <main id="content">
+    <p id="status">Loading today's deal...</p>
+  </main>
+
+  <template id="deal-template">
+    <article class="deal">
+      <img class="deal-image" alt="" />
+      <div class="deal-body">
+        <h2 class="deal-title"></h2>
+        <p class="deal-blurb"></p>
+        <div class="deal-price-row">
+          <span class="deal-price"></span>
+          <span class="deal-discount"></span>
+        </div>
+        <a class="deal-buy" target="_blank" rel="noopener noreferrer">Buy on Amazon</a>
+      </div>
+    </article>
+  </template>
+
+  <footer>
+    <span id="source-note"></span>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

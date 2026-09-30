@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Dealbots — AI Deal of the Day",
+  "version": "0.1.0",
+  "description": "One AI-picked deal a day, chosen from trending products and validated against real price history.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": ["storage"],
+  "host_permissions": []
+}
