@@ -109,8 +109,9 @@ ${ogImage ? `<meta property="og:image" content="${escapeHTML(ogImage)}" />` : ""
 </main>
 
 <footer>
-  Prices and availability change fast — always confirm at checkout.
-  Some links include an affiliate tag.
+  <p>Prices and availability change fast — always confirm at checkout.
+  Some links include an affiliate tag.</p>
+  <p>Get tomorrow's deal: <a href="https://t.me/dealbotsai" target="_blank" rel="noopener noreferrer">Telegram</a> · <a href="https://mastodon.social/@xeonproc" target="_blank" rel="noopener noreferrer">Mastodon</a></p>
 </footer>
 
 </body>

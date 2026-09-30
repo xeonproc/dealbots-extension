@@ -16,7 +16,8 @@ function formatMessage(feed) {
     `${price}${discount}\n\n` +
     `${top.blurb}\n\n` +
     `${top.url}\n\n` +
-    `More deals: ${config.moreDealsUrl}`
+    `More deals: ${config.moreDealsUrl}\n\n` +
+    `#AmazonDeals #Deals #DealOfTheDay`
   );
 }
 

@@ -49,6 +49,9 @@ async function fetchFeed(url) {
   return res.json();
 }
 
+document.getElementById("telegram-link").href = TELEGRAM_URL;
+document.getElementById("mastodon-link").href = MASTODON_URL;
+
 async function loadDeals() {
   try {
     let feed;

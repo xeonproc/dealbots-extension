@@ -85,8 +85,9 @@ alongside the blurb, all in one call.
 - ✅ Chrome Web Store submission — submitted, pending review
 - ✅ Privacy policy page (`privacy.html`) — live, linked from the submission
 - ✅ SEO archive (`deals/<date>.html`) + `sitemap.xml` + `robots.txt` — wired into the daily pipeline run, confirmed working locally
-- ⏳ Telegram / Mastodon auto-posting (`notify.js`) — built and wired in, but skips both until `TELEGRAM_BOT_TOKEN`/`TELEGRAM_CHAT_ID` or `MASTODON_INSTANCE_URL`/`MASTODON_ACCESS_TOKEN` secrets are set — see "Traffic strategy"
-- ⏳ Cross-links from the extension/page to the Telegram channel — not built yet, needs a real channel to exist first
+- ✅ Telegram (@dealbotsai) and Mastodon (@xeonproc) auto-posting — confirmed live, real posts going out daily via GitHub Actions
+- ✅ Cross-links from the extension popup and deals page to both channels, plus hashtags on social posts
+- ✅ Featured pick now requires real discount evidence (`discountPct >= MIN_DISCOUNT_PCT` or an explicit `priceClaim`) — fixes picks like a full-price chair or a $6.66 item with no discount ending up featured
 
 **Gotcha worth knowing if defaults ever seem ignored:** `pipeline/.env` overrides
 `pipeline/src/config.js` defaults for anything it sets, even a var the code
@@ -196,10 +197,7 @@ channel with no token.
 
 Add secrets via `gh secret set TELEGRAM_BOT_TOKEN --repo xeonproc/dealbots-extension` (or the repo's Settings → Secrets and variables → Actions in the GitHub UI). Once set, the next daily run picks them up automatically — no code or workflow changes needed.
 
-**Still needs doing, not yet built:** the actual cross-links from the
-extension popup / deals page to the Telegram channel (step 2 in the
-sequence above) — that needs a real channel to link to first, so it's
-wired up once the channel exists.
+**Live channels:** Telegram [@dealbotsai](https://t.me/dealbotsai), Mastodon [@xeonproc@mastodon.social](https://mastodon.social/@xeonproc) (posting as "Dealbots AI", marked as an automated account). Both are cross-linked from the extension popup and the deals page ("Get tomorrow's deal") so a one-time visitor has somewhere to follow, and the daily social posts include `#AmazonDeals #Deals #DealOfTheDay` for a small amount of free hashtag-search discoverability on Mastodon.
 
 ## Compliance notes (read before submitting to the Chrome Web Store)
 
