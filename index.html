@@ -45,15 +45,25 @@
     letter-spacing: -0.5px;
   }
 
-  /* Gradient-clip only the text span, never the emoji — background-clip:
-     text strips an emoji's native color layers and leaves a flat gradient
-     silhouette instead of the real glyph. */
   header h1 .gradient-text {
     background: linear-gradient(90deg, var(--hot), var(--hot2), var(--gold));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
+
+  /* Drawn instead of using the 🔥 emoji glyph — emoji fonts vary wildly by
+     OS (some render it as a flat, dull shape) and this way it always
+     matches the page's own gradient exactly. */
+  .flame-icon {
+    width: 0.85em;
+    height: 0.85em;
+    vertical-align: -0.08em;
+    filter: drop-shadow(0 0 6px rgba(255, 61, 110, 0.55));
+  }
+  .flame-icon .g1 { stop-color: var(--hot); }
+  .flame-icon .g2 { stop-color: var(--hot2); }
+  .flame-icon .g3 { stop-color: var(--gold); }
 
   header p {
     margin: 0;
@@ -265,7 +275,19 @@
 <body>
 
 <header>
-  <h1>🔥 <span class="gradient-text">Today's Deals</span></h1>
+  <h1>
+    <svg class="flame-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <defs>
+        <linearGradient id="flameGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop class="g1" offset="0%" />
+          <stop class="g2" offset="55%" />
+          <stop class="g3" offset="100%" />
+        </linearGradient>
+      </defs>
+      <path fill="url(#flameGrad)" fill-rule="evenodd" clip-rule="evenodd" d="M12.963 2.286a.75.75 0 0 0-1.071-.136 9.742 9.742 0 0 0-3.539 6.176 7.547 7.547 0 0 1-1.705-1.715.75.75 0 0 0-1.152-.082A9 9 0 1 0 15.68 4.534a7.46 7.46 0 0 1-2.717-2.248ZM15.75 14.25a3.75 3.75 0 1 1-7.313-1.172c.628.465 1.35.81 2.133 1.005a.75.75 0 0 0 .582-.185.75.75 0 0 0 .249-.585 2.24 2.24 0 0 1-.207-.892 2.25 2.25 0 0 1 .997-1.982c.166.463.42.898.75 1.243A2.25 2.25 0 0 1 15.75 14.25Z" />
+    </svg>
+    <span class="gradient-text">Today's Deals</span>
+  </h1>
   <p>AI-picked from what's trending right now — refreshed daily.</p>
   <div id="generated" hidden></div>
 </header>
