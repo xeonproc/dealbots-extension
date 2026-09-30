@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-30T16:50:02.524Z",
+  "generatedAt": "2026-09-30T16:59:08.970Z",
   "deals": [
     {
       "asin": "B0CBNSK6DY",
@@ -9,7 +9,7 @@
       "listPrice": 31,
       "discountPct": 29,
       "requiresCode": false,
-      "blurb": "609-piece Halo building set with lights and sounds, down from $31.",
+      "blurb": "Halo collectible building set with lights and sounds, down from $31.",
       "url": "https://www.amazon.com/dp/B0CBNSK6DY?tag=dealbots00-20"
     },
     {
@@ -20,19 +20,30 @@
       "listPrice": 30,
       "discountPct": 20,
       "requiresCode": false,
-      "blurb": "1707-piece Squid Game staircase building set with motion feature, down from $30.",
+      "blurb": "1707-piece Squid Game building toy with motion, marked down from $30.",
       "url": "https://www.amazon.com/dp/B0DJSM5TKW?tag=dealbots00-20"
     },
     {
-      "asin": "B08BWTQ9QF",
-      "title": "Makes Women's Backpack Purse (Various Colors) $14.99 + Free Shipping w/ Prime or on $35+",
-      "image": "https://static.slickdealscdn.com/attachment/3/5/8/2/5/6/8/8/300x300/21760791.thumb",
-      "price": 14.99,
+      "asin": "B0FZ814WTV",
+      "title": "Lexicon Button-Tufted Wingback Accent Chair w/ Reversible Seat Cushion (Blue) $90.80 + Free Shipping",
+      "image": "https://static.slickdealscdn.com/attachment/5/7/4/5/9/6/3/300x300/21761229.thumb",
+      "price": 90.8,
       "listPrice": null,
       "discountPct": null,
-      "requiresCode": true,
-      "blurb": "Women's backpack purse in various colors with code R40YCYEE at checkout.",
-      "url": "https://www.amazon.com/dp/B08BWTQ9QF?tag=dealbots00-20"
+      "requiresCode": false,
+      "blurb": "Button-tufted wingback accent chair with reversible cushion, free shipping.",
+      "url": "https://www.amazon.com/dp/B0FZ814WTV?tag=dealbots00-20"
+    },
+    {
+      "asin": "B0GPHTG8M1",
+      "title": "DEWALT 3/8-Inch Industrial Air Coupler with 3/8-Inch FNPT (DXCM036-0240) $6.66 + Free Shipping w/ Prime or on $35+",
+      "image": "https://static.slickdealscdn.com/attachment/1/5/5/7/3/6/2/300x300/21761241.thumb",
+      "price": 6.66,
+      "listPrice": null,
+      "discountPct": null,
+      "requiresCode": false,
+      "blurb": "DEWALT industrial air coupler, basic hardware tool at budget price.",
+      "url": "https://www.amazon.com/dp/B0GPHTG8M1?tag=dealbots00-20"
     },
     {
       "asin": "B0C1P649QS",
@@ -42,19 +53,19 @@
       "listPrice": null,
       "discountPct": null,
       "requiresCode": true,
-      "blurb": "Men's joggers with zipper pockets and lightweight fabric with code PSCUEJJN.",
+      "blurb": "Men's joggers with zipper pockets, with promo code at checkout.",
       "url": "https://www.amazon.com/dp/B0C1P649QS?tag=dealbots00-20"
     },
     {
-      "asin": "B0GZ39SFFP",
-      "title": "Saodimallsu Womens Button Up Striped Long Sleeve Crew Neck Fall Soft Lightweight Knit Sweater Tops $26.85",
-      "image": "https://static.slickdealscdn.com/attachment/6/2/0/0/0/9/300x300/21760983.thumb",
-      "price": 26.85,
+      "asin": "B08BWTQ9QF",
+      "title": "Makes Women's Backpack Purse (Various Colors) $14.99 + Free Shipping w/ Prime or on $35+",
+      "image": "https://static.slickdealscdn.com/attachment/3/5/8/2/5/6/8/8/300x300/21760791.thumb",
+      "price": 14.99,
       "listPrice": null,
       "discountPct": null,
-      "requiresCode": false,
-      "blurb": "Women's button-up striped knit sweater in mixed natural fibers.",
-      "url": "https://www.amazon.com/dp/B0GZ39SFFP?tag=dealbots00-20"
+      "requiresCode": true,
+      "blurb": "Women's backpack purse in multiple colors, with promo code at checkout.",
+      "url": "https://www.amazon.com/dp/B08BWTQ9QF?tag=dealbots00-20"
     }
   ]
 }
