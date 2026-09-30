@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Privacy Policy — Dealbots</title>
+<style>
+  :root {
+    --bg: #150c2e;
+    --bg2: #0c0620;
+    --text: #f5f2ff;
+    --muted: #b8a9e6;
+    --gold: #ffc72c;
+    --border: #3a2a6b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+    color: var(--text);
+    font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+  }
+  main {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 48px 20px 80px;
+  }
+  h1 {
+    font-size: 28px;
+    margin: 0 0 4px;
+  }
+  .updated {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 32px;
+  }
+  h2 {
+    font-size: 17px;
+    margin: 32px 0 8px;
+    color: var(--gold);
+  }
+  p, li {
+    font-size: 14.5px;
+    color: #e6defc;
+  }
+  a { color: var(--gold); }
+  .summary {
+    background: rgba(255, 199, 44, 0.08);
+    border: 1px solid rgba(255, 199, 44, 0.3);
+    border-radius: 10px;
+    padding: 16px 18px;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Privacy Policy</h1>
+  <div class="updated">Last updated: September 30, 2026</div>
+
+  <p class="summary">
+    Short version: Dealbots does not collect, store, transmit, or sell any
+    personal data. There is no account, no analytics, and no tracking.
+  </p>
+
+  <h2>What the extension does</h2>
+  <p>
+    Dealbots is a Chrome extension that displays one AI-picked "deal of the
+    day" and a page of other deal picks. It fetches a daily-updated, public
+    JSON feed and displays it. That's the entire functionality.
+  </p>
+
+  <h2>What data we collect</h2>
+  <p>None. Specifically, Dealbots does not:</p>
+  <ul>
+    <li>Require or support any account, login, or sign-up</li>
+    <li>Collect names, emails, location, or any personal information</li>
+    <li>Use analytics, telemetry, or crash reporting</li>
+    <li>Set cookies or use browser storage to track you</li>
+    <li>Read, modify, or have access to the content of the web pages you visit</li>
+  </ul>
+
+  <h2>Network requests the extension makes</h2>
+  <p>
+    The popup fetches a public, non-personalized JSON file from
+    <code>xeonproc.github.io</code> (this same GitHub Pages site) to display
+    today's deal. That request does not include your identity, browsing
+    history, or any other user-specific data — it is the same anonymous
+    request every user's copy of the extension makes.
+  </p>
+
+  <h2>Affiliate links</h2>
+  <p>
+    "Buy Now" links go to Amazon.com and include an Amazon Associates
+    affiliate tag. If you make a purchase, we may earn a small commission
+    at no extra cost to you. Once you leave the extension and land on
+    Amazon, Amazon's own privacy policy governs any data collected there —
+    Dealbots does not see or receive any information about what you do on
+    Amazon's site.
+  </p>
+
+  <h2>Permissions</h2>
+  <p>
+    The extension requests host permission for
+    <code>https://xeonproc.github.io/*</code> only, solely to fetch the
+    public deals feed described above and link to the full deals page. No
+    other sites are accessed by the extension.
+  </p>
+
+  <h2>Changes to this policy</h2>
+  <p>
+    If this policy ever changes, the update will be posted on this same
+    page with a revised "last updated" date.
+  </p>
+
+  <h2>Questions</h2>
+  <p>
+    Open an issue on the
+    <a href="https://github.com/xeonproc/dealbots-extension/issues" target="_blank" rel="noopener noreferrer">GitHub repository</a>.
+  </p>
+</main>
+</body>
+</html>
