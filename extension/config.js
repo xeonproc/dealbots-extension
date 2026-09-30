@@ -1,10 +1,8 @@
 // Where the popup fetches today's deal feed from.
 //
-// Local/dev default: the deals.json bundled inside the extension itself
-// (written by pipeline/src/index.js -> ../extension/deals.json).
-//
-// Once the daily pipeline is publishing to GitHub Pages, switch this to
-// that public URL, e.g.:
-//   const FEED_URL = "https://<your-username>.github.io/dealbots-extension/deals.json";
-// and add that origin to "host_permissions" in manifest.json.
-const FEED_URL = "deals.json";
+// Primary: the public feed published by the daily pipeline via GitHub Pages.
+// Fallback: the deals.json bundled inside the extension itself (written by
+// `npm run build` / `npm run build:mock` in pipeline/), used when the remote
+// feed is unreachable (offline dev, Pages not deployed yet, network hiccup).
+const REMOTE_FEED_URL = "https://xeonproc.github.io/dealbots-extension/extension/deals.json";
+const LOCAL_FEED_URL = "deals.json";

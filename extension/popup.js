@@ -32,13 +32,23 @@ function renderDeal(deal) {
   return node;
 }
 
+async function fetchFeed(url) {
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) {
+    throw new Error(`Feed request failed (${url}): ${res.status}`);
+  }
+  return res.json();
+}
+
 async function loadDeals() {
   try {
-    const res = await fetch(FEED_URL, { cache: "no-store" });
-    if (!res.ok) {
-      throw new Error(`Feed request failed: ${res.status}`);
+    let feed;
+    try {
+      feed = await fetchFeed(REMOTE_FEED_URL);
+    } catch (remoteErr) {
+      console.warn("[dealbots] remote feed unreachable, falling back to bundled deals.json", remoteErr);
+      feed = await fetchFeed(LOCAL_FEED_URL);
     }
-    const feed = await res.json();
 
     if (!feed.deals || feed.deals.length === 0) {
       statusEl.textContent = "No deal found for today. Check back tomorrow.";
