@@ -1,15 +1,93 @@
 {
-  "generatedAt": "2026-09-30T15:31:08.731Z",
+  "generatedAt": "2026-09-30T15:42:14.024Z",
   "deals": [
     {
-      "asin": "B0FZ9GFBMQ",
-      "title": "Amazon – Barjneel 4-Pack Men's Athletic Shorts - $14.24",
-      "image": "https://static.slickdealscdn.com/attachment/1/2/4/9/0/7/0/8/300x300/21759882.thumb",
-      "price": 14.24,
-      "listPrice": 16.99,
-      "discountPct": 16,
-      "blurb": "No-code price cut on a 4-pack of athletic shorts, clearly stated $14.24 from $16.99.",
-      "url": "https://www.amazon.com/dp/B0FZ9GFBMQ?tag=dealbots00-20"
+      "asin": "B0GFN8Z5T8",
+      "title": "Amazon – Uineer Tri-Mode Wireless Mouse - $10.28 w/ Code",
+      "image": "https://static.slickdealscdn.com/attachment/1/2/4/9/0/7/0/8/300x300/21759846.thumb",
+      "price": 10.28,
+      "listPrice": 21.99,
+      "discountPct": 53,
+      "requiresCode": true,
+      "blurb": "Tri-mode wireless mouse with six programmable buttons and rechargeable battery at half price.",
+      "url": "https://www.amazon.com/dp/B0GFN8Z5T8?tag=dealbots00-20"
+    },
+    {
+      "asin": "B0DZ68G8R8",
+      "title": "Amazon – AOSITE 234-Pc STEM Marble Run Building Set - $19.99 w/ Code",
+      "image": "https://static.slickdealscdn.com/attachment/1/2/4/9/0/7/0/8/300x300/21759807.thumb",
+      "price": 19.99,
+      "listPrice": 39.99,
+      "discountPct": 50,
+      "requiresCode": true,
+      "blurb": "234-piece STEM marble run building set with tracks, marbles, and storage bag, 50% off.",
+      "url": "https://www.amazon.com/dp/B0DZ68G8R8?tag=dealbots00-20"
+    },
+    {
+      "asin": "B0GKMC6RMV",
+      "title": "Amazon – arboleaf 8-Electrode Smart Body Composition Scale - $47.59 w/ Code",
+      "image": "https://static.slickdealscdn.com/attachment/1/2/4/9/0/7/0/8/300x300/21760101.thumb",
+      "price": 47.59,
+      "listPrice": 99.99,
+      "discountPct": 52,
+      "requiresCode": true,
+      "blurb": "8-electrode smart body composition scale tracking 50+ metrics with app integration.",
+      "url": "https://www.amazon.com/dp/B0GKMC6RMV?tag=dealbots00-20"
+    },
+    {
+      "asin": "B0F1TQSTVR",
+      "title": "Amazon – GAOKASE 4-Pack Stackable Wire Storage Baskets - $19.29 w/ Code",
+      "image": "https://static.slickdealscdn.com/attachment/1/2/4/9/0/7/0/8/300x300/21759777.thumb",
+      "price": 19.29,
+      "listPrice": 29.69,
+      "discountPct": 35,
+      "requiresCode": true,
+      "blurb": "4-pack stackable wire storage baskets with open-mesh design and rotating handles.",
+      "url": "https://www.amazon.com/dp/B0F1TQSTVR?tag=dealbots00-20"
+    },
+    {
+      "asin": "B0GYJFKWGL",
+      "title": "Amazon – 15.6\" 1080p Laptop Screen Extender - $137.99 w/ Code",
+      "image": "https://static.slickdealscdn.com/attachment/1/2/4/9/0/7/0/8/300x300/21759681.thumb",
+      "price": 137.99,
+      "listPrice": 229.99,
+      "discountPct": 40,
+      "requiresCode": true,
+      "blurb": "15.6-inch 1080p laptop screen extender with one-cable USB-C connection.",
+      "url": "https://www.amazon.com/dp/B0GYJFKWGL?tag=dealbots00-20"
+    },
+    {
+      "asin": "B0DN6CKXP3",
+      "title": "Amazon – VIZONY 1080p Smart Projector w/ WiFi 6 & Bluetooth - $76.99 w/ Code",
+      "image": "https://static.slickdealscdn.com/attachment/1/2/4/9/0/7/0/8/300x300/21759723.thumb",
+      "price": 76.99,
+      "listPrice": 139.99,
+      "discountPct": 45,
+      "requiresCode": true,
+      "blurb": "1080p smart projector with WiFi 6, Bluetooth, and automatic focus and keystone correction.",
+      "url": "https://www.amazon.com/dp/B0DN6CKXP3?tag=dealbots00-20"
+    },
+    {
+      "asin": "B0H5X6D4P9",
+      "title": "Amazon – AOUNQ 12-Pack Solar Pumpkin Halloween Lights - $22.99 w/ Code",
+      "image": "https://static.slickdealscdn.com/attachment/1/2/4/9/0/7/0/8/300x300/21759996.thumb",
+      "price": 22.99,
+      "listPrice": 45.99,
+      "discountPct": 50,
+      "requiresCode": true,
+      "blurb": "12-pack solar pumpkin pathway lights with 84 LEDs and eight lighting modes.",
+      "url": "https://www.amazon.com/dp/B0H5X6D4P9?tag=dealbots00-20"
+    },
+    {
+      "asin": "B0GKNCFC1T",
+      "title": "Amazon – SkyNature 24\" x 12\" Electric Heating Pad - $14.99–$19.99 w/ Code",
+      "image": "https://static.slickdealscdn.com/attachment/1/2/4/9/0/7/0/8/300x300/21759972.thumb",
+      "price": 14.99,
+      "listPrice": 29.99,
+      "discountPct": 50,
+      "requiresCode": true,
+      "blurb": "24x12-inch electric heating pad with nine temperature settings and 12 timer options.",
+      "url": "https://www.amazon.com/dp/B0GKNCFC1T?tag=dealbots00-20"
     }
   ]
 }

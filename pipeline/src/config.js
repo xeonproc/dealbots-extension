@@ -9,7 +9,10 @@ export const config = {
   dataSource: process.env.DATA_SOURCE || "slickdeals",
 
   anthropicApiKey: process.env.ANTHROPIC_API_KEY || "",
-  anthropicModel: process.env.ANTHROPIC_MODEL || "claude-sonnet-5",
+  // Task is bounded extraction + ranking from short text, not open-ended
+  // reasoning — well within Haiku's range, and ~2x cheaper than Sonnet 5.
+  // Revert to "claude-sonnet-5" if picks start looking worse.
+  anthropicModel: process.env.ANTHROPIC_MODEL || "claude-haiku-4-5",
   // Only needed if ANTHROPIC_API_KEY is an org-level key not scoped to a
   // workspace (Console error: "not scoped to a workspace"). Prefer creating
   // a workspace-scoped key instead, which needs no extra header.
@@ -27,5 +30,7 @@ export const config = {
   // least this much vs. its own 90-day average price.
   minDiscountPct: Number(process.env.MIN_DISCOUNT_PCT || 20),
 
-  maxDealsPerDay: Number(process.env.MAX_DEALS_PER_DAY || 1),
+  // deals[0] is the extension's featured pick; the rest populate the "see
+  // other deals" page — same daily Claude call powers both surfaces.
+  maxDealsPerDay: Number(process.env.MAX_DEALS_PER_DAY || 8),
 };

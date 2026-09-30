@@ -43,5 +43,19 @@ export async function callClaudeJSON(prompt, { maxTokens = 1024 } = {}) {
 
   const data = await res.json();
   const textBlock = data.content.find((block) => block.type === "text");
-  return JSON.parse(stripCodeFence(textBlock.text));
+  if (!textBlock) {
+    throw new Error(
+      `Anthropic response had no text block (stop_reason: ${data.stop_reason}). ` +
+        `Raw content: ${JSON.stringify(data.content)}`
+    );
+  }
+  const cleaned = stripCodeFence(textBlock.text);
+  try {
+    return JSON.parse(cleaned);
+  } catch (err) {
+    throw new Error(
+      `Failed to parse Claude's reply as JSON (stop_reason: ${data.stop_reason}, ` +
+        `${cleaned.length} chars): ${err.message}\n---\n${cleaned}\n---`
+    );
+  }
 }

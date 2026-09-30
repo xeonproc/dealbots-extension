@@ -26,6 +26,13 @@ function renderDeal(deal) {
     discountEl.remove();
   }
 
+  const codeBadgeEl = node.querySelector(".deal-code-badge");
+  if (deal.requiresCode) {
+    codeBadgeEl.textContent = "Code required at checkout";
+  } else {
+    codeBadgeEl.remove();
+  }
+
   const buyLink = node.querySelector(".deal-buy");
   buyLink.href = deal.url;
 
@@ -56,9 +63,7 @@ async function loadDeals() {
     }
 
     statusEl.remove();
-    for (const deal of feed.deals) {
-      contentEl.appendChild(renderDeal(deal));
-    }
+    contentEl.appendChild(renderDeal(feed.deals[0]));
 
     if (feed.generatedAt) {
       const generated = new Date(feed.generatedAt);
@@ -68,6 +73,13 @@ async function loadDeals() {
       });
     }
     sourceNoteEl.textContent = "Picked by AI from trending, genuinely-discounted products.";
+
+    if (feed.deals.length > 1) {
+      const moreLink = document.getElementById("more-deals-link");
+      moreLink.href = MORE_DEALS_URL;
+    } else {
+      document.getElementById("more-deals-link").remove();
+    }
   } catch (err) {
     statusEl.textContent = "Couldn't load today's deal. Try again later.";
     console.error("[dealbots] failed to load feed", err);

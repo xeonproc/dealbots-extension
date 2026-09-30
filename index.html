@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dealbots — Today's Deals</title>
+<style>
+  :root {
+    --bg: #150c2e;
+    --bg2: #0c0620;
+    --card: #1f1440;
+    --card-border: #3a2a6b;
+    --text: #f5f2ff;
+    --muted: #b8a9e6;
+    --hot: #ff3d6e;
+    --hot2: #ff7a1a;
+    --gold: #ffc72c;
+    --mint: #26e0a3;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 15% 0%, #3a1a6b 0%, transparent 45%),
+      radial-gradient(circle at 85% 15%, #6b1a5a 0%, transparent 40%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+    color: var(--text);
+    font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+    padding: 32px 16px 64px;
+  }
+
+  header {
+    max-width: 1080px;
+    margin: 0 auto 32px;
+    text-align: center;
+  }
+
+  header h1 {
+    font-size: clamp(28px, 6vw, 44px);
+    margin: 0 0 8px;
+    background: linear-gradient(90deg, var(--hot), var(--hot2), var(--gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  #generated {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 14px;
+    border-radius: 999px;
+    background: rgba(255, 61, 110, 0.15);
+    border: 1px solid rgba(255, 61, 110, 0.4);
+    color: var(--hot);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+
+  main {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  #status {
+    text-align: center;
+    color: var(--muted);
+    padding: 60px 0;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--hot2);
+    box-shadow: 0 12px 32px -8px rgba(255, 61, 110, 0.45);
+  }
+
+  .card.featured {
+    grid-column: span 2;
+    border: 1px solid var(--gold);
+    box-shadow: 0 0 0 1px rgba(255, 199, 44, 0.25), 0 16px 40px -12px rgba(255, 199, 44, 0.35);
+  }
+
+  @media (max-width: 640px) {
+    .card.featured { grid-column: span 1; }
+    .grid { grid-template-columns: 1fr; }
+  }
+
+  .featured-flag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 2;
+    background: linear-gradient(90deg, var(--gold), var(--hot2));
+    color: #1a0f00;
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: 0.4px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    box-shadow: 0 2px 10px rgba(255, 199, 44, 0.5);
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+  }
+
+  .card-image-wrap {
+    background: #0e0824;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+  }
+
+  .card.featured .card-image-wrap { height: 240px; }
+
+  .card-image-wrap img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+
+  .card-body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .card-title {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.35;
+    margin: 0;
+  }
+
+  .card.featured .card-title {
+    font-size: 18px;
+  }
+
+  .card-blurb {
+    margin: 0;
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.4;
+    flex: 1;
+  }
+
+  .price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .price {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--mint);
+  }
+
+  .card.featured .price { font-size: 30px; }
+
+  .list-price {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: line-through;
+  }
+
+  .discount-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: linear-gradient(90deg, var(--hot), var(--hot2));
+    color: #fff;
+    font-weight: 800;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    width: fit-content;
+  }
+
+  .code-badge {
+    display: inline-flex;
+    width: fit-content;
+    background: rgba(255, 199, 44, 0.15);
+    border: 1px solid rgba(255, 199, 44, 0.4);
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 999px;
+  }
+
+  .buy-btn {
+    display: block;
+    text-align: center;
+    margin-top: 4px;
+    padding: 11px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--hot), var(--hot2));
+    color: #fff;
+    font-weight: 800;
+    font-size: 14px;
+    text-decoration: none;
+    letter-spacing: 0.2px;
+    transition: filter 0.15s ease, transform 0.15s ease;
+  }
+
+  .buy-btn:hover {
+    filter: brightness(1.1);
+    transform: scale(1.02);
+  }
+
+  footer {
+    max-width: 1080px;
+    margin: 40px auto 0;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  footer a { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🔥 Today's Deals</h1>
+  <p>AI-picked from what's trending right now — refreshed daily.</p>
+  <div id="generated" hidden></div>
+</header>
+
+<main>
+  <p id="status">Loading today's deals…</p>
+  <div class="grid" id="grid" hidden></div>
+</main>
+
+<footer>
+  Prices and availability change fast — always confirm at checkout.
+  Some links include an affiliate tag.
+</footer>
+
+<script>
+  const FEED_URL = "extension/deals.json";
+
+  function money(v) {
+    return typeof v === "number" ? `$${v.toFixed(2)}` : v;
+  }
+
+  function cardHTML(deal, featured) {
+    const discount = deal.discountPct
+      ? `<span class="discount-badge">🔥 ${deal.discountPct}% OFF</span>`
+      : "";
+    const listPrice = deal.listPrice
+      ? `<span class="list-price">${money(deal.listPrice)}</span>`
+      : "";
+    const codeBadge = deal.requiresCode
+      ? `<span class="code-badge">🎟️ Code required at checkout</span>`
+      : "";
+    const flag = featured ? `<div class="featured-flag">⭐ Today's Pick</div>` : "";
+
+    return `
+      <article class="card${featured ? " featured" : ""}">
+        ${flag}
+        <div class="card-image-wrap"><img src="${deal.image || ""}" alt="" loading="lazy" /></div>
+        <div class="card-body">
+          <h3 class="card-title">${escapeHTML(deal.title || "Untitled product")}</h3>
+          <p class="card-blurb">${escapeHTML(deal.blurb || "")}</p>
+          <div class="price-row">
+            <span class="price">${money(deal.price)}</span>
+            ${listPrice}
+          </div>
+          ${discount}
+          ${codeBadge}
+          <a class="buy-btn" href="${deal.url}" target="_blank" rel="noopener noreferrer">Buy Now →</a>
+        </div>
+      </article>
+    `;
+  }
+
+  function escapeHTML(str) {
+    const div = document.createElement("div");
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  async function load() {
+    const statusEl = document.getElementById("status");
+    const gridEl = document.getElementById("grid");
+    const generatedEl = document.getElementById("generated");
+
+    try {
+      const res = await fetch(FEED_URL, { cache: "no-store" });
+      if (!res.ok) throw new Error(`Feed request failed: ${res.status}`);
+      const feed = await res.json();
+
+      if (!feed.deals || feed.deals.length === 0) {
+        statusEl.textContent = "No deals found today. Check back tomorrow.";
+        return;
+      }
+
+      statusEl.hidden = true;
+      gridEl.hidden = false;
+      gridEl.innerHTML = feed.deals
+        .map((deal, i) => cardHTML(deal, i === 0))
+        .join("");
+
+      if (feed.generatedAt) {
+        const d = new Date(feed.generatedAt);
+        generatedEl.textContent = `Updated ${d.toLocaleDateString(undefined, { month: "short", day: "numeric" })}`;
+        generatedEl.hidden = false;
+      }
+    } catch (err) {
+      statusEl.textContent = "Couldn't load today's deals. Try again shortly.";
+      console.error("[dealbots] failed to load feed", err);
+    }
+  }
+
+  load();
+</script>
+
+</body>
+</html>

@@ -14,6 +14,7 @@ export function buildFeed(rankedDeals) {
       price: d.currentPrice,
       listPrice: d.listPrice,
       discountPct: d.discountPct,
+      requiresCode: d.requiresCode || false,
       blurb: d.blurb,
       url: buildAffiliateUrl(d.asin),
     })),
