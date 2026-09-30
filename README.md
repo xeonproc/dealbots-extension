@@ -19,7 +19,7 @@ pipeline/  (run daily, e.g. via GitHub Actions)
 extension/  (Chrome Manifest V3 extension)
   popup.js fetches the live GitHub Pages feed (falls back to the bundled
   extension/deals.json if that's unreachable) and renders it.
-  "Buy on Amazon" links already have ?tag=<AFFILIATE_TAG> appended.
+  "Buy Now" links already have ?tag=<AFFILIATE_TAG> appended.
 ```
 
 The pipeline never runs inside the browser and the Anthropic API key never

@@ -1,7 +1,7 @@
 import { config } from "./config.js";
 import { callClaudeJSON } from "./anthropic.js";
 
-// How many top-by-thumb-score Slickdeals posts to hand to Claude. Keeps
+// How many top-by-vote-velocity Slickdeals posts to hand to Claude. Keeps
 // token usage bounded while still giving it real choices.
 const CANDIDATE_POOL_SIZE = 20;
 
@@ -27,8 +27,9 @@ act on right now. SKIP posts where: the final price depends on a coupon/promo co
 not work, the price requires an account/membership/rebate, the item is a grocery/consumable
 oddity, or the price isn't clearly stated as a single number.
 
-From the remaining good candidates, pick the best ${maxDeals} (by a mix of thumbScore and how
-compelling the deal genuinely is). For each pick, return:
+From the remaining good candidates, pick the best ${maxDeals} (by a mix of trendVelocity —
+community votes per hour since posted, a proxy for rising demand, not just total popularity —
+and how compelling the deal genuinely is). For each pick, return:
 - "index": its index in the list below
 - "currentPrice": the price as a plain number (no $ sign)
 - "listPrice": the "was"/regular price as a plain number, ONLY if explicitly stated in the
@@ -46,7 +47,7 @@ ${JSON.stringify(
   pool.map((c, index) => ({
     index,
     title: c.title,
-    thumbScore: c.thumbScore,
+    trendVelocity: c.voteVelocity,
     text: c.rawText,
   })),
   null,

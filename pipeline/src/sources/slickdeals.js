@@ -30,6 +30,22 @@ function decodeEntities(str) {
     .replace(/&gt;/g, ">");
 }
 
+// Raw thumbScore is a snapshot ("how many upvotes so far"), not a trend —
+// a post up for 2 days with 5 votes and one up for 1 hour with 5 votes look
+// identical by that measure, even though the second is climbing much
+// faster. Votes-per-hour-since-posted approximates actual velocity instead.
+// Clamp the age floor so a post that's only minutes old doesn't produce a
+// wildly inflated ratio from near-zero elapsed time.
+const MIN_AGE_HOURS = 0.25;
+
+function voteVelocity(thumbScore, pubDate) {
+  const posted = new Date(pubDate);
+  if (Number.isNaN(posted.getTime())) return thumbScore;
+
+  const ageHours = Math.max(MIN_AGE_HOURS, (Date.now() - posted.getTime()) / 36e5);
+  return Math.round((thumbScore / ageHours) * 100) / 100;
+}
+
 function parseItem(itemXml) {
   const title = decodeEntities(extractTag(itemXml, "title"));
   const link = extractTag(itemXml, "link");
@@ -43,13 +59,16 @@ function parseItem(itemXml) {
 
   if (!asinMatch || storeMatch?.[1] !== "amazon") return null;
 
+  const thumbScore = thumbMatch ? Number(thumbMatch[1]) : 0;
+
   return {
     asin: asinMatch[1],
     title,
     sourceLink: link,
     image: imgMatch ? imgMatch[1] : "",
-    thumbScore: thumbMatch ? Number(thumbMatch[1]) : 0,
+    thumbScore,
     pubDate,
+    voteVelocity: voteVelocity(thumbScore, pubDate),
     rawText: decodeEntities(stripTags(body)).slice(0, 600),
   };
 }
@@ -71,5 +90,5 @@ export async function fetchSlickdealsCandidates() {
   return items
     .map(parseItem)
     .filter(Boolean)
-    .sort((a, b) => b.thumbScore - a.thumbScore);
+    .sort((a, b) => b.voteVelocity - a.voteVelocity);
 }
