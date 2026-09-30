@@ -1,10 +1,12 @@
 # Dealbots — AI Deal of the Day
 
 A Chrome extension that shows one AI-picked "deal of the day," found and
-written fully automatically by Claude. Live at:
+written fully automatically by Claude — plus a "see other deals" page with
+the rest of the day's picks. Live at:
 
 - Extension: load unpacked from `extension/` (not yet published to the
   Chrome Web Store)
+- Deals page: https://xeonproc.github.io/dealbots-extension/
 - Public feed: https://xeonproc.github.io/dealbots-extension/extension/deals.json
 
 ## How it works
@@ -12,14 +14,19 @@ written fully automatically by Claude. Live at:
 ```
 pipeline/  (run daily, e.g. via GitHub Actions)
   1. Fetch candidate posts        -> sources/slickdeals.js (Slickdeals' public RSS feed)
-  2. Pick + extract price + blurb -> rankSlickdeals.js (Claude API, one call does all three)
+  2. Pick + extract price + blurb -> rankSlickdeals.js (Claude API, one call returns up to 8 ranked picks)
   3. Write feed                   -> buildFeed.js -> extension/deals.json
-  4. `git push`                   -> GitHub Pages republishes the feed
+  4. `git push`                   -> GitHub Pages republishes both the feed and the deals page
 
 extension/  (Chrome Manifest V3 extension)
   popup.js fetches the live GitHub Pages feed (falls back to the bundled
-  extension/deals.json if that's unreachable) and renders it.
+  extension/deals.json if that's unreachable) and renders only deals[0] —
+  the featured pick — plus a "See other deals" link to the deals page.
   "Buy Now" links already have ?tag=<AFFILIATE_TAG> appended.
+
+index.html  (GitHub Pages root, .nojekyll — served directly, not via Jekyll)
+  Reads the same deals.json and renders every pick from today's run as a
+  card grid, with deals[0] called out as "Today's Pick".
 ```
 
 The pipeline never runs inside the browser and the Anthropic API key never
@@ -58,13 +65,22 @@ alongside the blurb, all in one call.
 ## Status
 
 - ✅ Extension UI (popup) — confirmed working, loaded unpacked in Chrome
-- ✅ Fully automated pipeline (`DATA_SOURCE=slickdeals`, the default) — confirmed working end to end against the live Slickdeals feed and real Claude API
+- ✅ Fully automated pipeline (`DATA_SOURCE=slickdeals`, the default) — confirmed working end to end against the live Slickdeals feed and real Claude API, now returning up to 8 ranked picks per run
+- ✅ Running on Claude Haiku 4.5 (switched from Sonnet 5 — quality-checked side by side on live data first; ~2x cheaper, and at this volume both cost cents/month regardless)
+- ✅ "See other deals" page (`index.html`, GitHub Pages root) — colorful card grid of every pick, confirmed working including product images (needed `referrerpolicy="no-referrer"` — Slickdeals' image CDN blocks cross-origin embeds by Referer header otherwise)
 - ✅ Repo pushed to GitHub: https://github.com/xeonproc/dealbots-extension
-- ✅ GitHub Pages serving the feed publicly
+- ✅ GitHub Pages serving both the feed and the deals page publicly
 - ✅ `ANTHROPIC_API_KEY` set as a GitHub Actions repo secret, ready for later
 - ⏳ Amazon PA-API integration (`pipeline/src/sources/keepaLive.js`) — stubbed, throws until implemented (blocked on 3 qualifying sales)
 - ✅ GitHub Actions daily workflow (`.github/workflows/daily-deals.yml`) updated for `DATA_SOURCE=slickdeals`, ready to test via manual `workflow_dispatch`
 - ⏳ Chrome Web Store submission — not started
+
+**Gotcha worth knowing if defaults ever seem ignored:** `pipeline/.env` overrides
+`pipeline/src/config.js` defaults for anything it sets, even a var the code
+no longer expects you to set. This bit us once — `.env` had `ANTHROPIC_MODEL`
+and `MAX_DEALS_PER_DAY` hardcoded from early setup, which silently overrode
+later default changes in `config.js` for both. If a code default change
+doesn't seem to take effect, check `.env` first.
 
 ## Running the pipeline
 
