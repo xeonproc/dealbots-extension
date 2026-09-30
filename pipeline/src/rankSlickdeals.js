@@ -21,8 +21,7 @@ export async function rankSlickdealsCandidates(candidates, maxDeals = config.max
 
   const prompt = `You are building today's deal feed for a shopping extension from real
 Slickdeals.net community posts. Each post links to a specific Amazon product. The output
-powers two surfaces: a single "featured" pick (must be the cleanest, most compelling deal)
-and a longer "more deals" list (can include good deals with minor friction).
+powers two surfaces: a single "featured" pick and a longer "more deals" list.
 
 SKIP entirely only posts where: the price requires an account/membership/rebate to unlock,
 the item is a grocery/consumable oddity, or no single current price is stated at all. Do NOT
@@ -34,9 +33,15 @@ since posted, a proxy for rising demand, not just total popularity — and how c
 deal genuinely is), best first, up to ${maxDeals} total. Include EVERY candidate that has a
 clearly stated price, even ordinary/unexciting ones — the list needs enough variety, and a
 plain-but-real deal ranked low still belongs on it. Do not shrink the list just because most
-candidates aren't exceptional; only exclude ones that fail the SKIP rule above. Put the single
-cleanest, no-friction, clearly-priced deal first — that one becomes the featured pick, so hold
-IT (only) to a higher bar. For each pick, return:
+candidates aren't exceptional; only exclude ones that fail the SKIP rule above.
+
+The FIRST item in your ranking becomes the "featured" pick shown most prominently, so it needs
+a real reason to be featured, not just convenience: it MUST have either a computable discountPct
+of at least ${config.minDiscountPct}%, OR an explicit priceClaim (see below) — a plain-priced
+item with no discount evidence, no matter how "clean," must NOT be placed first. Rank items
+with genuine discount evidence above equally-clean items that have none. If NO candidate has a
+real discount or price claim, still return the list (ranked by trendVelocity/compellingness as
+usual) — don't fabricate one just to satisfy this rule. For each pick, return:
 - "index": its index in the list below
 - "currentPrice": the price as a plain number (no $ sign) — the price after any code, if one's needed
 - "listPrice": the "was"/regular price as a plain number, ONLY if explicitly stated in the
