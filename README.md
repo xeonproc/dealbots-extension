@@ -1,8 +1,7 @@
 # Dealbots — AI Deal of the Day
 
-A Chrome extension that shows one AI-picked "deal of the day": a product
-that's discounted vs. its usual price, with the pick and blurb written daily
-by Claude. Live at:
+A Chrome extension that shows one AI-picked "deal of the day," found and
+written fully automatically by Claude. Live at:
 
 - Extension: load unpacked from `extension/` (not yet published to the
   Chrome Web Store)
@@ -11,12 +10,11 @@ by Claude. Live at:
 ## How it works
 
 ```
-pipeline/  (run manually for now, e.g. once a day)
-  1. Get candidate products        -> sources/manual.js reads candidates.json (you fill this in by hand)
-  2. Filter: discount >= threshold -> analyze.js
-  3. Pick + write blurbs           -> rankWithClaude.js (Claude API)
-  4. Write feed                    -> buildFeed.js -> extension/deals.json
-  5. `git push`                    -> GitHub Pages republishes the feed
+pipeline/  (run daily, e.g. via GitHub Actions)
+  1. Fetch candidate posts        -> sources/slickdeals.js (Slickdeals' public RSS feed)
+  2. Pick + extract price + blurb -> rankSlickdeals.js (Claude API, one call does all three)
+  3. Write feed                   -> buildFeed.js -> extension/deals.json
+  4. `git push`                   -> GitHub Pages republishes the feed
 
 extension/  (Chrome Manifest V3 extension)
   popup.js fetches the live GitHub Pages feed (falls back to the bundled
@@ -28,53 +26,70 @@ The pipeline never runs inside the browser and the Anthropic API key never
 ships in the extension — only your machine (or GitHub Actions, once that's
 enabled) sees it. The extension itself just fetches a static JSON feed.
 
-### Why "manual" candidates for now, instead of full automation?
+### Why Slickdeals' RSS feed instead of Keepa or Amazon PA-API?
 
-The original plan was: an AI/API scours trending + discount data automatically.
-In practice that requires either Amazon's own Product Advertising API (free,
-but gated behind 3 qualifying sales through your Associates link in the last
-180 days — not available on day one) or a paid third-party product-data API
-like Keepa (cheapest plan is €49/month, no free tier). Scraping amazon.com
-directly isn't an option — it violates Amazon's Conditions of Use and gets
-detected/blocked regardless of who runs the scraper.
+The original plan was Amazon's own Product Advertising API, but that's
+gated behind 3 qualifying sales through your Associates link in the last
+180 days — not available on day one. Keepa (a paid alternative) has no free
+tier (cheapest plan is €49/month). Scraping amazon.com directly isn't an
+option — it violates Amazon's Conditions of Use.
 
-So for now: you browse Amazon's public Today's Deals / Best Sellers pages
-yourself (exactly what a shopper does — no scraping involved), and log a few
-candidates into `pipeline/candidates.json` with the price and Amazon's own
-listed "was" price. Claude still does 100% of the ranking and blurb-writing,
-and the tag-appending / feed-publishing is still fully automatic. Once you
-clear 3 sales, switch `DATA_SOURCE=live` and Amazon's PA-API takes over
-discovery for free — see `pipeline/src/sources/keepaLive.js` for where that
-integration goes (despite the filename, PA-API can plug in there too).
+Slickdeals publishes an **official public RSS feed** of their Hot Deals
+forum — RSS is a syndication format meant for exactly this kind of
+programmatic consumption, so it's not a scrape. Posts that link to Amazon
+carry the ASIN directly, and the community's "Thumb Score" is a real,
+human-validated "this is a genuinely good deal" signal — arguably better
+for this purpose than Google Trends, since it's shopping-specific.
+
+One thing worth knowing: those Amazon links in the RSS feed carry
+Slickdeals' own affiliate tag. The pipeline extracts only the ASIN and
+rebuilds the URL with `AFFILIATE_TAG` instead of reusing their link — so
+the commission that click would've earned Slickdeals goes to you instead.
+That's a deliberate tradeoff accepted for now; switch `DATA_SOURCE=live`
+(Amazon PA-API) once you qualify, and this goes away entirely.
+
+Because Slickdeals posts are free text ("$45.99 after promo code X", "was
+$80 now $45", etc.), there's no clean structured price field to parse with
+a regex — `rankSlickdeals.js` has Claude read each post directly, skip ones
+where the price isn't clearly actionable (needs a coupon, membership, etc.),
+and extract `currentPrice` / `listPrice` / `discountPct` (when statable)
+alongside the blurb, all in one call.
 
 ## Status
 
 - ✅ Extension UI (popup) — confirmed working, loaded unpacked in Chrome
-- ✅ Manual-candidate pipeline (`DATA_SOURCE=manual`) — confirmed working end to end, including real Claude blurb generation
+- ✅ Fully automated pipeline (`DATA_SOURCE=slickdeals`, the default) — confirmed working end to end against the live Slickdeals feed and real Claude API
 - ✅ Repo pushed to GitHub: https://github.com/xeonproc/dealbots-extension
 - ✅ GitHub Pages serving the feed publicly
 - ✅ `ANTHROPIC_API_KEY` set as a GitHub Actions repo secret, ready for later
-- ⏳ Amazon PA-API / live Keepa integration (`pipeline/src/sources/keepaLive.js`) — stubbed, throws until implemented (blocked on 3 qualifying sales, or a paid Keepa plan)
-- ⏳ GitHub Actions daily run — workflow pushed (`.github/workflows/daily-deals.yml`) but not enabled; running the pipeline and pushing is still manual
+- ⏳ Amazon PA-API integration (`pipeline/src/sources/keepaLive.js`) — stubbed, throws until implemented (blocked on 3 qualifying sales)
+- ✅ GitHub Actions daily workflow (`.github/workflows/daily-deals.yml`) updated for `DATA_SOURCE=slickdeals`, ready to test via manual `workflow_dispatch`
 - ⏳ Chrome Web Store submission — not started
 
 ## Running the pipeline
 
 Requires [Node.js](https://nodejs.org) 20+.
 
-**Day to day (manual candidates, real Claude blurb):**
+**Day to day (fully automatic):**
 
-1. Browse Amazon's public Today's Deals / Best Sellers pages, pick 1+ products
-2. Edit `pipeline/candidates.json` — `asin`, `title`, `category`, `image`, `currentPrice`, `listPrice` (Amazon's own listed price) for each
-3. `cd pipeline && npm run build`
-4. Check `extension/deals.json`, then `git add -A && git commit && git push` — GitHub Pages will pick it up within a few minutes
+```sh
+cd pipeline
+npm run build
+git add -A && git commit -m "deal: <date>" && git push
+```
 
-**Testing the pipeline logic itself (fake data, no API key, no candidates.json edits needed):**
+That's it — no candidate list to edit. GitHub Pages picks up the push within a few minutes.
+
+**Testing the pipeline logic itself (fake data, no API key, no network calls):**
 
 ```sh
 cd pipeline
 npm run build:mock
 ```
+
+**Manual-candidate mode** (`pipeline/candidates.json`, `DATA_SOURCE=manual`)
+still exists as a fallback if the Slickdeals feed is ever down or you want
+to hand-pick a specific deal for a day — see git history for how it worked.
 
 **Testing the extension UI:**
 
@@ -84,22 +99,23 @@ npm run build:mock
 
 ## Next steps
 
-1. Use the manual workflow above for real for a while — get to 3 Associates sales
-2. Once eligible, implement Amazon PA-API (or a paid Keepa plan, if you'd rather pay than wait) in `pipeline/src/sources/keepaLive.js`, set `DATA_SOURCE=live`
-3. Enable `.github/workflows/daily-deals.yml` (add `KEEPA_API_KEY` secret if using Keepa; `ANTHROPIC_API_KEY` is already set) and test via its manual `workflow_dispatch` trigger before trusting the daily cron
-4. Only then prep the Chrome Web Store listing (icons, screenshots, privacy policy, store description) — see "Compliance notes" below first
+1. Test the daily workflow via its manual `workflow_dispatch` trigger (Actions tab → "Update daily deal feed" → Run workflow) before trusting the scheduled cron
+2. Use the product for real for a while — get to 3 Associates sales
+3. Once eligible, implement Amazon PA-API in `pipeline/src/sources/keepaLive.js`, set `DATA_SOURCE=live`, and the Slickdeals-affiliate-tag tradeoff above goes away
+4. Prep the Chrome Web Store listing (icons, screenshots, privacy policy, store description) — see "Compliance notes" below first
 
 ## Compliance notes (read before submitting to the Chrome Web Store)
 
 - **Amazon Associates**: appending `?tag=dealbots00-20` to a product URL
-  needs no approval and is fine from day one. What needs care is *how the
-  underlying price/deal data is sourced* — don't scrape amazon.com directly;
-  use PA-API once eligible, a paid data API, or (current approach) your own
-  manual browsing.
+  needs no approval and is fine from day one.
+- **Slickdeals RSS reuse**: see "Why Slickdeals' RSS feed" above — using
+  their official RSS feed isn't scraping, but rebuilding the affiliate link
+  with a different tag is a deliberate, accepted tradeoff, not something
+  verified against Slickdeals' Terms of Service. Worth revisiting before
+  treating this as permanent rather than a bootstrap step.
 - **Price accuracy**: the Associates Operating Agreement requires displayed
-  prices to be accurate/current. Since the feed is only as fresh as the last
-  time you ran the pipeline, don't let `candidates.json` go stale — re-run
-  before publishing a new day's pick.
+  prices to be accurate/current. Since the feed is only as fresh as the
+  last pipeline run, don't let it go stale — re-run at least daily.
 - **Chrome Web Store review**: this extension intentionally uses no
   `host_permissions` beyond the feed URL and never modifies pages the user
   visits, which keeps the review surface small. You'll still need a privacy

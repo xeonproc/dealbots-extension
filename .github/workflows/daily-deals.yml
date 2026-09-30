@@ -1,9 +1,3 @@
-# DRAFT — not wired up yet. This runs the pipeline in "live" mode, which
-# requires keepaLive.js to be implemented and ANTHROPIC_API_KEY / KEEPA_API_KEY
-# secrets to be set on the repo. It also assumes GitHub Pages is configured to
-# serve extension/deals.json (Settings -> Pages -> source: main / root, or
-# copy the file into /docs if you'd rather serve from there). Revisit this
-# once local testing with mock data looks right.
 name: Update daily deal feed
 
 on:
@@ -29,9 +23,8 @@ jobs:
       - name: Run deal-sourcing pipeline
         working-directory: pipeline
         env:
-          USE_MOCK_DATA: "false"
+          DATA_SOURCE: "slickdeals"
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          KEEPA_API_KEY: ${{ secrets.KEEPA_API_KEY }}
           AFFILIATE_TAG: ${{ vars.AFFILIATE_TAG }}
         run: node src/index.js
 

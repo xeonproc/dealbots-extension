@@ -1,15 +1,8 @@
 import { config } from "./config.js";
-
-const ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages";
+import { callClaudeJSON } from "./anthropic.js";
 
 function fallbackBlurb(candidate) {
   return `Trending up in ${candidate.category || "its category"} and ${candidate.discountPct}% below its usual price.`;
-}
-
-// Claude sometimes wraps JSON replies in a ```json ... ``` fence despite
-// instructions not to — strip it before parsing.
-function stripCodeFence(text) {
-  return text.trim().replace(/^```(?:json)?\s*/i, "").replace(/```\s*$/, "");
 }
 
 // Picks the top `maxDeals` candidates and writes a short blurb for each.
@@ -49,38 +42,11 @@ ${JSON.stringify(
   2
 )}`;
 
-  const headers = {
-    "content-type": "application/json",
-    "x-api-key": config.anthropicApiKey,
-    "anthropic-version": "2023-06-01",
-  };
-  if (config.anthropicWorkspaceId) {
-    headers["anthropic-workspace-id"] = config.anthropicWorkspaceId;
-  }
-
-  const res = await fetch(ANTHROPIC_API_URL, {
-    method: "POST",
-    headers,
-    body: JSON.stringify({
-      model: config.anthropicModel,
-      max_tokens: 512,
-      messages: [{ role: "user", content: prompt }],
-    }),
-  });
-
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`Anthropic API request failed: ${res.status} ${text}`);
-  }
-
-  const data = await res.json();
-  const textBlock = data.content.find((block) => block.type === "text");
-
   let blurbs;
   try {
-    blurbs = JSON.parse(stripCodeFence(textBlock.text));
+    blurbs = await callClaudeJSON(prompt, { maxTokens: 512 });
   } catch (err) {
-    console.warn("[rankWithClaude] Failed to parse Claude response as JSON, using fallback blurbs.", err);
+    console.warn("[rankWithClaude] Claude call/parse failed, using fallback blurbs.", err);
     return shortlist.map((c) => ({ ...c, blurb: fallbackBlurb(c) }));
   }
 

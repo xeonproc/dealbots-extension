@@ -1,11 +1,12 @@
 export const config = {
-  // "manual"  - read pipeline/candidates.json, which you fill in by hand
-  //             each day (default, until you qualify for Amazon PA-API)
-  // "mock"    - read pipeline/fixtures/*.json (for testing the pipeline
-  //             itself, not real deals)
-  // "live"    - call sources/keepaLive.js (not implemented yet, requires a
-  //             paid Keepa plan or a PA-API-eligible Associates account)
-  dataSource: process.env.DATA_SOURCE || "manual",
+  // "slickdeals" - fully automated (default): reads Slickdeals' public RSS
+  //                feed, Claude picks + extracts price + writes the blurb
+  // "manual"     - read pipeline/candidates.json, which you fill in by hand
+  // "mock"       - read pipeline/fixtures/*.json (for testing the pipeline
+  //                itself, not real deals)
+  // "live"       - call sources/keepaLive.js (not implemented yet, requires
+  //                a paid Keepa plan or a PA-API-eligible Associates account)
+  dataSource: process.env.DATA_SOURCE || "slickdeals",
 
   anthropicApiKey: process.env.ANTHROPIC_API_KEY || "",
   anthropicModel: process.env.ANTHROPIC_MODEL || "claude-sonnet-5",
