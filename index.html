@@ -41,12 +41,18 @@
   header h1 {
     font-size: clamp(28px, 6vw, 44px);
     margin: 0 0 8px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  /* Gradient-clip only the text span, never the emoji — background-clip:
+     text strips an emoji's native color layers and leaves a flat gradient
+     silhouette instead of the real glyph. */
+  header h1 .gradient-text {
     background: linear-gradient(90deg, var(--hot), var(--hot2), var(--gold));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    font-weight: 800;
-    letter-spacing: -0.5px;
   }
 
   header p {
@@ -259,7 +265,7 @@
 <body>
 
 <header>
-  <h1>🔥 Today's Deals</h1>
+  <h1>🔥 <span class="gradient-text">Today's Deals</span></h1>
   <p>AI-picked from what's trending right now — refreshed daily.</p>
   <div id="generated" hidden></div>
 </header>
