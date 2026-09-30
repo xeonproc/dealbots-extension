@@ -6,6 +6,12 @@ function fallbackBlurb(candidate) {
   return `Trending up in ${candidate.category || "its category"} and ${candidate.discountPct}% below its usual price.`;
 }
 
+// Claude sometimes wraps JSON replies in a ```json ... ``` fence despite
+// instructions not to — strip it before parsing.
+function stripCodeFence(text) {
+  return text.trim().replace(/^```(?:json)?\s*/i, "").replace(/```\s*$/, "");
+}
+
 // Picks the top `maxDeals` candidates and writes a short blurb for each.
 // Falls back to a plain-template blurb (no network call) when no
 // ANTHROPIC_API_KEY is set, so the pipeline is fully testable offline.
@@ -26,7 +32,9 @@ genuinely discounted (vs. their own 90-day average price, not an inflated "was" 
 For each product, write ONE short, factual, enthusiasm-free sentence (max 20 words)
 explaining why it's a good pick today. Do not invent facts not given below.
 
-Return ONLY a JSON array of strings, one blurb per product, in the same order given.
+Return ONLY a raw JSON array of strings, one blurb per product, in the same order
+given. No markdown code fences, no commentary — the response must be valid JSON
+on its own.
 
 Products:
 ${JSON.stringify(
@@ -41,13 +49,18 @@ ${JSON.stringify(
   2
 )}`;
 
+  const headers = {
+    "content-type": "application/json",
+    "x-api-key": config.anthropicApiKey,
+    "anthropic-version": "2023-06-01",
+  };
+  if (config.anthropicWorkspaceId) {
+    headers["anthropic-workspace-id"] = config.anthropicWorkspaceId;
+  }
+
   const res = await fetch(ANTHROPIC_API_URL, {
     method: "POST",
-    headers: {
-      "content-type": "application/json",
-      "x-api-key": config.anthropicApiKey,
-      "anthropic-version": "2023-06-01",
-    },
+    headers,
     body: JSON.stringify({
       model: config.anthropicModel,
       max_tokens: 512,
@@ -65,7 +78,7 @@ ${JSON.stringify(
 
   let blurbs;
   try {
-    blurbs = JSON.parse(textBlock.text);
+    blurbs = JSON.parse(stripCodeFence(textBlock.text));
   } catch (err) {
     console.warn("[rankWithClaude] Failed to parse Claude response as JSON, using fallback blurbs.", err);
     return shortlist.map((c) => ({ ...c, blurb: fallbackBlurb(c) }));
