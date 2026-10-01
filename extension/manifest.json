@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Dealbots — AI Deal of the Day",
-  "version": "1.0.5",
-  "description": "One AI-picked deal a day, sourced from real shopper community posts and filtered for genuine, actionable pricing.",
+  "version": "1.0.6",
+  "description": "AI-picked Amazon deal of the day — one real daily deal, filtered from genuine shopper communities, not fake sales.",
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
