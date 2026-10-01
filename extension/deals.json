@@ -1,17 +1,41 @@
 {
-  "generatedAt": "2026-10-01T13:07:41.955Z",
+  "generatedAt": "2026-10-01T13:22:13.552Z",
   "deals": [
     {
-      "asin": "B0092K7C1O",
-      "title": "$5.79: Gillette Mach3 Razor for Men, 1 Razor Handle + 1 Blade Refill at Amazon",
-      "image": "https://static.slickdealscdn.com/attachment/2/9/8/1/5/7/1/1/300x300/21770259.thumb",
-      "price": 5.79,
-      "listPrice": null,
-      "discountPct": null,
+      "asin": "B0CJ32WVHP",
+      "title": "[AC] $21.12 | 16-Pack 4.4-Oz Nongshim Vegan Shin Green Ramyun at Amazon ($1.32 each)",
+      "image": "https://static.slickdealscdn.com/attachment/1/1/7/1/5/2/7/300x300/21770454.thumb",
+      "price": 21.12,
+      "listPrice": 23.47,
+      "discountPct": 10,
       "priceClaim": null,
-      "requiresCode": false,
-      "blurb": "Gillette Mach3 razor with handle and one blade refill for under $6, free shipping with Prime.",
-      "url": "https://www.amazon.com/dp/B0092K7C1O?tag=dealbots00-20"
+      "requiresCode": true,
+      "blurb": "16-pack instant noodles; clip coupon at checkout for $21.12 with free Prime shipping.",
+      "url": "https://www.amazon.com/dp/B0CJ32WVHP?tag=dealbots00-20"
+    },
+    {
+      "asin": "B0D51ZBWQ1",
+      "title": "[AC] $144.86 | ASUS ROG RYUJIN III WB WHT CPU Water Block at Amazon",
+      "image": "https://static.slickdealscdn.com/attachment/1/1/7/1/5/2/7/300x300/21770568.thumb",
+      "price": 144.86,
+      "listPrice": 239.71,
+      "discountPct": 40,
+      "priceClaim": null,
+      "requiresCode": true,
+      "blurb": "ASUS ROG RYUJIN III CPU water block cooler; clip coupon for $144.86 with free shipping.",
+      "url": "https://www.amazon.com/dp/B0D51ZBWQ1?tag=dealbots00-20"
+    },
+    {
+      "asin": "B0CJ33VFQZ",
+      "title": "[SnS, AC] $25.41* | 16-pk 4.58-oz Nongshim Premium Shin Ramyun Noodles: Gold at Amazon",
+      "image": "https://static.slickdealscdn.com/attachment/1/1/7/1/5/2/7/300x300/21770466.thumb",
+      "price": 25.41,
+      "listPrice": 29.89,
+      "discountPct": 15,
+      "priceClaim": null,
+      "requiresCode": true,
+      "blurb": "16-pack premium Shin Ramyun noodles; coupon + Subscribe & Save discount brings price to $25.41.",
+      "url": "https://www.amazon.com/dp/B0CJ33VFQZ?tag=dealbots00-20"
     },
     {
       "asin": "B0DQWSVPDP",
@@ -22,68 +46,44 @@
       "discountPct": 15,
       "priceClaim": null,
       "requiresCode": true,
-      "blurb": "4-pack Nongshim Toomba Shin Ramyun with coupon and Subscribe & Save discounts applied.",
+      "blurb": "4-pack spicy ramyun noodles at $1.27 each; coupon + Subscribe & Save reduces to $5.09.",
       "url": "https://www.amazon.com/dp/B0DQWSVPDP?tag=dealbots00-20"
     },
     {
-      "asin": "B0054TWQ36",
-      "title": "Nongshim Shin Ramyun Bowl Noodles, Spicy Korean Signature Instant Ramyun, Rich Beef Flavored Broth Microwaveable Bowl, 3.03 oz (Pack of 12)~$10.80 After Coupon @ Amazon",
-      "image": "https://static.slickdealscdn.com/attachment/1/7/2/9/6/9/0/300x300/21770331.thumb",
-      "price": 10.8,
+      "asin": "B0GMXX642Z",
+      "title": "$5.23: Proferred 8\" Putty Knife, Half Tang, Non-Slip Grip, Hammer Cap at Amazon",
+      "image": "https://static.slickdealscdn.com/attachment/2/9/8/1/5/7/1/1/300x300/21770514.thumb",
+      "price": 5.23,
       "listPrice": null,
       "discountPct": null,
-      "priceClaim": "Coupon Deal",
+      "priceClaim": null,
+      "requiresCode": false,
+      "blurb": "8-inch putty knife with non-slip grip and hammer cap for $5.23, free Prime shipping.",
+      "url": "https://www.amazon.com/dp/B0GMXX642Z?tag=dealbots00-20"
+    },
+    {
+      "asin": "B0DS61RZYG",
+      "title": "Fanttik Flip G9 Pro Electric Spin Scrubber w/ 6 Brush Heads & Adjustable Angle (Black or White) $62.99 + Free Shipping",
+      "image": "https://static.slickdealscdn.com/attachment/3/7/4/7/9/3/300x300/21770439.thumb",
+      "price": 62.99,
+      "listPrice": 99.99,
+      "discountPct": 37,
+      "priceClaim": null,
       "requiresCode": true,
-      "blurb": "12-pack Nongshim Shin Ramyun bowls with clip coupon applied at checkout.",
-      "url": "https://www.amazon.com/dp/B0054TWQ36?tag=dealbots00-20"
+      "blurb": "Electric spin scrubber with 6 brush heads and adjustable angle; promo code required for $62.99.",
+      "url": "https://www.amazon.com/dp/B0DS61RZYG?tag=dealbots00-20"
     },
     {
-      "asin": "B0CJ32WVHP",
-      "title": "[AC] $21.12 | 16-Pack 4.4-Oz Nongshim Vegan Shin Green Ramyun at Amazon ($1.32 each)",
-      "image": "https://static.slickdealscdn.com/attachment/1/1/7/1/5/2/7/300x300/21770454.thumb",
-      "price": 21.12,
-      "listPrice": 23.47,
-      "discountPct": 10,
-      "priceClaim": null,
-      "requiresCode": true,
-      "blurb": "16-pack Nongshim Vegan Shin Green Ramyun ($1.32 each) with coupon clip applied.",
-      "url": "https://www.amazon.com/dp/B0CJ32WVHP?tag=dealbots00-20"
-    },
-    {
-      "asin": "B07NMPWY5X",
-      "title": "Atlas Obscura 2nd Ed: An Explorer's Guide to the World's Hidden Wonders (Kindle Edition) $2.99",
-      "image": "https://static.slickdealscdn.com/attachment/3/6/9/5/2/8/300x300/21770097.thumb",
-      "price": 2.99,
+      "asin": "B0F6RTD6XW",
+      "title": "[NEW] $89.99 | Losi Micro-T 1/28 2 Wheel Drive Silver RTR LOS-1392T2 at Amazon",
+      "image": "https://static.slickdealscdn.com/attachment/1/1/7/1/5/2/7/300x300/21770535.thumb",
+      "price": 89.99,
       "listPrice": null,
       "discountPct": null,
       "priceClaim": null,
       "requiresCode": false,
-      "blurb": "Atlas Obscura 2nd Edition Kindle book about world's hidden wonders.",
-      "url": "https://www.amazon.com/dp/B07NMPWY5X?tag=dealbots00-20"
-    },
-    {
-      "asin": "B0F3QQ6HN6",
-      "title": "$7.99 | Sinners (DVD) at Amazon",
-      "image": "https://static.slickdealscdn.com/attachment/1/1/7/1/5/2/7/300x300/21770283.thumb",
-      "price": 7.99,
-      "listPrice": null,
-      "discountPct": null,
-      "priceClaim": null,
-      "requiresCode": false,
-      "blurb": "Sinners DVD, free shipping with Prime or $35+ orders.",
-      "url": "https://www.amazon.com/dp/B0F3QQ6HN6?tag=dealbots00-20"
-    },
-    {
-      "asin": "B06XYG9892",
-      "title": "100 Caplets Vanquish Extra Strength, Acetaminophen, Aspirin, Caffeine $7.30 + Free S&H w/ Prime or $35+",
-      "image": "https://static.slickdealscdn.com/attachment/2/9/8/1/5/7/1/1/300x300/21770190.thumb",
-      "price": 7.3,
-      "listPrice": null,
-      "discountPct": null,
-      "priceClaim": null,
-      "requiresCode": false,
-      "blurb": "Vanquish Extra Strength 100 caplets with acetaminophen, aspirin, and caffeine.",
-      "url": "https://www.amazon.com/dp/B06XYG9892?tag=dealbots00-20"
+      "blurb": "Losi Micro-T 1/28 scale RC truck ready-to-run with free shipping at $89.99.",
+      "url": "https://www.amazon.com/dp/B0F6RTD6XW?tag=dealbots00-20"
     },
     {
       "asin": "B0CJMVWVDF",
@@ -94,7 +94,7 @@
       "discountPct": null,
       "priceClaim": null,
       "requiresCode": false,
-      "blurb": "ARRMA Gorgon 2WD MT 1/10 RC truck kit with battery and charger included.",
+      "blurb": "ARRMA Gorgon 1/10 RC truck kit with battery and charger included for $99.99, free shipping.",
       "url": "https://www.amazon.com/dp/B0CJMVWVDF?tag=dealbots00-20"
     }
   ]

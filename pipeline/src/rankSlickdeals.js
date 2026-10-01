@@ -88,7 +88,7 @@ ${JSON.stringify(
 
   const picks = await callClaudeJSON(prompt, { maxTokens: 4096 });
 
-  return picks
+  const ranked = picks
     .filter((p) => pool[p.index])
     .map((p) => ({
       ...pool[p.index],
@@ -99,4 +99,29 @@ ${JSON.stringify(
       requiresCode: p.requiresCode ?? false,
       blurb: p.blurb,
     }));
+
+  return promoteFeaturedPick(ranked);
+}
+
+// The prompt instructs Claude to only feature an item with real discount
+// evidence, but that's a soft instruction, not a guarantee — observed in
+// practice to get ignored sometimes (a plain-priced item placed first over
+// candidates with a real discountPct or priceClaim just below it). This is
+// a hard business rule, not a judgment call, so enforce it in code rather
+// than trust the model every run: promote the first qualifying candidate
+// to the front if Claude didn't already put one there, keeping everyone
+// else's relative order. If nothing qualifies, leave Claude's order as is.
+function promoteFeaturedPick(deals) {
+  if (deals.length === 0) return deals;
+
+  const hasEvidence = (d) => Boolean(d.discountPct) || Boolean(d.priceClaim);
+  if (hasEvidence(deals[0])) return deals;
+
+  const promoteIndex = deals.findIndex(hasEvidence);
+  if (promoteIndex <= 0) return deals;
+
+  const reordered = [...deals];
+  const [promoted] = reordered.splice(promoteIndex, 1);
+  reordered.unshift(promoted);
+  return reordered;
 }
