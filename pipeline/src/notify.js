@@ -9,6 +9,8 @@ function formatMessage(feed) {
     ? ` (${top.discountPct}% off)`
     : top.priceClaim
     ? ` (${top.priceClaim})`
+    : top.trending
+    ? ` (trending)`
     : "";
 
   return (

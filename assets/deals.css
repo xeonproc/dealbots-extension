@@ -222,6 +222,20 @@ main {
   width: fit-content;
 }
 
+.trending-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(38, 224, 163, 0.15);
+  border: 1px solid rgba(38, 224, 163, 0.45);
+  color: var(--mint);
+  font-weight: 700;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  width: fit-content;
+}
+
 .code-badge {
   display: inline-flex;
   width: fit-content;

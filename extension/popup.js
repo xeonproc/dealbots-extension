@@ -24,6 +24,8 @@ function renderDeal(deal) {
     discountEl.textContent = `${deal.discountPct}% off (was ${formatPrice(deal.listPrice)})`;
   } else if (deal.priceClaim) {
     discountEl.textContent = `🔥 ${deal.priceClaim}`;
+  } else if (deal.trending) {
+    discountEl.textContent = `📈 Trending`;
   } else {
     discountEl.remove();
   }
