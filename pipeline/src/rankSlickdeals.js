@@ -114,7 +114,14 @@ ${JSON.stringify(
 function promoteFeaturedPick(deals) {
   if (deals.length === 0) return deals;
 
-  const hasEvidence = (d) => Boolean(d.discountPct) || Boolean(d.priceClaim);
+  // Matches the prompt's stated bar exactly — a discount under
+  // minDiscountPct is "truthy" but isn't the real reason-to-feature the
+  // rule is meant to guarantee (caught via a real run: a 5% pick blocked
+  // promotion of 51%/38% candidates sitting right below it, because 5 is
+  // truthy).
+  const hasEvidence = (d) =>
+    (typeof d.discountPct === "number" && d.discountPct >= config.minDiscountPct) ||
+    Boolean(d.priceClaim);
   if (hasEvidence(deals[0])) return deals;
 
   const promoteIndex = deals.findIndex(hasEvidence);
