@@ -122,9 +122,17 @@ function promoteFeaturedPick(deals) {
   const hasEvidence = (d) =>
     (typeof d.discountPct === "number" && d.discountPct >= config.minDiscountPct) ||
     Boolean(d.priceClaim);
-  if (hasEvidence(deals[0])) return deals;
+  // The featured card is mostly image, and a Slickdeals post occasionally
+  // reaches the RSS feed with no <img> at all (caught via a real run: the
+  // featured pick shipped with image "" and rendered as a broken-image
+  // icon). So an image is required to be featured whenever any deal has
+  // one — image-less deals stay in the list, just not in the top slot.
+  // Among deals with an image, discount evidence is still preferred.
+  const hasImage = (d) => Boolean(d.image);
 
-  const promoteIndex = deals.findIndex(hasEvidence);
+  let promoteIndex = deals.findIndex((d) => hasEvidence(d) && hasImage(d));
+  if (promoteIndex === -1) promoteIndex = deals.findIndex(hasImage);
+  if (promoteIndex === -1) promoteIndex = deals.findIndex(hasEvidence);
   if (promoteIndex <= 0) return deals;
 
   const reordered = [...deals];

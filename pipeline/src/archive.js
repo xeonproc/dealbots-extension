@@ -35,11 +35,16 @@ function cardHTML(deal, featured) {
     ? `<span class="code-badge">🎟️ Code required at checkout</span>`
     : "";
   const flag = featured ? `<div class="featured-flag">⭐ Today's Pick</div>` : "";
+  // No image, or one that fails to load: drop the whole wrap rather than
+  // leave an empty grey box / broken-image icon.
+  const image = deal.image
+    ? `<div class="card-image-wrap"><img src="${escapeHTML(deal.image)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()" /></div>`
+    : "";
 
   return `
     <article class="card${featured ? " featured" : ""}">
       ${flag}
-      <div class="card-image-wrap"><img src="${deal.image || ""}" alt="" loading="lazy" referrerpolicy="no-referrer" /></div>
+      ${image}
       <div class="card-body">
         <h3 class="card-title">${escapeHTML(deal.title || "Untitled product")}</h3>
         <p class="card-blurb">${escapeHTML(deal.blurb || "")}</p>

@@ -2,19 +2,6 @@
   "generatedAt": "2026-10-11T13:05:09.299Z",
   "deals": [
     {
-      "asin": "B0B5P7R7Y1",
-      "title": "Carhartt Men's Force 3\" EH Nano Toe Work Sneaker $55.04",
-      "image": "",
-      "price": 55.04,
-      "listPrice": null,
-      "discountPct": null,
-      "priceClaim": "Coupon Deal",
-      "trending": false,
-      "requiresCode": true,
-      "blurb": "Men's work sneaker with EH nano toe; clip coupon at checkout to unlock price.",
-      "url": "https://www.amazon.com/dp/B0B5P7R7Y1?tag=dealbots00-20"
-    },
-    {
       "asin": "B0CJDZVDJN",
       "title": "Fanttik X9 Pro 150 PSI Portable Tire Inflator $37.99 + Free Shipping",
       "image": "https://static.slickdealscdn.com/attachment/3/7/4/7/9/3/300x300/21916980.thumb",
@@ -26,6 +13,19 @@
       "requiresCode": true,
       "blurb": "150 PSI portable tire inflator; apply code 5PQQFHIV at checkout for $12 off.",
       "url": "https://www.amazon.com/dp/B0CJDZVDJN?tag=dealbots00-20"
+    },
+    {
+      "asin": "B0B5P7R7Y1",
+      "title": "Carhartt Men's Force 3\" EH Nano Toe Work Sneaker $55.04",
+      "image": "",
+      "price": 55.04,
+      "listPrice": null,
+      "discountPct": null,
+      "priceClaim": "Coupon Deal",
+      "trending": false,
+      "requiresCode": true,
+      "blurb": "Men's work sneaker with EH nano toe; clip coupon at checkout to unlock price.",
+      "url": "https://www.amazon.com/dp/B0B5P7R7Y1?tag=dealbots00-20"
     },
     {
       "asin": "B0DJ1D4J5Q",

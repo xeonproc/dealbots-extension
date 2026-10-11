@@ -12,8 +12,15 @@ function renderDeal(deal) {
   const node = template.content.cloneNode(true);
 
   const img = node.querySelector(".deal-image");
-  img.src = deal.image || "";
-  img.alt = deal.title || "";
+  // No image in the feed, or one that fails to load: drop the element
+  // rather than show a broken-image icon above the deal.
+  if (deal.image) {
+    img.addEventListener("error", () => img.remove());
+    img.src = deal.image;
+    img.alt = deal.title || "";
+  } else {
+    img.remove();
+  }
 
   node.querySelector(".deal-title").textContent = deal.title || "Untitled product";
   node.querySelector(".deal-blurb").textContent = deal.blurb || "";
