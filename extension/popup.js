@@ -47,6 +47,24 @@ function renderDeal(deal) {
   const buyLink = node.querySelector(".deal-buy");
   buyLink.href = deal.url;
 
+  // Copies the same affiliate-tagged link Buy Now uses. Clipboard rather
+  // than navigator.share: the OS share sheet takes focus, which closes the
+  // popup out from under it.
+  const shareBtn = node.querySelector(".deal-share");
+  const label = shareBtn.textContent;
+  shareBtn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(deal.url);
+      shareBtn.textContent = "Link copied ✓";
+    } catch (err) {
+      console.error("[dealbots] couldn't copy share link", err);
+      shareBtn.textContent = "Couldn't copy link";
+    }
+    setTimeout(() => {
+      shareBtn.textContent = label;
+    }, 2000);
+  });
+
   return node;
 }
 

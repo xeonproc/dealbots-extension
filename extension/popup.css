@@ -139,6 +139,26 @@ header h1 {
   transform: translateY(-1px);
 }
 
+.deal-share {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 8px;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--fg);
+  font: inherit;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.deal-share:hover {
+  border-color: var(--muted);
+}
+
 footer {
   padding: 8px 14px 12px;
   border-top: 1px solid var(--border);
