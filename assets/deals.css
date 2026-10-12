@@ -161,6 +161,24 @@ main {
   border-radius: 8px;
 }
 
+/* Placeholder tile for a deal with no image, or one that failed to load. */
+.card-image-wrap.no-image img { display: none; }
+
+.card-image-wrap.no-image::before {
+  content: "🎁";
+  height: 100%;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  border-radius: 8px;
+  background: var(--card);
+  border: 1px dashed var(--card-border);
+  filter: grayscale(0.6);
+  opacity: 0.7;
+}
+
 .card-body {
   padding: 16px;
   display: flex;
@@ -266,6 +284,26 @@ main {
 .buy-btn:hover {
   filter: brightness(1.1);
   transform: scale(1.02);
+}
+
+.share-btn {
+  display: block;
+  width: 100%;
+  padding: 9px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid var(--card-border);
+  color: var(--text);
+  font: inherit;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.share-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--muted);
 }
 
 footer {

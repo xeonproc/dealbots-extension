@@ -35,11 +35,11 @@ function cardHTML(deal, featured) {
     ? `<span class="code-badge">🎟️ Code required at checkout</span>`
     : "";
   const flag = featured ? `<div class="featured-flag">⭐ Today's Pick</div>` : "";
-  // No image, or one that fails to load: drop the whole wrap rather than
-  // leave an empty grey box / broken-image icon.
+  // No image, or one that fails to load: show the placeholder tile (the
+  // .no-image rule in assets/deals.css) so the card matches its neighbours.
   const image = deal.image
-    ? `<div class="card-image-wrap"><img src="${escapeHTML(deal.image)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()" /></div>`
-    : "";
+    ? `<div class="card-image-wrap"><img src="${escapeHTML(deal.image)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('no-image')" /></div>`
+    : `<div class="card-image-wrap no-image"></div>`;
 
   return `
     <article class="card${featured ? " featured" : ""}">
@@ -55,6 +55,7 @@ function cardHTML(deal, featured) {
         ${discount}
         ${codeBadge}
         <a class="buy-btn" href="${deal.url}" target="_blank" rel="noopener noreferrer">Buy Now →</a>
+        <button type="button" class="share-btn" data-url="${escapeHTML(deal.url)}" data-title="${escapeHTML(deal.title || "")}">Share with a friend</button>
       </div>
     </article>
   `;
@@ -121,6 +122,7 @@ ${ogImage ? `<meta property="og:image" content="${escapeHTML(ogImage)}" />` : ""
   <p>Get tomorrow's deal: <a href="https://t.me/dealbotsai" target="_blank" rel="noopener noreferrer">Telegram</a> · <a href="https://mastodon.social/@xeonproc" target="_blank" rel="noopener noreferrer">Mastodon</a></p>
 </footer>
 
+<script src="../assets/share.js"></script>
 </body>
 </html>
 `;
