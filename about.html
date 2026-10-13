@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DealBots — one AI-picked deal a day</title>
+  <meta name="description" content="DealBots is a free Chrome and Edge extension that shows one real deal a day, picked by AI from deal-hunter communities. No account, no tracking." />
+  <link rel="canonical" href="https://xeonproc.github.io/dealbots-extension/about.html" />
+  <link rel="icon" href="extension/icons/icon48.png" type="image/png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="DealBots — one AI-picked deal a day" />
+  <meta property="og:description" content="A free Chrome and Edge extension that shows one real deal a day, picked from deal-hunter communities. No account, no tracking." />
+  <meta property="og:url" content="https://xeonproc.github.io/dealbots-extension/about.html" />
+  <meta property="og:image" content="https://xeonproc.github.io/dealbots-extension/extension/icons/icon128.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="theme-color" content="#150c2e" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "DealBots",
+    "applicationCategory": "BrowserApplication",
+    "operatingSystem": "Chrome, Microsoft Edge",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "A free browser extension that shows one AI-picked deal a day from deal-hunter communities. No account and no tracking.",
+    "url": "https://xeonproc.github.io/dealbots-extension/about.html"
+  }
+  </script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #150c2e;
+      --bg2: #0c0620;
+      --card: #1f1440;
+      --text: #f5f2ff;
+      --muted: #c4b6ea;
+      --gold: #ffc72c;
+      --ink: #1a1204;
+      --line: rgba(255, 199, 44, 0.28);
+      --hot: #ff6b93;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.55;
+      background:
+        radial-gradient(circle at 12% 0%, #3a1a6b 0%, transparent 42%),
+        radial-gradient(circle at 88% 8%, #6b1a5a 0%, transparent 36%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+    }
+    a { color: var(--gold); }
+    a:hover { text-decoration: none; }
+    img { max-width: 100%; height: auto; }
+    .wrap { width: min(960px, calc(100% - 32px)); margin: 0 auto; }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 0;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 750;
+      letter-spacing: -0.02em;
+    }
+    .brand img { width: 36px; height: 36px; border-radius: 8px; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .hero { padding: 28px 0 12px; text-align: center; }
+    .hero-icon {
+      width: 112px;
+      height: 112px;
+      border-radius: 28px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    }
+    h1 {
+      margin: 18px 0 10px;
+      font-size: clamp(2.2rem, 7vw, 3.4rem);
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+    }
+    .lead {
+      margin: 0 auto 8px;
+      max-width: 38rem;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2.4vw, 1.25rem);
+    }
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .pills li {
+      border: 1px solid var(--line);
+      background: rgba(255, 199, 44, 0.08);
+      color: var(--gold);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 0.85rem;
+      font-weight: 650;
+    }
+    .cta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin: 26px 0 12px;
+    }
+    a.btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 750;
+      letter-spacing: -0.01em;
+    }
+    a.btn:focus-visible, .nav a:focus-visible, summary:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 3px;
+    }
+    a.btn-primary { background: var(--gold); color: var(--ink); }
+    a.btn-primary:hover { filter: brightness(1.05); }
+    a.btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+    a.btn-secondary:hover { background: rgba(255, 255, 255, 0.04); }
+    section { padding: 28px 0; }
+    h2 {
+      margin: 0 0 14px;
+      font-size: clamp(1.4rem, 3vw, 1.8rem);
+      letter-spacing: -0.03em;
+    }
+    .card {
+      background: rgba(31, 20, 64, 0.85);
+      border: 1px solid rgba(255, 199, 44, 0.16);
+      border-radius: 16px;
+      padding: 20px 22px;
+    }
+    .card p:last-child { margin-bottom: 0; }
+    .steps, .features {
+      display: grid;
+      gap: 14px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .steps { grid-template-columns: 1fr; }
+    .features { grid-template-columns: 1fr; }
+    @media (min-width: 720px) {
+      .steps { grid-template-columns: 1fr 1fr; }
+      .features { grid-template-columns: 1fr 1fr 1fr; }
+    }
+    .step, .feature {
+      background: rgba(31, 20, 64, 0.85);
+      border: 1px solid rgba(255, 199, 44, 0.16);
+      border-radius: 16px;
+      padding: 18px 18px 16px;
+    }
+    .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: var(--gold);
+      color: var(--ink);
+      font-weight: 800;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+    .step h3, .feature h3 { margin: 0 0 6px; font-size: 1.05rem; }
+    .step p, .feature p, .card p { margin: 0; color: var(--muted); }
+    .faq { display: grid; gap: 10px; }
+    details {
+      background: rgba(31, 20, 64, 0.85);
+      border: 1px solid rgba(255, 199, 44, 0.16);
+      border-radius: 14px;
+      padding: 4px 16px;
+    }
+    summary {
+      cursor: pointer;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+    }
+    details p { margin: 0 0 14px; color: var(--muted); }
+    .disclosure {
+      border-color: rgba(255, 107, 147, 0.45);
+      background: rgba(255, 107, 147, 0.08);
+    }
+    .disclosure strong { color: var(--text); }
+    footer {
+      padding: 8px 0 48px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    footer p { margin: 8px 0; }
+    @media (max-width: 640px) {
+      .nav { align-items: flex-start; flex-direction: column; }
+      .cta a.btn { flex: 1 1 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <nav class="nav" aria-label="Page">
+      <a class="brand" href="#top">
+        <img src="extension/icons/icon128.png" width="36" height="36" alt="" />
+        DealBots
+      </a>
+      <div class="nav-links">
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#faq">FAQ</a>
+        <a href="index.html">Today's deals</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap">
+      <img class="hero-icon" src="extension/icons/icon128.png" width="112" height="112" alt="DealBots gift box icon" />
+      <h1>DealBots</h1>
+      <p class="lead">One AI-picked deal a day, from real deal-hunter posts. Free for Chrome and Edge.</p>
+      <ul class="pills">
+        <li>No account</li>
+        <li>No tracking</li>
+        <li>Updated daily</li>
+      </ul>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/hkldacoaflldjimcipkgliblaopnnioc" target="_blank" rel="noopener noreferrer">Add to Chrome</a>
+        <a class="btn btn-secondary" href="https://microsoftedge.microsoft.com/addons/detail/kemaapaonfjbkjflmkekgmngfobjjiic" target="_blank" rel="noopener noreferrer">Get it on Edge</a>
+      </div>
+      <p><a href="index.html">See today's deals</a></p>
+    </section>
+
+    <section class="wrap" aria-labelledby="why-heading">
+      <div class="card">
+        <h2 id="why-heading">Why it exists</h2>
+        <p>Most “deal of the day” pages pad inflated list prices and sponsored placements. Deal-hunting communities already surface real discounts, but you have to wade through hundreds of posts. DealBots picks one clear, worth-buying deal each day and explains why it made the cut.</p>
+      </div>
+    </section>
+
+    <section class="wrap" id="how" aria-labelledby="how-heading">
+      <h2 id="how-heading">How it works</h2>
+      <ol class="steps">
+        <li class="step">
+          <span class="num">1</span>
+          <h3>Read the day's posts</h3>
+          <p>A daily pass looks at trending posts from deal-hunter communities.</p>
+        </li>
+        <li class="step">
+          <span class="num">2</span>
+          <h3>Drop the unclear ones</h3>
+          <p>Posts with unclear pricing, discounts that don't match the posted price, or prices locked behind a membership or rebate are filtered out.</p>
+        </li>
+        <li class="step">
+          <span class="num">3</span>
+          <h3>Rank what's left</h3>
+          <p>Remaining posts are ranked by the size of the discount and how fast the post is gaining traction.</p>
+        </li>
+        <li class="step">
+          <span class="num">4</span>
+          <h3>Show one pick</h3>
+          <p>The extension popup shows the top deal with a short explanation of why it made the cut. The rest of the day's picks are on the deals page.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="wrap" id="features" aria-labelledby="features-heading">
+      <h2 id="features-heading">Features</h2>
+      <ul class="features">
+        <li class="feature">
+          <h3>One deal a day</h3>
+          <p>A single featured pick, so you don't have to sort a feed of lookalike sales.</p>
+        </li>
+        <li class="feature">
+          <h3>A reason, not just a price</h3>
+          <p>Each pick includes a short note on why it made the cut.</p>
+        </li>
+        <li class="feature">
+          <h3>The rest of the day</h3>
+          <p>Open <a href="index.html">today's deals</a> for the other picks from the same run.</p>
+        </li>
+        <li class="feature">
+          <h3>Chrome and Edge</h3>
+          <p>Install it from either browser store. The extension is free.</p>
+        </li>
+        <li class="feature">
+          <h3>No account</h3>
+          <p>Nothing to sign up for. Open the popup and the day's pick is there.</p>
+        </li>
+        <li class="feature">
+          <h3>No tracking</h3>
+          <p>No analytics, no ads profile, and no reading of the pages you visit.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="wrap" id="faq" aria-labelledby="faq-heading">
+      <h2 id="faq-heading">FAQ and privacy</h2>
+      <div class="faq">
+        <details open>
+          <summary>Do I need an account?</summary>
+          <p>No. DealBots has no login, sign-up, or profile.</p>
+        </details>
+        <details>
+          <summary>Do you track me?</summary>
+          <p>No. DealBots does not collect, store, or sell personal data. There is no analytics and no tracking. The extension fetches the same public deal feed for everyone. That request does not include your identity or browsing history, and the extension does not read the pages you visit. The full policy is on the <a href="privacy.html">privacy page</a>.</p>
+        </details>
+        <details>
+          <summary>Is it free?</summary>
+          <p>Yes. Installing DealBots on Chrome or Edge costs nothing.</p>
+        </details>
+        <details>
+          <summary>How often does the deal change?</summary>
+          <p>Once a day. If a day has no pick that clears the filters, the extension says so and asks you to check back tomorrow.</p>
+        </details>
+        <details>
+          <summary>Where do the deals come from?</summary>
+          <p>From public posts in deal-hunter communities. Prices and availability change quickly, so confirm the offer before you buy. The popup shows one pick; <a href="index.html">today's deals</a> lists the rest.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="wrap" aria-labelledby="disclosure-heading">
+      <div class="card disclosure">
+        <h2 id="disclosure-heading">Affiliate disclosure</h2>
+        <p>Some product links in DealBots are affiliate links. If you buy through one of them, we may earn a commission. That does not change the price you pay, and it does not decide which deal is picked.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <p>Built by Lewie Senff. <a href="index.html">Today's deals</a> · <a href="privacy.html">Privacy</a> · <a href="https://github.com/xeonproc/dealbots-extension" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+  </footer>
+</body>
+</html>
