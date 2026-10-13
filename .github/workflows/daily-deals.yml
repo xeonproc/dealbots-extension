@@ -24,6 +24,9 @@ jobs:
         working-directory: pipeline
         env:
           DATA_SOURCE: "slickdeals"
+          # Kill switch. Set the FEED_PAUSED Actions variable to "true"
+          # to publish an empty feed (no store update required). See README.
+          FEED_PAUSED: ${{ vars.FEED_PAUSED }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           AFFILIATE_TAG: ${{ vars.AFFILIATE_TAG }}
           # Social posting — optional. Empty/unset secrets mean notify.js

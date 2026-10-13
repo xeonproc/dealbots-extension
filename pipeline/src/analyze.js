@@ -1,3 +1,5 @@
+import { discountPctFromPrices } from "./validateDeal.js";
+
 // Stage 1: is this product trending?
 // Best Sellers Rank is "lower = more popular", so a product is trending
 // when its rank drops (numerically) between the oldest and newest samples.
@@ -12,18 +14,9 @@ export function trendScore(rankHistory) {
   return (oldest - newest) / oldest; // positive = improving/trending
 }
 
-// Stage 2: is the current price a genuine discount vs. its own history?
-// (Not a vendor's claimed "list price" — the actual 90-day average.)
-export function discountPct(currentPrice, priceHistory90d) {
-  if (!priceHistory90d || priceHistory90d.length === 0) return 0;
-
-  const baseline =
-    priceHistory90d.reduce((sum, p) => sum + p, 0) / priceHistory90d.length;
-
-  if (baseline <= 0) return 0;
-  return Math.round(((baseline - currentPrice) / baseline) * 100);
-}
-
+// Stage 2: the "was" price is this product's own 90-day average, not a
+// vendor's claimed list price. The published percent is computed from that
+// rounded price in validateDeal.js so it cannot drift from the feed.
 export function baselinePrice(priceHistory90d) {
   return (
     priceHistory90d.reduce((sum, p) => sum + p, 0) / priceHistory90d.length
@@ -38,9 +31,10 @@ export function baselinePrice(priceHistory90d) {
 export function findManualCandidates({ candidates, config }) {
   return candidates
     .map((c) => {
-      if (!c.listPrice || c.listPrice <= 0) return null;
-      const discount = Math.round(((c.listPrice - c.currentPrice) / c.listPrice) * 100);
-      return { ...c, discountPct: discount };
+      // A hand-entered "was" price is not a price-history check.
+      const discount = discountPctFromPrices(c.currentPrice, c.listPrice);
+      if (discount == null) return null;
+      return { ...c, discountPct: discount, priceHistoryChecked: false };
     })
     .filter(Boolean)
     .filter((c) => c.discountPct >= config.minDiscountPct)
@@ -54,14 +48,19 @@ export function findCandidates({ trending, priceHistory, config }) {
       const history = priceHistory[product.asin];
       if (!history) return null;
 
-      const discount = discountPct(history.currentPrice, history.priceHistory90d);
+      const listPrice = Math.round(baselinePrice(history.priceHistory90d) * 100) / 100;
+      // Recompute from the rounded was-price so the stored triple always
+      // satisfies dealNumberError. The history itself is the verdict.
+      const discount = discountPctFromPrices(history.currentPrice, listPrice);
+      if (discount == null) return null;
 
       return {
         ...product,
         trendScore: trend,
         currentPrice: history.currentPrice,
-        listPrice: Math.round(baselinePrice(history.priceHistory90d) * 100) / 100,
+        listPrice,
         discountPct: discount,
+        priceHistoryChecked: true,
       };
     })
     .filter(Boolean)

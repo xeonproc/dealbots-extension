@@ -6,7 +6,8 @@
   "description": "Daily deal-sourcing pipeline: find trending products, validate real discounts, rank with Claude, publish deals.json for the extension.",
   "scripts": {
     "build": "node --env-file=.env src/index.js",
-    "build:mock": "node --env-file=.env.mock src/index.js"
+    "build:mock": "node --env-file=.env.mock src/index.js",
+    "test": "node --test test/*.test.js ../extension/feed-status.test.js"
   },
   "engines": {
     "node": ">=20"

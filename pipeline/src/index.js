@@ -11,6 +11,7 @@ import { findCandidates, findManualCandidates } from "./analyze.js";
 import { rankCandidates } from "./rankWithClaude.js";
 import { rankSlickdealsCandidates } from "./rankSlickdeals.js";
 import { buildFeed } from "./buildFeed.js";
+import { publishableDeals } from "./validateDeal.js";
 import { writeArchiveAndSitemap } from "./archive.js";
 import { postToChannels } from "./notify.js";
 
@@ -18,10 +19,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const outputPath = path.join(__dirname, "..", "..", "extension", "deals.json");
 
 // Returns the final, ranked-and-blurbed deals ready for buildFeed().
-// Each data source handles its own discovery + filtering + (usually) a
-// separate Claude ranking pass — Slickdeals is the odd one out where
-// ranking and price-extraction happen in the same Claude call, since the
-// source data is free text rather than clean structured fields.
+// Each source discovers and filters on its own. Prices and the
+// price-history flag are set before Claude runs; Claude only writes the
+// one-line why (see rankWithClaude.js).
 async function getRankedDeals() {
   if (config.dataSource === "slickdeals") {
     console.log("[pipeline] DATA_SOURCE=slickdeals — reading the public Slickdeals RSS feed.");
@@ -67,18 +67,29 @@ async function getRankedDeals() {
 }
 
 async function main() {
-  const ranked = await getRankedDeals();
+  if (config.feedPaused) {
+    console.warn("[pipeline] FEED_PAUSED is set — publishing an empty feed (kill switch).");
+    const pausedFeed = buildFeed([], { paused: true });
+    await fs.writeFile(outputPath, JSON.stringify(pausedFeed, null, 2));
+    console.log(`[pipeline] Wrote paused feed to ${outputPath}`);
+    return;
+  }
 
-  if (ranked.length === 0) {
+  const ranked = await getRankedDeals();
+  const publishable = publishableDeals(ranked, (deal, reason) => {
+    console.warn(`[pipeline] Dropping ${deal.asin || deal.title || "deal"}: ${reason}`);
+  });
+
+  if (publishable.length === 0) {
     console.warn("[pipeline] No qualifying deal found today. Writing an empty feed.");
     await fs.writeFile(outputPath, JSON.stringify(buildFeed([]), null, 2));
     return;
   }
 
-  const feed = buildFeed(ranked);
+  const feed = buildFeed(publishable);
 
   await fs.writeFile(outputPath, JSON.stringify(feed, null, 2));
-  console.log(`[pipeline] Wrote ${ranked.length} deal(s) to ${outputPath}`);
+  console.log(`[pipeline] Wrote ${publishable.length} deal(s) to ${outputPath}`);
   for (const deal of feed.deals) {
     console.log(`  - ${deal.title}: $${deal.price} (${deal.discountPct ?? "?"}% off) -> ${deal.url}`);
   }

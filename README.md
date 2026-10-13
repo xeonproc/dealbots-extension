@@ -14,7 +14,7 @@ the rest of the day's picks. Live at:
 ```
 pipeline/  (run daily, e.g. via GitHub Actions)
   1. Fetch candidate posts        -> sources/slickdeals.js (Slickdeals' public RSS feed)
-  2. Pick + extract price + blurb -> rankSlickdeals.js (Claude API, one call returns up to 8 ranked picks)
+  2. Parse price in code, blurb   -> parseDealText.js + rankSlickdeals.js (Claude writes only the one-line why)
   3. Write feed                   -> buildFeed.js -> extension/deals.json
   4. Write archive + sitemap      -> archive.js -> deals/<date>.html, sitemap.xml, robots.txt
   5. Post to socials (optional)   -> notify.js -> Telegram / Mastodon, if configured
@@ -65,11 +65,15 @@ That's a deliberate tradeoff accepted for now; switch `DATA_SOURCE=live`
 (Amazon PA-API) once you qualify, and this goes away entirely.
 
 Because Slickdeals posts are free text ("$45.99 after promo code X", "was
-$80 now $45", etc.), there's no clean structured price field to parse with
-a regex — `rankSlickdeals.js` has Claude read each post directly, skip ones
-where the price isn't clearly actionable (needs a coupon, membership, etc.),
-and extract `currentPrice` / `listPrice` / `discountPct` (when statable)
-alongside the blurb, all in one call.
+$80 now $45", etc.), `parseDealText.js` reads the current price, the was
+price, and whether a code is required with fixed patterns. `discountPct`
+is always `round((list − price) / list)`, never a number the model
+produced. A deal whose price, list price, and discount don't agree — or
+whose price is not below the list price — is dropped before the feed is
+written. Claude only writes the short "why this made the cut" line, and
+dollar amounts or "N% off" in that line are stripped. The "checked against
+price history" flag is set only by the Keepa/fixture path, which compares
+the price to the product's own 90-day average.
 
 ## Status
 
@@ -198,6 +202,37 @@ channel with no token.
 Add secrets via `gh secret set TELEGRAM_BOT_TOKEN --repo xeonproc/dealbots-extension` (or the repo's Settings → Secrets and variables → Actions in the GitHub UI). Once set, the next daily run picks them up automatically — no code or workflow changes needed.
 
 **Live channels:** Telegram [@dealbotsai](https://t.me/dealbotsai), Mastodon [@xeonproc@mastodon.social](https://mastodon.social/@xeonproc) (posting as "Dealbots AI", marked as an automated account). Both are cross-linked from the extension popup and the deals page ("Get tomorrow's deal") so a one-time visitor has somewhere to follow, and the daily social posts include `#AmazonDeals #Deals #DealOfTheDay` for a small amount of free hashtag-search discoverability on Mastodon.
+
+## Kill switch
+
+Publish an empty feed to stop showing a pick. No extension update required.
+
+The daily job overwrites `extension/deals.json`, so a one-off edit comes
+back the next morning unless the job itself is told to stay quiet. Set the
+Actions repository variable `FEED_PAUSED` to `true`
+(Settings → Secrets and variables → Actions → Variables), then run
+"Update daily deal feed" (or wait for the schedule). The pipeline writes:
+
+```json
+{
+  "generatedAt": "2026-10-13T15:00:00.000Z",
+  "paused": true,
+  "deals": []
+}
+```
+
+and skips that run's archive page and social posts. Delete the variable,
+or set it to `false`, and re-run the workflow to resume.
+
+`deals: []` is what the extension already in the store understands. It
+shows "No deal found for today. Check back tomorrow." The `paused` flag
+is additive: the next store build also treats `paused: true` as no pick
+even if `deals` is left filled in. Keep the list empty either way, so the
+current build, the next build, and the deals page all go quiet together.
+
+To clear the live feed immediately without waiting for Actions, commit
+that same JSON to `extension/deals.json` and push. Set `FEED_PAUSED` as
+well if you don't want the next scheduled run to fill it back in.
 
 ## Compliance notes (read before submitting to the Chrome Web Store)
 
