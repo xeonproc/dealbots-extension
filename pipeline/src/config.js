@@ -1,6 +1,6 @@
 export const config = {
   // "slickdeals" - fully automated (default): reads Slickdeals' public RSS
-  //                feed, Claude picks + extracts price + writes the blurb
+  //                feed, code parses prices, Claude writes only the blurb
   // "manual"     - read pipeline/candidates.json, which you fill in by hand
   // "mock"       - read pipeline/fixtures/*.json (for testing the pipeline
   //                itself, not real deals)
@@ -42,4 +42,8 @@ export const config = {
   telegramChatId: process.env.TELEGRAM_CHAT_ID || "",
   mastodonInstanceUrl: process.env.MASTODON_INSTANCE_URL || "",
   mastodonAccessToken: process.env.MASTODON_ACCESS_TOKEN || "",
+
+  // Kill switch. When set, the run writes an empty paused feed and does
+  // not archive or post. See README "Kill switch".
+  feedPaused: /^(1|true|yes)$/i.test(process.env.FEED_PAUSED || ""),
 };

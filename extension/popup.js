@@ -1,6 +1,23 @@
+import {
+  isFeedStale,
+  formatUtcDate,
+  feedHasNoPick,
+  verifiedOffer,
+  showPriceHistory,
+} from "./feed-status.js";
+import {
+  REMOTE_FEED_URL,
+  LOCAL_FEED_URL,
+  MORE_DEALS_URL,
+  TELEGRAM_URL,
+  MASTODON_URL,
+} from "./config.js";
+
 const statusEl = document.getElementById("status");
 const contentEl = document.getElementById("content");
 const dateEl = document.getElementById("date");
+const headingEl = document.getElementById("heading");
+const staleEl = document.getElementById("stale-notice");
 const sourceNoteEl = document.getElementById("source-note");
 const template = document.getElementById("deal-template");
 
@@ -23,18 +40,37 @@ function renderDeal(deal) {
   }
 
   node.querySelector(".deal-title").textContent = deal.title || "Untitled product";
-  node.querySelector(".deal-blurb").textContent = deal.blurb || "";
+
+  const whyLabel = node.querySelector(".deal-why-label");
+  const blurbEl = node.querySelector(".deal-blurb");
+  if (deal.blurb) {
+    whyLabel.hidden = false;
+    blurbEl.textContent = deal.blurb;
+  } else {
+    whyLabel.remove();
+    blurbEl.remove();
+  }
+
   node.querySelector(".deal-price").textContent = formatPrice(deal.price);
 
   const discountEl = node.querySelector(".deal-discount");
-  if (deal.discountPct) {
-    discountEl.textContent = `${deal.discountPct}% off (was ${formatPrice(deal.listPrice)})`;
+  const offer = verifiedOffer(deal);
+  if (offer) {
+    discountEl.textContent = `${offer.discountPct}% off (was ${formatPrice(offer.listPrice)})`;
   } else if (deal.priceClaim) {
     discountEl.textContent = `🔥 ${deal.priceClaim}`;
   } else if (deal.trending) {
     discountEl.textContent = `📈 Trending`;
   } else {
     discountEl.remove();
+  }
+
+  const trustEl = node.querySelector(".deal-trust");
+  if (showPriceHistory(deal)) {
+    trustEl.hidden = false;
+    trustEl.textContent = "Checked against price history";
+  } else {
+    trustEl.remove();
   }
 
   const codeBadgeEl = node.querySelector(".deal-code-badge");
@@ -89,22 +125,29 @@ async function loadDeals() {
       feed = await fetchFeed(LOCAL_FEED_URL);
     }
 
-    if (!feed.deals || feed.deals.length === 0) {
-      statusEl.textContent = "No deal found for today. Check back tomorrow.";
+    if (feedHasNoPick(feed)) {
+      statusEl.textContent = "No pick today, check back tomorrow.";
       return;
     }
 
-    statusEl.remove();
-    contentEl.appendChild(renderDeal(feed.deals[0]));
+    const deal = feed.deals[0];
+    const stale = isFeedStale(feed.generatedAt);
 
-    if (feed.generatedAt) {
-      const generated = new Date(feed.generatedAt);
-      dateEl.textContent = generated.toLocaleDateString(undefined, {
-        month: "short",
-        day: "numeric",
-      });
+    statusEl.remove();
+    contentEl.appendChild(renderDeal(deal));
+
+    if (stale) {
+      document.body.classList.add("is-stale");
+      headingEl.textContent = "Latest pick";
+      const updated = formatUtcDate(feed.generatedAt);
+      staleEl.hidden = false;
+      staleEl.textContent = updated ? `Last updated ${updated}` : "Last updated";
+      sourceNoteEl.textContent = "This pick is from an older feed.";
+    } else {
+      const pickDate = formatUtcDate(deal.pickedOn || feed.generatedAt);
+      if (pickDate) dateEl.textContent = pickDate;
+      sourceNoteEl.textContent = "Picked by AI from trending, genuinely-discounted products.";
     }
-    sourceNoteEl.textContent = "Picked by AI from trending, genuinely-discounted products.";
 
     if (feed.deals.length > 1) {
       const moreLink = document.getElementById("more-deals-link");
