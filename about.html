@@ -11,9 +11,13 @@
   <meta property="og:title" content="DealBots — one AI-picked deal a day" />
   <meta property="og:description" content="A free Chrome and Edge extension that shows one real deal a day, picked from deal-hunter communities. No account, no tracking." />
   <meta property="og:url" content="https://xeonproc.github.io/dealbots-extension/about.html" />
-  <meta property="og:image" content="https://xeonproc.github.io/dealbots-extension/extension/icons/icon128.png" />
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:image" content="https://xeonproc.github.io/dealbots-extension/assets/landing/one-deal-a-day.webp" />
+  <meta property="og:image:width" content="1280" />
+  <meta property="og:image:height" content="800" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://xeonproc.github.io/dealbots-extension/assets/landing/one-deal-a-day.webp" />
   <meta name="theme-color" content="#150c2e" />
+  <link rel="preload" as="image" href="assets/landing/one-deal-a-day.webp" type="image/webp" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -85,11 +89,15 @@
     }
     .nav-links a:hover { color: var(--text); }
     .hero { padding: 28px 0 12px; text-align: center; }
-    .hero-icon {
-      width: 112px;
-      height: 112px;
-      border-radius: 28px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    .hero-shot { margin: 22px auto 6px; max-width: 720px; }
+    .hero-shot img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.38);
+      background: #fff8ee;
     }
     h1 {
       margin: 18px 0 10px;
@@ -139,10 +147,11 @@
       font-weight: 750;
       letter-spacing: -0.01em;
     }
-    a.btn:focus-visible, .nav a:focus-visible, summary:focus-visible {
+    a.btn:focus-visible, .nav a:focus-visible, .gallery a:focus-visible, summary:focus-visible {
       outline: 3px solid var(--gold);
       outline-offset: 3px;
     }
+    .gallery a:focus-visible { outline-offset: -3px; }
     a.btn-primary { background: var(--gold); color: var(--ink); }
     a.btn-primary:hover { filter: brightness(1.05); }
     a.btn-secondary {
@@ -164,12 +173,40 @@
       padding: 20px 22px;
     }
     .card p:last-child { margin-bottom: 0; }
-    .steps, .features {
+    .section-lead {
+      margin: -4px 0 16px;
+      max-width: 40rem;
+      color: var(--muted);
+    }
+    .steps, .features, .gallery {
       display: grid;
       gap: 14px;
       margin: 0;
       padding: 0;
       list-style: none;
+    }
+    .gallery { gap: 18px; }
+    .gallery figure {
+      margin: 0;
+      background: rgba(31, 20, 64, 0.85);
+      border: 1px solid rgba(255, 199, 44, 0.16);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .gallery a { display: block; background: #fff8ee; }
+    .gallery img { display: block; width: 100%; height: auto; }
+    .gallery figcaption {
+      padding: 12px 16px 14px;
+      color: var(--text);
+      font-weight: 650;
+      letter-spacing: -0.01em;
+    }
+    .gallery figcaption span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-weight: 450;
+      font-size: 0.92rem;
     }
     .steps { grid-template-columns: 1fr; }
     .features { grid-template-columns: 1fr; }
@@ -239,6 +276,7 @@
       </a>
       <div class="nav-links">
         <a href="#how">How it works</a>
+        <a href="#screenshots">Screenshots</a>
         <a href="#features">Features</a>
         <a href="#faq">FAQ</a>
         <a href="index.html">Today's deals</a>
@@ -248,7 +286,6 @@
 
   <main id="top">
     <section class="hero wrap">
-      <img class="hero-icon" src="extension/icons/icon128.png" width="112" height="112" alt="DealBots gift box icon" />
       <h1>DealBots</h1>
       <p class="lead">One AI-picked deal a day, from real deal-hunter posts. Free for Chrome and Edge.</p>
       <ul class="pills">
@@ -260,6 +297,16 @@
         <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/hkldacoaflldjimcipkgliblaopnnioc" target="_blank" rel="noopener noreferrer">Add to Chrome</a>
         <a class="btn btn-secondary" href="https://microsoftedge.microsoft.com/addons/detail/kemaapaonfjbkjflmkekgmngfobjjiic" target="_blank" rel="noopener noreferrer">Get it on Edge</a>
       </div>
+      <figure class="hero-shot">
+        <img
+          src="assets/landing/one-deal-a-day.webp"
+          width="1280"
+          height="800"
+          alt="DealBots Chrome extension graphic. The headline reads “One real deal a day, picked by AI.” Smaller text says deals are filtered from real deal-hunter communities and checked against price history, with no fake “was” prices, no countdown timers, and no feed to scroll. Two red buttons sit under the text."
+          fetchpriority="high"
+          decoding="async"
+        />
+      </figure>
       <p><a href="index.html">See today's deals</a></p>
     </section>
 
@@ -294,6 +341,73 @@
           <p>The extension popup shows the top deal with a short explanation of why it made the cut. The rest of the day's picks are on the deals page.</p>
         </li>
       </ol>
+    </section>
+
+    <section class="wrap" id="screenshots" aria-labelledby="shots-heading">
+      <h2 id="shots-heading">What it looks like</h2>
+      <p class="section-lead">The daily pass, one featured pick, the rest of that day's list, and what the extension leaves out.</p>
+      <ul class="gallery">
+        <li>
+          <figure>
+            <a href="assets/landing/how-dealbots-works.webp" target="_blank" rel="noopener noreferrer">
+              <img
+                src="assets/landing/how-dealbots-works.webp"
+                width="1280"
+                height="800"
+                alt="How DealBots works, in three steps. Gather: read trending deal posts from Slickdeals and Reddit, plus affiliate price data with price history. Filter and rank: drop unclear pricing and hidden catches, then rank by the real discount versus price history and by rising demand. One pick: click the toolbar icon for today's single best deal, with a short note on why it made the cut. The footer says it is a free Chrome extension with no account and no tracking."
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+            <figcaption>How a day of deals is chosen<span>Gather posts, drop the unclear ones, then show one pick.</span></figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <a href="assets/landing/todays-pick.webp" target="_blank" rel="noopener noreferrer">
+              <img
+                src="assets/landing/todays-pick.webp"
+                width="1280"
+                height="800"
+                alt="Today's Pick, in one click. A real pick from the DealBots feed on October 11, 2026: the Fanttik X9 Pro 150 PSI portable tire inflator at $37.99, down from $49.99, with a code required at checkout. Callouts say the discount was checked against price history rather than an inflated was price, give a short reason the pick made the cut, and point to See other deals for the full daily list."
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+            <figcaption>One pick, with a reason<span>The price, a checkout note, and why it made the cut.</span></figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <a href="assets/landing/every-pick.webp" target="_blank" rel="noopener noreferrer">
+              <img
+                src="assets/landing/every-pick.webp"
+                width="1280"
+                height="800"
+                alt="A preview of the daily deals page, headed “want more? See every pick of the day.” The address is xeonproc.github.io/dealbots-extension, refreshed daily. The page shown is Today's Deals for October 11, including a Carhartt work sneaker and the Fanttik tire inflator."
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+            <figcaption>The rest of the day<span>Today's deals lists every pick from the same run.</span></figcaption>
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <a href="assets/landing/built-to-be-trusted.webp" target="_blank" rel="noopener noreferrer">
+              <img
+                src="assets/landing/built-to-be-trusted.webp"
+                width="1280"
+                height="800"
+                alt="Built to be trusted: a deal tool that respects you. Four points: no account, just install and click; no tracking and no data collected or sold; no spam, no push alerts, and no fake timers; honest pricing, with hidden catches filtered out. A closing note says some links are affiliate links, and that is how DealBots stays free."
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+            <figcaption>No account, no tracking, no spam<span>Hidden catches are filtered out, and the affiliate note is in plain text.</span></figcaption>
+          </figure>
+        </li>
+      </ul>
     </section>
 
     <section class="wrap" id="features" aria-labelledby="features-heading">
