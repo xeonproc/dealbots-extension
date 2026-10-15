@@ -101,7 +101,9 @@ Shape:
 - Then one plain sentence on why it is actually a deal.
 - Under 45 words total.
 
-Use only facts present in the product fields below. Never invent a price, spec, size, material, count, discount, brand origin, durability, or quality claim. A joke may tease the shopper (the junk drawer, a chore they keep putting off). It may not smuggle in a product claim. You may paraphrase a size or count that is already in the title. If you are unsure, or a joke would need a fact you do not have, skip the joke and write a plain factual blurb.
+Use only facts present in the product fields below. Never invent a price, spec, size, material, count, discount, brand origin, durability, or quality claim. A joke may tease the shopper (the junk drawer, a chore they keep putting off). It may not smuggle in a product claim. Do not say the product works, lasts, is sturdy, or is better than what they own unless the title says so. You may paraphrase a size or count that is already in the title. If you are unsure, or a joke would need a fact you do not have, skip the joke and write a plain factual blurb.
+
+Each sentence must be a complete sentence. Do not end on a fragment that is only a price plus a label, such as "$3.95 with a checkout code".
 
 Prices and deal claims:
 - You may quote currentPrice or listPrice only by copying the number exactly, cents included. Writing $15 for a currentPrice of 15.08 invents a price. If you might round, leave the number out.
@@ -111,7 +113,7 @@ Prices and deal claims:
 - Mention a price-history check only when priceHistoryChecked is true.
 - Never write the word Amazon, even if a title originally said it. Never name a store.
 
-No offensive or mean humor. Do not insult the shopper's body, home, age, money, or taste. No fake hype — "lowest ever", "steal", "unbelievable", "best price", "rare", "selling out" — unless the fields above explicitly support that claim.
+No offensive or mean humor. Do not insult the shopper's body, home, age, money, or taste. No fake hype — "lowest ever", "steal", "unbelievable", "miracle", "best price", "rare", "selling out" — unless the fields above explicitly support that claim.
 
 Return ONLY a raw JSON array of strings, one blurb per product, in the same order. No markdown fences, no commentary. Do not include these examples in the array.
 
@@ -123,7 +125,7 @@ Example 1 — coupon deal, no was-price. The plain sentence does not invent a co
 
 Example 2 — was-price is present, so the plain sentence may use those exact figures and nothing past them:
 {"title":"Soft Throw Blanket","currentPrice":20,"listPrice":50,"discountPct":60,"priceClaim":null,"needsCode":false,"priceHistoryChecked":false}
-"A soft throw for the couch that has been fine for three winters. You know the one. $20, below the was-price of $50 listed in the post."
+"A soft throw for the couch that has been fine for three winters. You know the one. It is $20, below the was-price of $50 listed in the post."
 
 Products:
 ${JSON.stringify(deals.map(dealForBlurbPrompt), null, 2)}`;

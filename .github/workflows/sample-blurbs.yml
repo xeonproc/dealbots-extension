@@ -30,4 +30,4 @@ jobs:
         working-directory: pipeline
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: node src/sampleBlurbs.js
+        run: node src/sampleBlurbs.js ../extension/deals.json 8
