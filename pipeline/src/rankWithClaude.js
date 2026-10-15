@@ -167,7 +167,9 @@ export async function addBlurbs(deals) {
   let blurbs;
   try {
     // A few dozen words per deal, up to maxDealsPerDay of them.
-    blurbs = await callClaudeJSON(prompt, { maxTokens: 2048 });
+    // Lower temperature so the joke stays on the title and the price
+    // instead of wandering into a made-up use.
+    blurbs = await callClaudeJSON(prompt, { maxTokens: 2048, temperature: 0.4 });
   } catch (err) {
     console.warn("[rankWithClaude] Claude call/parse failed, using fallback blurbs.", err);
     return withFallback();
