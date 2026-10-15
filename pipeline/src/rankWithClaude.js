@@ -66,6 +66,14 @@ export function cleanWhy(text, fallback, deal) {
     .trim();
 
   if (deal && dropped) return fallback;
+  // A coupon is not a checkout code. Only requiresCode may say one is needed.
+  if (
+    deal &&
+    deal.requiresCode !== true &&
+    /\b(checkout code|promo code|coupon code|with a code|code at checkout|code required)\b/i.test(cleaned)
+  ) {
+    return fallback;
+  }
   if (cleaned.length < 8) return fallback;
   return cleaned;
 }
@@ -103,13 +111,15 @@ Shape:
 
 Use only facts present in the product fields below. Never invent a price, spec, size, material, count, discount, brand origin, durability, or quality claim. A joke may tease the shopper (the junk drawer, a chore they keep putting off). It may not smuggle in a product claim. Do not say the product works, lasts, is sturdy, or is better than what they own unless the title says so. You may paraphrase a size or count that is already in the title. If you are unsure, or a joke would need a fact you do not have, skip the joke and write a plain factual blurb.
 
-Each sentence must be a complete sentence. Do not end on a fragment that is only a price plus a label, such as "$3.95 with a checkout code".
+Each sentence must be a complete sentence. Do not end on a fragment that is only a price plus a label, and do not reuse one closing sentence on every product. "It is $X with a checkout code" is not a template.
 
 Prices and deal claims:
 - You may quote currentPrice or listPrice only by copying the number exactly, cents included. Writing $15 for a currentPrice of 15.08 invents a price. If you might round, leave the number out.
 - You may say it is below a was-price only when listPrice and discountPct are both numbers. If you mention the was-price, copy listPrice exactly.
 - You may write "N% off" only when discountPct is a number, and only by copying that integer. Otherwise write no percent-off.
-- "Lowest price" only when priceClaim is exactly "Lowest price". "On sale" only when priceClaim is "On sale". "Coupon" only when priceClaim is "Coupon deal". Mention a checkout code only when needsCode is true. Do not claim there is no code.
+- "Lowest price" only when priceClaim is exactly "Lowest price". "On sale" only when priceClaim is "On sale".
+- "Coupon deal" is not a checkout code. When priceClaim is "Coupon deal", you may say it is a coupon deal. When it is anything else, do not say coupon.
+- needsCode true means a code is required at checkout, and you may say that. needsCode false means you must not mention a code, a promo code, or a checkout code at all.
 - Mention a price-history check only when priceHistoryChecked is true.
 - Never write the word Amazon, even if a title originally said it. Never name a store.
 

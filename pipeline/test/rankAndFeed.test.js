@@ -138,6 +138,20 @@ test("a blurb that names Amazon or repeats the popup label falls back or drops t
     cleanWhy("Why it made the cut: six inches of wrench for the junk drawer.", "fallback", wiha),
     "six inches of wrench for the junk drawer."
   );
+  assert.equal(
+    cleanWhy("Six inches of wrench for the junk drawer. It is $15.08 with a checkout code.", "fallback", {
+      currentPrice: 15.08,
+      requiresCode: false,
+    }),
+    "fallback"
+  );
+  assert.equal(
+    cleanWhy("A flameless lighter for the candles. A code is required at checkout.", "fallback", {
+      currentPrice: 3.95,
+      requiresCode: true,
+    }),
+    "A flameless lighter for the candles. A code is required at checkout."
+  );
 });
 
 test("prompt titles drop the store name and the price, and the blurb prompt stays inside the facts", () => {
