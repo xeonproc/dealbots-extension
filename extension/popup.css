@@ -72,11 +72,183 @@ body.is-stale .deal {
   min-height: 120px;
 }
 
+[hidden] {
+  display: none !important;
+}
+
+/* Loading reserves the same vertical rhythm as a deal card (image, two-line
+   title, why-line, two-line blurb, price, buy, share) so the popup does not
+   jump when the pick replaces the skeleton. Image height matches .deal-image. */
+#loading {
+  position: relative;
+}
+
+.skeleton-image {
+  height: 160px;
+  border-radius: 8px;
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid rgba(26, 26, 26, 0.12);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 #status {
   margin: 0;
-  color: var(--muted);
+  color: #6b6b6b;
   font-size: 13px;
   text-align: center;
+}
+
+.skeleton-line,
+.skeleton-price,
+.skeleton-button {
+  border-radius: 6px;
+  background-color: var(--border);
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 153, 0, 0.28) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.3s ease-in-out infinite;
+}
+
+.skeleton-line {
+  height: 12px;
+  margin-top: 6px;
+}
+
+.skeleton-line.title {
+  height: 14px;
+  margin-top: 4px;
+}
+
+.skeleton-line.title:first-child {
+  margin-top: 10px;
+}
+
+.skeleton-line.why {
+  width: 38%;
+  height: 10px;
+  margin-top: 8px;
+}
+
+.skeleton-line.blurb {
+  height: 12px;
+}
+
+.skeleton-line.blurb.narrow {
+  width: 84%;
+  margin-bottom: 10px;
+}
+
+.skeleton-line.narrow {
+  width: 72%;
+}
+
+.skeleton-price {
+  height: 18px;
+  width: 72px;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.skeleton-button {
+  height: 36px;
+  border-radius: 6px;
+}
+
+.skeleton-button.ghost {
+  height: 34px;
+  margin-top: 8px;
+  background: transparent;
+  border: 1px solid var(--border);
+  animation: none;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner,
+  .skeleton-line,
+  .skeleton-price,
+  .skeleton-button {
+    animation: none;
+  }
+}
+
+.message-panel {
+  text-align: center;
+}
+
+.message-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.message-detail {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+body[data-view="empty"] .message-panel,
+body[data-view="error"] .message-panel {
+  padding: 28px 8px;
+}
+
+body[data-view="cached"] .message-panel {
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px dashed var(--border);
+}
+
+#retry {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--hot), var(--hot2));
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+
+#retry:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
 }
 
 .deal-image {
@@ -197,6 +369,44 @@ footer {
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+}
+
+.source-row {
+  position: relative;
+}
+
+/* Sits in the reserved source-line slot while the skeleton is showing,
+   so that gap reads as part of the placeholder instead of a blank band. */
+.footer-bones {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.bone-note,
+.bone-link {
+  display: block;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--border);
+}
+
+.bone-note {
+  width: 62%;
+  margin-top: 3px;
+}
+
+.bone-note.short {
+  width: 40%;
+}
+
+.bone-link {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  width: 78px;
+  height: 10px;
+  margin-top: 0;
 }
 
 .footer-row + .footer-row {
