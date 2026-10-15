@@ -13,7 +13,30 @@
   <p id="stale-notice" hidden></p>
 
   <main id="content">
-    <p id="status">Loading today's deal...</p>
+    <div id="loading" role="status" aria-live="polite" aria-busy="true">
+      <div class="skeleton-image">
+        <span class="spinner" aria-hidden="true"></span>
+        <p id="status">Loading today's deal...</p>
+      </div>
+      <div class="skeleton" aria-hidden="true">
+        <div class="skeleton-line title"></div>
+        <div class="skeleton-line title narrow"></div>
+        <div class="skeleton-line why"></div>
+        <div class="skeleton-line blurb"></div>
+        <div class="skeleton-line blurb narrow"></div>
+        <div class="skeleton-price"></div>
+        <div class="skeleton-button"></div>
+        <div class="skeleton-button ghost"></div>
+      </div>
+    </div>
+
+    <div id="message-panel" class="message-panel" hidden role="status" aria-live="polite">
+      <p id="message-title" class="message-title"></p>
+      <p id="message-detail" class="message-detail"></p>
+      <button type="button" id="retry" hidden>Retry</button>
+    </div>
+
+    <div id="deal-slot"></div>
   </main>
 
   <template id="deal-template">
@@ -36,9 +59,14 @@
   </template>
 
   <footer>
-    <div class="footer-row">
+    <div class="footer-row source-row">
       <span id="source-note"></span>
-      <a id="more-deals-link" target="_blank" rel="noopener noreferrer">See other deals →</a>
+      <a id="more-deals-link" target="_blank" rel="noopener noreferrer" hidden>See other deals →</a>
+      <span id="footer-bones" class="footer-bones" hidden aria-hidden="true">
+        <span class="bone bone-note"></span>
+        <span class="bone bone-note short"></span>
+        <span class="bone bone-link"></span>
+      </span>
     </div>
     <div class="footer-row follow-row">
       <span>Get tomorrow's deal:</span>
