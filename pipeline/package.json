@@ -7,6 +7,7 @@
   "scripts": {
     "build": "node --env-file=.env src/index.js",
     "build:mock": "node --env-file=.env.mock src/index.js",
+    "blurbs:sample": "node src/sampleBlurbs.js",
     "test": "node --test test/*.test.js ../extension/feed-status.test.js"
   },
   "engines": {

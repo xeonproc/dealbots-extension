@@ -9,30 +9,129 @@ function fallbackBlurb(candidate) {
   return `A community-picked deal${category}.`;
 }
 
+// Forum titles often carry a price and "at Amazon". The card already shows
+// the price, and the blurb is not allowed to name Amazon, so neither goes
+// to the model as part of the title. The numeric price is passed separately.
 export function titleForPrompt(title) {
   return String(title || "")
+    .replace(/^(?:\[[^\]]+\]\s*)+/, "")
     .replace(/\$\s*\d{1,3}(?:,\d{3})*(?:\.\d{2})?\+?/g, "")
+    .replace(/\bat\s+amazon(?:\.com)?\b/gi, "")
+    .replace(/\bamazon(?:\.com)?\b/gi, "")
+    .replace(/[*|]+/g, " ")
     .replace(/\s+/g, " ")
     .trim();
 }
 
-// Drops dollar amounts and "N% off" if the model includes them anyway.
+function priceValues(deal) {
+  if (!deal) return [];
+  return [deal.currentPrice, deal.price, deal.listPrice].filter(
+    (n) => typeof n === "number" && Number.isFinite(n)
+  );
+}
+
+function priceIsAllowed(numText, deal) {
+  const value = Number(String(numText).replace(/,/g, ""));
+  if (!Number.isFinite(value)) return false;
+  const cents = Math.round(value * 100);
+  return priceValues(deal).some((n) => Math.round(n * 100) === cents);
+}
+
+// Drops dollar amounts and "N% off" that are not the deal's own parsed
+// figures. An exact currentPrice, listPrice, or discountPct may stay.
 // Other figures ("5-pack", "100% cotton") stay — those aren't a price claim.
-export function cleanWhy(text, fallback) {
+// Naming Amazon, or a price that doesn't match, falls back rather than
+// publishing a blurb with a made-up number or a store name.
+export function cleanWhy(text, fallback, deal) {
   if (typeof text !== "string") return fallback;
+  if (/\bamazon\b/i.test(text)) return fallback;
+
+  let dropped = false;
   const cleaned = text
-    .replace(/\$\s*\d{1,3}(?:,\d{3})*(?:\.\d{2})?/g, "")
-    .replace(/\b\d{1,3}\s*%\s*off\b/gi, "")
+    .replace(/\bwhy (?:this|it) made the cut\b\s*:?\s*/gi, "")
+    .replace(/\$\s*(\d{1,3}(?:,\d{3})*(?:\.\d{2})?)/g, (match, num) => {
+      if (priceIsAllowed(num, deal)) return `$${num}`;
+      dropped = true;
+      return "";
+    })
+    .replace(/\b(\d{1,3})\s*%\s*off\b/gi, (full, n) => {
+      if (deal && typeof deal.discountPct === "number" && Number(n) === deal.discountPct) {
+        return `${Number(n)}% off`;
+      }
+      dropped = true;
+      return "";
+    })
     .replace(/\s{2,}/g, " ")
     .replace(/\s+([,.;:])/g, "$1")
     .trim();
+
+  if (deal && dropped) return fallback;
   if (cleaned.length < 8) return fallback;
   return cleaned;
 }
 
-// The only model output in the pipeline: one sentence per deal. Prices,
+export function dealForBlurbPrompt(deal) {
+  const currentPrice =
+    typeof deal.currentPrice === "number"
+      ? deal.currentPrice
+      : typeof deal.price === "number"
+        ? deal.price
+        : null;
+  return {
+    title: titleForPrompt(deal.title),
+    category: deal.category || null,
+    currentPrice,
+    listPrice: typeof deal.listPrice === "number" ? deal.listPrice : null,
+    discountPct: typeof deal.discountPct === "number" ? deal.discountPct : null,
+    priceClaim: deal.priceClaim || null,
+    needsCode: Boolean(deal.requiresCode),
+    priceHistoryChecked: deal.priceHistoryChecked === true,
+  };
+}
+
+// Cheeky pitch plus one factual sentence. Examples are style only: every
+// concrete detail in them is present in that example's fields.
+export function buildBlurbPrompt(deals) {
+  return `You write the blurb for a deal card. In the extension popup it sits under the label "Why this made the cut". That label is already on screen. Other pages and posts show the blurb with no label, so it has to stand on its own. Never write "why this made the cut" or "why it made the cut".
+
+Voice: a witty friend a little too excited about a bargain. Cheeky and self-aware. Light teasing of the product or the shopper is fine.
+
+Shape:
+- One or two short sentences of that pitch.
+- Then one plain sentence on why it is actually a deal.
+- Under 45 words total.
+
+Use only facts present in the product fields below. Never invent a price, spec, size, material, count, discount, brand origin, durability, or quality claim. A joke may tease the shopper (the junk drawer, a chore they keep putting off). It may not smuggle in a product claim. You may paraphrase a size or count that is already in the title. If you are unsure, or a joke would need a fact you do not have, skip the joke and write a plain factual blurb.
+
+Prices and deal claims:
+- You may quote currentPrice or listPrice only by copying the number exactly, cents included. Writing $15 for a currentPrice of 15.08 invents a price. If you might round, leave the number out.
+- You may say it is below a was-price only when listPrice and discountPct are both numbers. If you mention the was-price, copy listPrice exactly.
+- You may write "N% off" only when discountPct is a number, and only by copying that integer. Otherwise write no percent-off.
+- "Lowest price" only when priceClaim is exactly "Lowest price". "On sale" only when priceClaim is "On sale". "Coupon" only when priceClaim is "Coupon deal". Mention a checkout code only when needsCode is true. Do not claim there is no code.
+- Mention a price-history check only when priceHistoryChecked is true.
+- Never write the word Amazon, even if a title originally said it. Never name a store.
+
+No offensive or mean humor. Do not insult the shopper's body, home, age, money, or taste. No fake hype — "lowest ever", "steal", "unbelievable", "best price", "rare", "selling out" — unless the fields above explicitly support that claim.
+
+Return ONLY a raw JSON array of strings, one blurb per product, in the same order. No markdown fences, no commentary. Do not include these examples in the array.
+
+Examples are style only. Every concrete detail in an example blurb is taken from that example's fields. Do not reuse an example's wording on a different product.
+
+Example 1 — coupon deal, no was-price. The plain sentence does not invent a comparison, a material, or a rounded price:
+{"title":"6 in. Wiha Adjustable Wrench","currentPrice":15.08,"listPrice":null,"discountPct":null,"priceClaim":"Coupon deal","needsCode":false,"priceHistoryChecked":false}
+"Six inches of Wiha adjustable wrench for when the junk-drawer one finally gives up. $15.08 for the replacement you were going to buy anyway. The post marks it as a coupon deal."
+
+Example 2 — was-price is present, so the plain sentence may use those exact figures and nothing past them:
+{"title":"Soft Throw Blanket","currentPrice":20,"listPrice":50,"discountPct":60,"priceClaim":null,"needsCode":false,"priceHistoryChecked":false}
+"A soft throw for the couch that has been fine for three winters. You know the one. $20, below the was-price of $50 listed in the post."
+
+Products:
+${JSON.stringify(deals.map(dealForBlurbPrompt), null, 2)}`;
+}
+
+// The only model output in the pipeline: a short blurb per deal. Prices,
 // list prices, discount percents, and the price-history flag are already
-// set by the caller and are not sent back for the model to fill in.
+// set by the caller. The model may quote those figures exactly.
 export async function addBlurbs(deals) {
   if (!deals || deals.length === 0) return [];
 
@@ -43,30 +142,12 @@ export async function addBlurbs(deals) {
     return withFallback();
   }
 
-  const prompt = `You are writing the one-line "why this made the cut" note for a deal feed.
-For each product, write ONE short, factual, enthusiasm-free sentence (max 20 words)
-about the product itself. Do not invent facts not given below.
-Do not include prices, dollar amounts, or percent-off figures. Those are computed
-separately and must not appear in your sentence.
-
-Return ONLY a raw JSON array of strings, one sentence per product, in the same order
-given. No markdown code fences, no commentary — the response must be valid JSON
-on its own.
-
-Products:
-${JSON.stringify(
-  deals.map((c) => ({
-    title: titleForPrompt(c.title),
-    category: c.category || null,
-    needsCode: Boolean(c.requiresCode),
-  })),
-  null,
-  2
-)}`;
+  const prompt = buildBlurbPrompt(deals);
 
   let blurbs;
   try {
-    blurbs = await callClaudeJSON(prompt, { maxTokens: 1024 });
+    // A few dozen words per deal, up to maxDealsPerDay of them.
+    blurbs = await callClaudeJSON(prompt, { maxTokens: 2048 });
   } catch (err) {
     console.warn("[rankWithClaude] Claude call/parse failed, using fallback blurbs.", err);
     return withFallback();
@@ -79,7 +160,7 @@ ${JSON.stringify(
 
   return deals.map((c, i) => ({
     ...c,
-    blurb: cleanWhy(blurbs[i], fallbackBlurb(c)),
+    blurb: cleanWhy(blurbs[i], fallbackBlurb(c), c),
   }));
 }
 

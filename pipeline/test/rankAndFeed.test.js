@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { rankSlickdealsDeterministic } from "../src/rankSlickdeals.js";
-import { addBlurbs, cleanWhy } from "../src/rankWithClaude.js";
+import { addBlurbs, buildBlurbPrompt, cleanWhy, titleForPrompt } from "../src/rankWithClaude.js";
 import { buildFeed } from "../src/buildFeed.js";
 import { findCandidates, findManualCandidates } from "../src/analyze.js";
 import { dealNumberError } from "../src/validateDeal.js";
@@ -93,6 +93,88 @@ test("blurbs do not change prices, and price figures are stripped from the why",
   assert.equal(cleanWhy("100% cotton 5-pack", "fallback"), "100% cotton 5-pack");
   assert.equal(cleanWhy(40, "fallback"), "fallback");
   assert.equal(cleanWhy("$5", "fallback"), "fallback");
+});
+
+test("an exact parsed price may stay in the blurb; a rounded or invented one does not", () => {
+  const wiha = { currentPrice: 15.08, listPrice: null, discountPct: null };
+  assert.equal(
+    cleanWhy(
+      "Six inches of Wiha adjustable wrench for the junk drawer. $15.08, and the post marks it as a coupon deal.",
+      "fallback",
+      wiha
+    ),
+    "Six inches of Wiha adjustable wrench for the junk drawer. $15.08, and the post marks it as a coupon deal."
+  );
+  assert.equal(
+    cleanWhy("Six inches of wrench. $15 for the junk drawer today.", "fallback", wiha),
+    "fallback"
+  );
+  assert.equal(
+    cleanWhy("Soft throw at $20, was $50, 60% off today.", "fallback", {
+      currentPrice: 20,
+      listPrice: 50,
+      discountPct: 60,
+    }),
+    "Soft throw at $20, was $50, 60% off today."
+  );
+  assert.equal(
+    cleanWhy("Soft throw at $20, 90% off today.", "fallback", {
+      currentPrice: 20,
+      listPrice: 50,
+      discountPct: 60,
+    }),
+    "fallback"
+  );
+  assert.equal(cleanWhy("100% cotton 5-pack for the drawer.", "fallback", wiha), "100% cotton 5-pack for the drawer.");
+});
+
+test("a blurb that names Amazon or repeats the popup label falls back or drops the label", () => {
+  const wiha = { currentPrice: 15.08 };
+  assert.equal(
+    cleanWhy("Six inches of wrench, and Amazon has it in stock today.", "fallback", wiha),
+    "fallback"
+  );
+  assert.equal(
+    cleanWhy("Why it made the cut: six inches of wrench for the junk drawer.", "fallback", wiha),
+    "six inches of wrench for the junk drawer."
+  );
+});
+
+test("prompt titles drop the store name and the price, and the blurb prompt stays inside the facts", () => {
+  assert.equal(
+    titleForPrompt("[AC] $15.08* | 6″ Wiha Adjustable Wrench at Amazon"),
+    "6″ Wiha Adjustable Wrench"
+  );
+  assert.equal(titleForPrompt("Grinch Polly Pocket $9.99 in Stock at Amazon"), "Grinch Polly Pocket in Stock");
+
+  const prompt = buildBlurbPrompt([
+    {
+      title: "[AC] $15.08* | 6″ Wiha Adjustable Wrench at Amazon",
+      currentPrice: 15.08,
+      listPrice: null,
+      discountPct: null,
+      priceClaim: "Coupon deal",
+      requiresCode: false,
+      priceHistoryChecked: false,
+    },
+  ]);
+  const products = prompt.slice(prompt.lastIndexOf("Products:"));
+  assert.doesNotMatch(products, /amazon/i);
+  assert.match(products, /"currentPrice": 15\.08/);
+  assert.match(products, /"priceClaim": "Coupon deal"/);
+  assert.doesNotMatch(products, /\$15\.08/);
+
+  assert.match(prompt, /witty friend/i);
+  assert.match(prompt, /under 45 words/i);
+  assert.match(prompt, /Never invent a price/);
+  assert.match(prompt, /No offensive or mean humor/);
+  assert.match(prompt, /If you are unsure/);
+  assert.match(prompt, /Never write the word Amazon/);
+  assert.match(prompt, /Writing \$15 for a currentPrice of 15\.08 invents a price/);
+  const exampleBlurb = prompt.slice(prompt.indexOf('"Six inches'), prompt.indexOf("Example 2"));
+  assert.match(exampleBlurb, /\$15\.08 for the replacement/);
+  assert.doesNotMatch(exampleBlurb, /\$15 for/);
+  assert.doesNotMatch(exampleBlurb, /was-price|steel|quality|outlast/i);
 });
 
 test("without an API key the why is a sentence and the numbers stay put", async () => {

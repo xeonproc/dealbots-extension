@@ -14,7 +14,7 @@ the rest of the day's picks. Live at:
 ```
 pipeline/  (run daily, e.g. via GitHub Actions)
   1. Fetch candidate posts        -> sources/slickdeals.js (Slickdeals' public RSS feed)
-  2. Parse price in code, blurb   -> parseDealText.js + rankSlickdeals.js (Claude writes only the one-line why)
+  2. Parse price in code, blurb   -> parseDealText.js + rankSlickdeals.js (Claude writes only the blurb)
   3. Write feed                   -> buildFeed.js -> extension/deals.json
   4. Write archive + sitemap      -> archive.js -> deals/<date>.html, sitemap.xml, robots.txt
   5. Post to socials (optional)   -> notify.js -> Telegram / Mastodon, if configured
@@ -70,8 +70,9 @@ price, and whether a code is required with fixed patterns. `discountPct`
 is always `round((list − price) / list)`, never a number the model
 produced. A deal whose price, list price, and discount don't agree — or
 whose price is not below the list price — is dropped before the feed is
-written. Claude only writes the short "why this made the cut" line, and
-dollar amounts or "N% off" in that line are stripped. The "checked against
+written. Claude only writes the blurb under "Why this made the cut", and
+a dollar amount or "N% off" that doesn't match the parsed price fields is
+dropped. The "checked against
 price history" flag is set only by the Keepa/fixture path, which compares
 the price to the product's own 90-day average.
 
@@ -120,6 +121,15 @@ That's it — no candidate list to edit. GitHub Pages picks up the push within a
 cd pipeline
 npm run build:mock
 ```
+
+**Hearing the blurb voice without publishing** (needs `ANTHROPIC_API_KEY` in the environment; does not rewrite the feed, archive, or post):
+
+```sh
+cd pipeline
+npm run blurbs:sample
+```
+
+That writes blurbs for the first few deals already in `extension/deals.json`. A path and a count override it: `node src/sampleBlurbs.js ../extension/deals.json 3`. The same script is the manual "Sample deal blurbs" Action, which also does not publish.
 
 **Manual-candidate mode** (`pipeline/candidates.json`, `DATA_SOURCE=manual`)
 still exists as a fallback if the Slickdeals feed is ever down or you want
