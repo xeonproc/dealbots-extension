@@ -97,45 +97,46 @@ export function dealForBlurbPrompt(deal) {
   };
 }
 
-// Cheeky pitch plus one factual sentence. Examples are style only: every
-// concrete detail in them is present in that example's fields.
+// Woot-style blurb. Examples are energy only: every concrete detail in
+// them is present in that example's fields, and the price sits in the joke.
 export function buildBlurbPrompt(deals) {
-  return `You write the blurb for a deal card. In the extension popup it sits under the label "Why this made the cut". That label is already on screen. Other pages and posts show the blurb with no label, so it has to stand on its own. Never write "why this made the cut" or "why it made the cut".
+  return `You write the blurb for a deal card. In the popup it sits under the label "Why this made the cut", which is already on screen. Other pages show the blurb alone. Never write "why this made the cut" or "why it made the cut".
 
-Voice: a witty friend a little too excited about a bargain. Cheeky and self-aware. Light teasing of the product or the shopper is fine.
+Voice: a Woot write-up. Playful, witty, a little irreverent, a storyteller talking to a friend. Wry asides, light self-aware humor, a fun hook in the first few words. Family-friendly. Tease the situation. Do not mock the shopper.
 
-Shape:
-- One or two short sentences of that pitch.
-- Then one plain sentence on why it is actually a deal.
-- Under 45 words total.
+Shape: 2 or 3 short sentences, under 45 words. The price, and the code or coupon or was-price when the fields allow them, land inside the joke. A punchline, a wry aside, the middle of a sentence. Not a caption glued on the end.
 
-Use only facts present in the product fields below. Never invent a price, spec, size, material, count, discount, brand origin, durability, or quality claim. A joke may tease the shopper (the junk drawer, a chore they keep putting off). It may not smuggle in a product claim. Do not say the product works, lasts, is sturdy, or is better than what they own unless the title says so. You may paraphrase a size or count that is already in the title. If you are unsure, or a joke would need a fact you do not have, skip the joke and write a plain factual blurb.
+Never start a sentence with "It is $". Never end on a flat line whose only job is the price or the code ("with a code at checkout", "as a coupon deal"). If you delete the last sentence and the price vanishes, the price was stuck on. Weave it in earlier. Vary the endings. No two blurbs in this batch should share a rhythm.
 
-Each sentence must be a complete sentence. Do not end on a fragment that is only a price plus a label, and do not reuse one closing sentence on every product. "It is $X with a checkout code" is not a template.
-
-Prices and deal claims:
-- You may quote currentPrice or listPrice only by copying the number exactly, cents included. Writing $15 for a currentPrice of 15.08 invents a price. If you might round, leave the number out.
-- You may say it is below a was-price only when listPrice and discountPct are both numbers. If you mention the was-price, copy listPrice exactly.
-- You may write "N% off" only when discountPct is a number, and only by copying that integer. Otherwise write no percent-off.
+Use only facts present in the product fields below. Never invent a price, spec, size, material, count, color, discount, brand origin, feature, or usage detail.
+- Do not claim the product works, starts, lasts, lights, heats, holds, fits, cleans, organizes, or "actually" does a job unless the title says that in those words. "Actually starts your candles" is an invented claim. A title that says "flameless" may say flameless. It may not say the lighter works or starts anything.
+- Do not invent a place, a user, or a before-story (a dark porch, things stacked under the bed, a board they already own) unless the title says so. A general aside, like the junk drawer or the fact of a bargain, is fine. A specific scene you made up is not.
+- You may paraphrase a size or count that is already in the title (6 in. → six inches).
+- Quote currentPrice or listPrice only by copying the number exactly, cents included. Writing $15 for a currentPrice of 15.08 invents a price. If you might round, leave the number out.
+- A was-price only when listPrice and discountPct are both numbers. Copy listPrice exactly. Write "N% off" only by copying discountPct. Otherwise write no percent-off.
 - "Lowest price" only when priceClaim is exactly "Lowest price". "On sale" only when priceClaim is "On sale".
-- "Coupon deal" is not a checkout code. When priceClaim is "Coupon deal", you may say it is a coupon deal. When it is anything else, do not say coupon.
-- needsCode true means a code is required at checkout, and you may say that. needsCode false means you must not mention a code, a promo code, or a checkout code at all.
+- priceClaim "Coupon deal" means you may say coupon. It does not mean there is a code.
+- needsCode true: mention the checkout code inside the joke. needsCode false: do not mention a code, a promo code, or a checkout code at all.
 - Mention a price-history check only when priceHistoryChecked is true.
 - Never write the word Amazon, even if a title originally said it. Never name a store.
+- No offensive or mean humor. Do not insult the shopper's body, home, age, money, or taste. No fake hype — "lowest ever", "steal", "unbelievable", "miracle", "best price", "rare", "selling out" — unless a field above says so.
+- If you are unsure, or a joke needs a fact you do not have, skip the joke and write a plain factual blurb. A short true blurb beats a cute invented one.
 
-No offensive or mean humor. Do not insult the shopper's body, home, age, money, or taste. No fake hype — "lowest ever", "steal", "unbelievable", "miracle", "best price", "rare", "selling out" — unless the fields above explicitly support that claim.
+Return ONLY a raw JSON array of strings, one blurb per product, in the same order. No markdown fences, no commentary.
 
-Return ONLY a raw JSON array of strings, one blurb per product, in the same order. No markdown fences, no commentary. Do not include these examples in the array.
+Examples are energy only. Do not copy their sentences, even when a product matches. Every concrete detail in an example is in that example's fields. Notice the three different rhythms.
 
-Examples are style only. Every concrete detail in an example blurb is taken from that example's fields. Do not reuse an example's wording on a different product.
-
-Example 1 — coupon deal, no was-price. The plain sentence does not invent a comparison, a material, or a rounded price:
+Example 1 — coupon, no code, no was-price. The price is in the joke, not a footer:
 {"title":"6 in. Wiha Adjustable Wrench","currentPrice":15.08,"listPrice":null,"discountPct":null,"priceClaim":"Coupon deal","needsCode":false,"priceHistoryChecked":false}
-"Six inches of Wiha adjustable wrench for when the junk-drawer one finally gives up. $15.08 for the replacement you were going to buy anyway. The post marks it as a coupon deal."
+"The junk drawer has had a long reign. Six inches of Wiha adjustable wrench walks in at $15.08, coupon deal, and that is the whole coup."
 
-Example 2 — was-price is present, so the plain sentence may use those exact figures and nothing past them:
+Example 2 — code required, no was-price. The code is an aside, and the ending does not match example 1:
+{"title":"HOTO 24-in-1 Mini Screwdriver Set","currentPrice":12.99,"listPrice":null,"discountPct":null,"priceClaim":"Coupon deal","needsCode":true,"priceHistoryChecked":false}
+"Twenty-four tiny drivers, one HOTO set. Call it preparedness. Call it a hobby. $12.99, checkout code and coupon deal included, in whatever order you like."
+
+Example 3 — was-price, no code. Opens on the price, which the others do not:
 {"title":"Soft Throw Blanket","currentPrice":20,"listPrice":50,"discountPct":60,"priceClaim":null,"needsCode":false,"priceHistoryChecked":false}
-"A soft throw for the couch that has been fine for three winters. You know the one. It is $20, below the was-price of $50 listed in the post."
+"$20 for a soft throw, under a $50 was-price, 60% off, which we mention because the math asked nicely. The couch has been fine for three winters. You knew."
 
 Products:
 ${JSON.stringify(deals.map(dealForBlurbPrompt), null, 2)}`;

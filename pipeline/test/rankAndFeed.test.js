@@ -178,17 +178,24 @@ test("prompt titles drop the store name and the price, and the blurb prompt stay
   assert.match(products, /"priceClaim": "Coupon deal"/);
   assert.doesNotMatch(products, /\$15\.08/);
 
-  assert.match(prompt, /witty friend/i);
+  assert.match(prompt, /Woot write-up/);
+  assert.match(prompt, /a little irreverent/i);
+  assert.match(prompt, /Family-friendly/);
+  assert.match(prompt, /2 or 3 short sentences/);
   assert.match(prompt, /under 45 words/i);
   assert.match(prompt, /Never invent a price/);
+  assert.match(prompt, /actually starts your candles/i);
   assert.match(prompt, /No offensive or mean humor/);
   assert.match(prompt, /If you are unsure/);
   assert.match(prompt, /Never write the word Amazon/);
+  assert.match(prompt, /Never start a sentence with "It is \$"/);
   assert.match(prompt, /Writing \$15 for a currentPrice of 15\.08 invents a price/);
-  const exampleBlurb = prompt.slice(prompt.indexOf('"Six inches'), prompt.indexOf("Example 2"));
-  assert.match(exampleBlurb, /\$15\.08 for the replacement/);
+  const exampleBlurb = prompt.slice(prompt.indexOf("Example 1"), prompt.indexOf("Example 2"));
+  assert.match(exampleBlurb, /\$15\.08/);
   assert.doesNotMatch(exampleBlurb, /\$15 for/);
-  assert.doesNotMatch(exampleBlurb, /was-price|steel|quality|outlast/i);
+  assert.doesNotMatch(exampleBlurb, /It is \$/);
+  assert.doesNotMatch(exampleBlurb, /steel|quality brand|outlast|actually starts/i);
+  assert.match(prompt.slice(prompt.indexOf("Example 2"), prompt.indexOf("Example 3")), /checkout code/);
 });
 
 test("without an API key the why is a sentence and the numbers stay put", async () => {
