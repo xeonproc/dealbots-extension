@@ -1,10 +1,17 @@
 name: Sample deal blurbs
 
 # Tone check only. Prints blurbs for the current feed and does not commit,
-# archive, or post. Run from the Actions tab, or locally with
-# `npm run blurbs:sample` inside pipeline/.
+# archive, or post. Runs on a pull request that touches the blurb prompt,
+# and from the Actions tab once this file is on the default branch.
+# Locally: `npm run blurbs:sample` inside pipeline/.
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - pipeline/src/rankWithClaude.js
+      - pipeline/src/sampleBlurbs.js
+      - pipeline/src/anthropic.js
+      - .github/workflows/sample-blurbs.yml
 
 permissions:
   contents: read
