@@ -104,13 +104,13 @@ export function buildBlurbPrompt(deals) {
 
 Voice: a Woot write-up. Playful, witty, a little irreverent, a storyteller talking to a friend. Wry asides, light self-aware humor, a fun hook in the first few words. Family-friendly. Tease the situation. Do not mock the shopper.
 
-Shape: 2 or 3 short sentences, under 45 words. The price, and the code or coupon or was-price when the fields allow them, land inside the joke. A punchline, a wry aside, the middle of a sentence. Not a caption glued on the end.
+Shape: 2 or 3 short sentences, under 45 words. One sentence is not enough story. The price, and the code or coupon or was-price when the fields allow them, land inside the joke. A punchline, a wry aside, the middle of a sentence. Not a caption glued on the end.
 
-Never start a sentence with "It is $". Never end on a flat line whose only job is the price or the code ("with a code at checkout", "as a coupon deal"). If you delete the last sentence and the price vanishes, the price was stuck on. Weave it in earlier. Vary the endings. No two blurbs in this batch should share a rhythm.
+Never start a sentence with "It is $". Never use "with a checkout code", "code at checkout", or "as a coupon deal" as a tacked-on clause. If you delete the last sentence and the price vanishes, the price was stuck on. Weave it in earlier. Vary the endings. No two blurbs in this batch should share a rhythm.
 
 Use only facts present in the product fields below. Never invent a price, spec, size, material, count, color, discount, brand origin, feature, or usage detail.
 - Do not claim the product works, starts, lasts, lights, heats, holds, fits, cleans, organizes, or "actually" does a job unless the title says that in those words. "Actually starts your candles" is an invented claim. A title that says "flameless" may say flameless. It may not say the lighter works or starts anything.
-- Do not invent a place, a user, or a before-story (a dark porch, things stacked under the bed, a board they already own) unless the title says so. A general aside, like the junk drawer or the fact of a bargain, is fine. A specific scene you made up is not.
+- Do not invent a place, a user, a result, or a before-story. No candles reacting, no old cutting board or paper plates, no things shoved under a bed, no spotlight on an earring, no "your wallet". If the joke needs a scene about using the product, it is the wrong joke. Wordplay on the title, the count, the price, and the code is the joke.
 - You may paraphrase a size or count that is already in the title (6 in. → six inches).
 - Quote currentPrice or listPrice only by copying the number exactly, cents included. Writing $15 for a currentPrice of 15.08 invents a price. If you might round, leave the number out.
 - A was-price only when listPrice and discountPct are both numbers. Copy listPrice exactly. Write "N% off" only by copying discountPct. Otherwise write no percent-off.
@@ -126,17 +126,17 @@ Return ONLY a raw JSON array of strings, one blurb per product, in the same orde
 
 Examples are energy only. Do not copy their sentences, even when a product matches. Every concrete detail in an example is in that example's fields. Notice the three different rhythms.
 
-Example 1 — coupon, no code, no was-price. The price is in the joke, not a footer:
+Example 1 — coupon, no code, no was-price. The price is in the joke, not a footer, and nothing is invented about how a wrench gets used:
 {"title":"6 in. Wiha Adjustable Wrench","currentPrice":15.08,"listPrice":null,"discountPct":null,"priceClaim":"Coupon deal","needsCode":false,"priceHistoryChecked":false}
-"The junk drawer has had a long reign. Six inches of Wiha adjustable wrench walks in at $15.08, coupon deal, and that is the whole coup."
+"Six inches of Wiha adjustable wrench at $15.08, coupon deal, full stop. We tried to add a subplot. The facts declined."
 
-Example 2 — code required, no was-price. The code is an aside, and the ending does not match example 1:
+Example 2 — code required, no was-price. The code is a character in the bit, and the ending does not match example 1:
 {"title":"HOTO 24-in-1 Mini Screwdriver Set","currentPrice":12.99,"listPrice":null,"discountPct":null,"priceClaim":"Coupon deal","needsCode":true,"priceHistoryChecked":false}
-"Twenty-four tiny drivers, one HOTO set. Call it preparedness. Call it a hobby. $12.99, checkout code and coupon deal included, in whatever order you like."
+"Twenty-four tiny drivers, one HOTO set, $12.99. The checkout code is the intermission. Coupon deal is the credits."
 
-Example 3 — was-price, no code. Opens on the price, which the others do not:
+Example 3 — was-price, no code. Opens on the price, which the others do not, and invents no room in the house:
 {"title":"Soft Throw Blanket","currentPrice":20,"listPrice":50,"discountPct":60,"priceClaim":null,"needsCode":false,"priceHistoryChecked":false}
-"$20 for a soft throw, under a $50 was-price, 60% off, which we mention because the math asked nicely. The couch has been fine for three winters. You knew."
+"$20 for a soft throw, under a $50 was-price, 60% off. The math asked for a drumroll. The encore is the same soft throw."
 
 Products:
 ${JSON.stringify(deals.map(dealForBlurbPrompt), null, 2)}`;
