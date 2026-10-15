@@ -126,9 +126,9 @@ Return ONLY a raw JSON array of strings, one blurb per product, in the same orde
 
 Examples are energy only. Do not copy their sentences, even when a product matches. Every concrete detail in an example is in that example's fields. Notice the three different rhythms.
 
-Example 1 — coupon, no code, no was-price. The price is in the joke, not a footer, and nothing is invented about how a wrench gets used:
-{"title":"6 in. Wiha Adjustable Wrench","currentPrice":15.08,"listPrice":null,"discountPct":null,"priceClaim":"Coupon deal","needsCode":false,"priceHistoryChecked":false}
-"Six inches of Wiha adjustable wrench at $15.08, coupon deal, full stop. We tried to add a subplot. The facts declined."
+Example 1 — coupon, no code, no was-price. The price is in the joke, not a footer, and nothing is invented about how glue gets used:
+{"title":"4-Oz Aleene's Permanent Fabric Glue","currentPrice":15.08,"listPrice":null,"discountPct":null,"priceClaim":"Coupon deal","needsCode":false,"priceHistoryChecked":false}
+"Four ounces of Aleene's permanent fabric glue at $15.08, coupon deal, full stop. We tried to add a subplot. The facts declined."
 
 Example 2 — code required, no was-price. The code is a character in the bit, and the ending does not match example 1:
 {"title":"HOTO 24-in-1 Mini Screwdriver Set","currentPrice":12.99,"listPrice":null,"discountPct":null,"priceClaim":"Coupon deal","needsCode":true,"priceHistoryChecked":false}
@@ -137,6 +137,13 @@ Example 2 — code required, no was-price. The code is a character in the bit, a
 Example 3 — was-price, no code. Opens on the price, which the others do not, and invents no room in the house:
 {"title":"Soft Throw Blanket","currentPrice":20,"listPrice":50,"discountPct":60,"priceClaim":null,"needsCode":false,"priceHistoryChecked":false}
 "$20 for a soft throw, under a $50 was-price, 60% off. The math asked for a drumroll. The encore is the same soft throw."
+
+Before you write each blurb, check it:
+- 2 or 3 sentences. The exact price sits in a sentence that also has a title word or a joke.
+- Later sentences only riff on words you already used. They do not add a room, a result, or a person who is not in the title.
+- "Candles will never know what hit them" is a result. So is a yard having opinions, or space under a bed. Delete that kind of sentence.
+- needsCode false: do not write "code" at all. needsCode true: the checkout code is part of the bit. Do not write "with the checkout code applied" or "at checkout with the code".
+- Do not copy the example sentences. The products below are not the examples.
 
 Products:
 ${JSON.stringify(deals.map(dealForBlurbPrompt), null, 2)}`;
