@@ -12,7 +12,7 @@ function stripCodeFence(text) {
 // Throws if there's no API key, the request fails, or the reply isn't valid
 // JSON (even after stripping a markdown fence) — callers decide how to
 // fall back.
-export async function callClaudeJSON(prompt, { maxTokens = 1024, temperature } = {}) {
+export async function callClaudeJSON(prompt, { maxTokens = 1024 } = {}) {
   if (!config.anthropicApiKey) {
     throw new Error("ANTHROPIC_API_KEY not set");
   }
@@ -32,7 +32,6 @@ export async function callClaudeJSON(prompt, { maxTokens = 1024, temperature } =
     body: JSON.stringify({
       model: config.anthropicModel,
       max_tokens: maxTokens,
-      ...(temperature != null ? { temperature } : {}),
       messages: [{ role: "user", content: prompt }],
     }),
   });
