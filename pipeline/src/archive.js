@@ -145,6 +145,13 @@ async function writeSitemap(dates) {
   const staticUrls = [
     { loc: `${siteOrigin}/`, changefreq: "daily" },
     { loc: `${siteOrigin}/privacy.html`, changefreq: "yearly" },
+    // Evergreen guides are not archive pages. Keep them here so the daily
+    // sitemap rewrite does not drop them.
+    {
+      loc: `${siteOrigin}/guides/how-to-tell-if-a-sale-is-real.html`,
+      lastmod: "2026-10-17",
+      changefreq: "monthly",
+    },
   ];
   const archiveUrls = dates.map((d) => ({
     loc: `${siteOrigin}/deals/${d}.html`,
