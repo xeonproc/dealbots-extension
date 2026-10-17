@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How to Tell If a Sale Is Real | DealBots</title>
+  <meta name="description" content="How to tell if a sale is real: spot a fake discount, ignore the was price, compare the 60 to 90 day low, and check per-unit price and coupon fine print." />
+  <link rel="canonical" href="https://xeonproc.github.io/dealbots-extension/guides/how-to-tell-if-a-sale-is-real.html" />
+  <link rel="icon" href="../extension/icons/icon48.png" type="image/png" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="How to Tell If a Sale Is Real | DealBots" />
+  <meta property="og:description" content="How to tell if a sale is real: spot a fake discount, ignore the was price, compare the 60 to 90 day low, and check per-unit price and coupon fine print." />
+  <meta property="og:url" content="https://xeonproc.github.io/dealbots-extension/guides/how-to-tell-if-a-sale-is-real.html" />
+  <meta property="og:image" content="https://xeonproc.github.io/dealbots-extension/assets/landing/one-deal-a-day.webp" />
+  <meta property="og:image:width" content="1280" />
+  <meta property="og:image:height" content="800" />
+  <meta property="og:image:alt" content="DealBots graphic: one real deal a day, picked by AI, with fake was prices filtered using price history." />
+  <meta property="article:published_time" content="2026-10-17" />
+  <meta property="article:modified_time" content="2026-10-17" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How to Tell If a Sale Is Real | DealBots" />
+  <meta name="twitter:description" content="How to tell if a sale is real: spot a fake discount, ignore the was price, compare the 60 to 90 day low, and check per-unit price and coupon fine print." />
+  <meta name="twitter:image" content="https://xeonproc.github.io/dealbots-extension/assets/landing/one-deal-a-day.webp" />
+  <meta name="twitter:image:alt" content="DealBots graphic: one real deal a day, picked by AI, with fake was prices filtered using price history." />
+  <meta name="theme-color" content="#150c2e" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "How to tell if a sale is real",
+        "description": "How to tell if a sale is real: spot a fake discount, ignore the was price, compare the 60 to 90 day low, and check per-unit price and coupon fine print.",
+        "datePublished": "2026-10-17",
+        "dateModified": "2026-10-17",
+        "inLanguage": "en",
+        "author": {
+          "@type": "Person",
+          "name": "Lewie Senff"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "DealBots",
+          "url": "https://xeonproc.github.io/dealbots-extension/about.html",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://xeonproc.github.io/dealbots-extension/extension/icons/icon128.png"
+          }
+        },
+        "image": "https://xeonproc.github.io/dealbots-extension/assets/landing/one-deal-a-day.webp",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://xeonproc.github.io/dealbots-extension/guides/how-to-tell-if-a-sale-is-real.html"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I tell if a sale is real?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Compare the checkout price, not the was price, with what the same item sold for over the last 60 to 90 days. A real sale is at or under that recent low, and the coupon or shipping terms do not take the difference back."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a fake discount?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A fake discount is a sale label built on a reference price shoppers were not actually paying. The usual version raises the list price, then discounts it back to the old everyday price. The percentage looks large and the amount due does not change."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I know if this is a good price?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A good price is the checkout total for the exact item you will buy: at or under its recent low, with a per-unit cost that is not worse than a smaller size, and with no code, shipping rule, or rebate catch that puts the savings back."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How far back should a price history checker look?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use 60 to 90 days for most products. Sixty days gets past a short markup. Ninety days is the safer window when the item already goes on sale every month or two. Match the count, size, color, and condition, or the low belongs to a different product."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are Black Friday prices always lower?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sometimes they are lower, and sometimes they repeat a low the item already hit. Treat the event as a reason to look, then compare that day's checkout price with the 60 to 90 day low. A seasonal headline is not itself evidence."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #150c2e;
+      --bg2: #0c0620;
+      --card: #1f1440;
+      --text: #f5f2ff;
+      --muted: #c4b6ea;
+      --gold: #ffc72c;
+      --ink: #1a1204;
+      --line: rgba(255, 199, 44, 0.28);
+      --hot: #ff6b93;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      background:
+        radial-gradient(circle at 12% 0%, #3a1a6b 0%, transparent 42%),
+        radial-gradient(circle at 88% 8%, #6b1a5a 0%, transparent 36%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+    }
+    a { color: var(--gold); }
+    a:hover { text-decoration: none; }
+    .wrap { width: min(960px, calc(100% - 32px)); margin: 0 auto; }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 0;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 750;
+      letter-spacing: -0.02em;
+    }
+    .brand img { width: 36px; height: 36px; border-radius: 8px; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .nav-links a:hover,
+    .nav-links a[aria-current="page"] { color: var(--text); }
+    a:focus-visible, summary:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 3px;
+    }
+    .article {
+      width: min(42rem, 100%);
+      padding-bottom: 12px;
+    }
+    .kicker {
+      margin: 8px 0 0;
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 750;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 8px 0 10px;
+      font-size: clamp(2rem, 6vw, 2.8rem);
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+    }
+    .updated {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .article p, .article li { color: var(--muted); }
+    .article .lead {
+      margin: 0 0 16px;
+      font-size: 1.08rem;
+      color: var(--text);
+    }
+    h2 {
+      margin: 32px 0 10px;
+      font-size: clamp(1.35rem, 3vw, 1.65rem);
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+    }
+    h3 {
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+    }
+    p { margin: 0 0 14px; }
+    .toc {
+      margin: 0 0 8px;
+      padding: 16px 18px 8px;
+      background: rgba(31, 20, 64, 0.85);
+      border: 1px solid rgba(255, 199, 44, 0.16);
+      border-radius: 16px;
+    }
+    .toc p {
+      margin: 0 0 8px;
+      color: var(--text);
+      font-weight: 700;
+    }
+    .toc ol {
+      margin: 0;
+      padding: 0 0 8px 1.2rem;
+    }
+    .toc a { text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+    .card {
+      background: rgba(31, 20, 64, 0.85);
+      border: 1px solid rgba(255, 199, 44, 0.16);
+      border-radius: 16px;
+      padding: 18px 18px 6px;
+      margin: 0 0 16px;
+    }
+    .checks {
+      margin: 0 0 14px;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+    .checks li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: start;
+      margin: 0;
+      padding: 12px;
+      background: rgba(31, 20, 64, 0.85);
+      border: 1px solid rgba(255, 199, 44, 0.16);
+      border-radius: 14px;
+    }
+    .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: var(--gold);
+      color: var(--ink);
+      font-weight: 800;
+      font-size: 0.9rem;
+    }
+    .cta {
+      border-color: rgba(255, 199, 44, 0.45);
+      background: rgba(255, 199, 44, 0.08);
+      padding-bottom: 18px;
+    }
+    .cta h2 { margin-top: 0; }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 4px;
+    }
+    a.btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 750;
+      letter-spacing: -0.01em;
+    }
+    a.btn-primary { background: var(--gold); color: var(--ink); }
+    a.btn-primary:hover { filter: brightness(1.05); }
+    a.btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+    a.btn-secondary:hover { background: rgba(255, 255, 255, 0.04); }
+    .faq { display: grid; gap: 10px; margin-bottom: 8px; }
+    details {
+      background: rgba(31, 20, 64, 0.85);
+      border: 1px solid rgba(255, 199, 44, 0.16);
+      border-radius: 14px;
+      padding: 4px 16px;
+    }
+    summary {
+      cursor: pointer;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+    }
+    details p { margin: 0 0 14px; }
+    footer {
+      padding: 8px 0 48px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    footer p { margin: 8px 0; }
+    @media (max-width: 640px) {
+      .nav { align-items: flex-start; flex-direction: column; }
+      .actions a.btn { flex: 1 1 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <nav class="nav" aria-label="Site">
+      <a class="brand" href="../about.html">
+        <img src="../extension/icons/icon128.png" width="36" height="36" alt="" />
+        DealBots
+      </a>
+      <div class="nav-links">
+        <a href="../about.html">About</a>
+        <a href="../index.html">Today's deals</a>
+        <a href="#checklist">Is a sale real?</a>
+        <a href="../privacy.html">Privacy</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="wrap article" id="top">
+    <p class="kicker">Guide</p>
+    <h1>How to tell if a sale is real</h1>
+    <p class="updated">Updated October 17, 2026</p>
+
+    <p class="lead">A sale badge is a claim. The price you pay is the fact. A crossed-out "was" price can sit on an ordinary selling price, and the percent beside it is only as honest as that reference.</p>
+
+    <p>Work through the checks below before you treat a percent-off badge as a real sale.</p>
+
+    <p><a href="../about.html">DealBots</a> is a free browser extension that does the price-history part on one pick a day. The pick comes from what deal-hunter communities are upvoting. A price that only looks low next to a fake "was" price is filtered out, and the pick explains why it made the cut. There is no account and no tracking.</p>
+
+    <nav class="toc" aria-label="On this page">
+      <p>On this page</p>
+      <ol>
+        <li><a href="#was-price">Why the "was" price is unreliable</a></li>
+        <li><a href="#markup">The markup-then-discount trick</a></li>
+        <li><a href="#recent-low">Compare the price with the recent low</a></li>
+        <li><a href="#per-unit">Check the price per unit</a></li>
+        <li><a href="#coupons">Coupon codes and the fine print</a></li>
+        <li><a href="#seasonal">Seasonal timing, including Black Friday</a></li>
+        <li><a href="#checklist">Is this a good price? A short checklist</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="was-price">Why the "was" price is unreliable</h2>
+    <p>The number next to "was," "list," or "compare at" is not a receipt. The page does not have to show that anyone paid it, that it lasted, or that it matched this count, size, color, and condition. The seller sets that reference. Raise it, leave the selling price alone, and a badge can claim a large percent off while checkout stays the same. That is a fake discount: arithmetic on a number the seller chose, not evidence the price is low.</p>
+    <p>Trust two comparisons more than the badge. If the "was" price is far above other current offers for the same item and the same count, the reference is inflated. If the dollar price matches what the item has already been selling for, the percent off is a costume.</p>
+
+    <h2 id="markup">The markup-then-discount trick</h2>
+    <p>The usual trick is short. A seller lifts the list price for a few days, sometimes only on that product page, then discounts it back to the old everyday price. The cart total does not move. A slower version leans on a suggested price the item almost never sells at, so ordinary weeks can all be labeled a sale.</p>
+    <p>Check that the comparison is the same product. A bundle, a smaller count, or a refurbished unit can borrow a percent off the full-size list price. The badge math can be correct and still describe a different item. Ask what checkout will charge after any code, before a mail-in rebate you might not get, and whether this dollar amount has already shown up with no sale label. If it has, you are looking at the regular price.</p>
+
+    <h2 id="recent-low">Compare the price with the recent low</h2>
+    <p>A price history checker replaces the "was" price with prices people actually paid. For most products, look at the low over 60 to 90 days. Sixty days is enough to see past a brief markup. Ninety days is better when the item already goes on sale every month or two, because a short chart makes a routine low look special.</p>
+    <p>Match the variant. A price at or under that 60 to 90 day low, for the same count, size, color, and condition, is a real candidate. A price that sits on the ordinary selling price is the normal price with a new label. A dip that only beats yesterday, after yesterday jumped, is the markup trick on a chart. An open-box low, or a low for a smaller count, is a different product.</p>
+    <p>No chart? Search the product name plus "price" and read deal-community posts from the last two or three months. Keep the dollar amounts, and ignore percentages copied from the product page. DealBots runs this check before it shows a pick, so a price that only beats an inflated "was" price does not make the cut.</p>
+
+    <h2 id="per-unit">Check the price per unit</h2>
+    <p>A lower package price can be a worse deal. Divide what you will pay by the count, weight, loads, or months of use, and compare that with a smaller pack of the same product. Skip the multipack's own "was" price.</p>
+    <p>The sale pack can cost less overall and more per unit. The comparison unit can be a different formula, a travel size, or a refill that assumes you already own the hardware. A subscription can look cheap on the first order and step up after that. Price the orders you will keep. If the unit price is worse, the percent off does not repair it. "Is this a good price?" means the item you will use up.</p>
+
+    <h2 id="coupons">Coupon codes and the fine print</h2>
+    <p>A code can be the whole discount, or a price checkout will not honor. Before you count it, look for a minimum that forces extra items into the cart, an "up to" percent that excludes this item, and limits such as one per customer, new customers only, or the first subscription order. A mail-in rebate is not part of the price until it is approved. Shipping, a required membership, or a mandatory add-on can cost more than the cut. A timer tells you when the label expires, not whether the price is low.</p>
+    <p>Apply the code, let the cart recalculate, and judge that total. If the code fails, the deal you were reading is gone.</p>
+
+    <h2 id="seasonal">Seasonal timing, including Black Friday</h2>
+    <p>Black Friday, end-of-season clearance, back-to-school, and holiday weekends change headlines more reliably than they change lows. Some prices really drop. Others repeat a low from the last month or two. Keep the 60 to 90 day test. A doorbuster that matches last month's low is last month's price with a seasonal name.</p>
+    <p>Prices sometimes dip the week before a named event and rebound on the day, so waiting is a bet once you already have the recent low. Clearance on seasonal goods, such as outerwear, holiday decor, and outdoor gear, often improves as the season ends, and a popular size can sell out. A claim that prices rise after the weekend is another "was" price, pointed forward.</p>
+
+    <h2 id="checklist">Is this a good price? A short checklist</h2>
+    <p>Answer these from checkout and from recent prices, not from the badge.</p>
+    <ol class="checks">
+      <li><span class="num" aria-hidden="true">1</span><span>What will I pay after codes, shipping, and any required add-on, before an unapproved rebate?</span></li>
+      <li><span class="num" aria-hidden="true">2</span><span>Did people pay the "was" price, or did the seller only print it?</span></li>
+      <li><span class="num" aria-hidden="true">3</span><span>Is today at or below the 60 to 90 day low for this same item?</span></li>
+      <li><span class="num" aria-hidden="true">4</span><span>Is the price per unit better than a smaller size?</span></li>
+      <li><span class="num" aria-hidden="true">5</span><span>Does the coupon exclude this item, demand a minimum, or apply only once?</span></li>
+      <li><span class="num" aria-hidden="true">6</span><span>If the event is seasonal, is the price under the recent low?</span></li>
+    </ol>
+    <p>When the checkout price is at or under that low, the unit price is not worse, and the fine print leaves the savings in place, the sale is real. If the recent low is unclear, skip the offer.</p>
+
+    <section class="card cta" aria-labelledby="cta-heading">
+      <h2 id="cta-heading">One checked price, without running the whole list every morning</h2>
+      <p>You do not have to run the full list every morning. DealBots shows one deal a day from what deal-hunter communities are upvoting, checked against price history so a fake "was" price is filtered out. Each pick explains why it made the cut. It is free, it needs no account, and it does not track you. Add it on Chrome or Edge, and use the checklist when you want to judge another price yourself.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/hkldacoaflldjimcipkgliblaopnnioc" target="_blank" rel="noopener noreferrer">Add to Chrome</a>
+        <a class="btn btn-secondary" href="https://microsoftedge.microsoft.com/addons/detail/kemaapaonfjbkjflmkekgmngfobjjiic" target="_blank" rel="noopener noreferrer">Get it on Edge</a>
+        <a class="btn btn-secondary" href="../index.html">See today's deals</a>
+      </div>
+    </section>
+
+    <h2 id="faq">Questions people ask</h2>
+    <div class="faq">
+      <details open>
+        <summary>How do I tell if a sale is real?</summary>
+        <p>Compare the checkout price, not the was price, with what the same item sold for over the last 60 to 90 days. A real sale is at or under that recent low, and the coupon or shipping terms do not take the difference back.</p>
+      </details>
+      <details>
+        <summary>What is a fake discount?</summary>
+        <p>A fake discount is a sale label built on a reference price shoppers were not actually paying. The usual version raises the list price, then discounts it back to the old everyday price. The percentage looks large and the amount due does not change.</p>
+      </details>
+      <details>
+        <summary>How do I know if this is a good price?</summary>
+        <p>A good price is the checkout total for the exact item you will buy: at or under its recent low, with a per-unit cost that is not worse than a smaller size, and with no code, shipping rule, or rebate catch that puts the savings back.</p>
+      </details>
+      <details>
+        <summary>How far back should a price history checker look?</summary>
+        <p>Use 60 to 90 days for most products. Sixty days gets past a short markup. Ninety days is the safer window when the item already goes on sale every month or two. Match the count, size, color, and condition, or the low belongs to a different product.</p>
+      </details>
+      <details>
+        <summary>Are Black Friday prices always lower?</summary>
+        <p>Sometimes they are lower, and sometimes they repeat a low the item already hit. Treat the event as a reason to look, then compare that day's checkout price with the 60 to 90 day low. A seasonal headline is not itself evidence.</p>
+      </details>
+    </div>
+  </main>
+
+  <footer class="wrap">
+    <p>Built by Lewie Senff. <a href="../about.html">About</a> · <a href="../index.html">Today's deals</a> · <a href="../privacy.html">Privacy</a> · <a href="https://github.com/xeonproc/dealbots-extension" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+  </footer>
+</body>
+</html>
