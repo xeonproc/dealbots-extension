@@ -152,6 +152,11 @@ async function writeSitemap(dates) {
       lastmod: "2026-10-17",
       changefreq: "monthly",
     },
+    {
+      loc: `${siteOrigin}/guides/are-black-friday-deals-real.html`,
+      lastmod: "2026-10-18",
+      changefreq: "monthly",
+    },
   ];
   const archiveUrls = dates.map((d) => ({
     loc: `${siteOrigin}/deals/${d}.html`,
