@@ -158,6 +158,11 @@ async function writeSitemap(dates) {
       lastmod: "2026-10-18",
       changefreq: "monthly",
     },
+    {
+      loc: `${siteOrigin}/guides/black-friday-vs-cyber-monday.html`,
+      lastmod: "2026-10-20",
+      changefreq: "monthly",
+    },
   ];
   const archiveUrls = dates.map((d) => ({
     loc: `${siteOrigin}/deals/${d}.html`,
