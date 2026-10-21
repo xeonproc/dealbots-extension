@@ -163,6 +163,11 @@ async function writeSitemap(dates) {
       lastmod: "2026-10-20",
       changefreq: "monthly",
     },
+    {
+      loc: `${siteOrigin}/guides/how-to-read-a-price-history-chart.html`,
+      lastmod: "2026-10-21",
+      changefreq: "monthly",
+    },
   ];
   const archiveUrls = dates.map((d) => ({
     loc: `${siteOrigin}/deals/${d}.html`,
