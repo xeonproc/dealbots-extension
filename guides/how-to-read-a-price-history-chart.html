@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>How to Read a Price History Chart | DealBots</title>
+  <meta name="description" content="How to read a price history chart: typical price versus list price, inflate-then-discount, seasonal dips, and a real all-time low versus a one-day blip." />
+  <link rel="canonical" href="https://xeonproc.github.io/dealbots-extension/guides/how-to-read-a-price-history-chart.html" />
+  <link rel="icon" href="../extension/icons/icon48.png" type="image/png" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="How to Read a Price History Chart | DealBots" />
+  <meta property="og:description" content="How to read a price history chart: typical price versus list price, inflate-then-discount, seasonal dips, and a real all-time low versus a one-day blip." />
+  <meta property="og:url" content="https://xeonproc.github.io/dealbots-extension/guides/how-to-read-a-price-history-chart.html" />
+  <meta property="og:image" content="https://xeonproc.github.io/dealbots-extension/assets/landing/one-deal-a-day.webp" />
+  <meta property="og:image:width" content="1280" />
+  <meta property="og:image:height" content="800" />
+  <meta property="og:image:alt" content="DealBots graphic: one real deal a day, picked by AI, with fake was prices filtered using price history." />
+  <meta property="article:published_time" content="2026-10-21" />
+  <meta property="article:modified_time" content="2026-10-21" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="How to Read a Price History Chart | DealBots" />
+  <meta name="twitter:description" content="How to read a price history chart: typical price versus list price, inflate-then-discount, seasonal dips, and a real all-time low versus a one-day blip." />
+  <meta name="twitter:image" content="https://xeonproc.github.io/dealbots-extension/assets/landing/one-deal-a-day.webp" />
+  <meta name="twitter:image:alt" content="DealBots graphic: one real deal a day, picked by AI, with fake was prices filtered using price history." />
+  <meta name="theme-color" content="#150c2e" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "headline": "How to read a price history chart",
+        "description": "How to read a price history chart: typical price versus list price, inflate-then-discount, seasonal dips, and a real all-time low versus a one-day blip.",
+        "datePublished": "2026-10-21",
+        "dateModified": "2026-10-21",
+        "inLanguage": "en",
+        "author": {
+          "@type": "Person",
+          "name": "Lewie Senff"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "DealBots",
+          "url": "https://xeonproc.github.io/dealbots-extension/about.html",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://xeonproc.github.io/dealbots-extension/extension/icons/icon128.png"
+          }
+        },
+        "image": "https://xeonproc.github.io/dealbots-extension/assets/landing/one-deal-a-day.webp",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://xeonproc.github.io/dealbots-extension/guides/how-to-read-a-price-history-chart.html"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I read a price history chart?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Find where the line spends most of its time. That level is the typical price. Compare today's checkout total for the same item with that level. A percent off the list price does not say whether the price is low."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the typical price, and how is it different from the list price?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The typical price is the level the chart sits on most days. The list price is a reference the seller prints, sometimes labeled was or compare at. If the line never reaches the list price, shoppers were not paying it."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I spot an inflate-then-discount pattern?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Look for a short step up, then a sale that lands back on the old typical price. The percent off uses the raised price as its starting point. A real discount falls below the typical price."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How far back should a price history chart go?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use 60 to 90 days for most products. Sixty days gets past a short markup. Ninety days is safer when the item already goes on sale every month or two. Look back about a year when the item is seasonal or the page calls the price an all-time low."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the difference between an all-time low and a one-day blip?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A real low is the bottom of a chart that covers a long stretch, for the same item, and the line sits there or comes back to it. A one-day blip drops for a single point and snaps back. The lowest point on a 90-day chart is a recent low, not an all-time low, unless the chart goes back farther."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do holiday sales and end-of-season clearance look on a price history chart?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "They show up as dips that usually last more than a day. When the chart is long enough, seasonal goods often repeat a dip around the same time of year. A dip that only returns to the typical price is the regular price with a seasonal name."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #150c2e;
+      --bg2: #0c0620;
+      --card: #1f1440;
+      --text: #f5f2ff;
+      --muted: #c4b6ea;
+      --gold: #ffc72c;
+      --ink: #1a1204;
+      --line: rgba(255, 199, 44, 0.28);
+      --hot: #ff6b93;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      background:
+        radial-gradient(circle at 12% 0%, #3a1a6b 0%, transparent 42%),
+        radial-gradient(circle at 88% 8%, #6b1a5a 0%, transparent 36%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+    }
+    a { color: var(--gold); }
+    a:hover { text-decoration: none; }
+    .wrap { width: min(960px, calc(100% - 32px)); margin: 0 auto; }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 0;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 750;
+      letter-spacing: -0.02em;
+    }
+    .brand img { width: 36px; height: 36px; border-radius: 8px; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .nav-links a:hover,
+    .nav-links a[aria-current="page"] { color: var(--text); }
+    a:focus-visible, summary:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 3px;
+    }
+    .article {
+      width: min(42rem, 100%);
+      padding-bottom: 12px;
+    }
+    .kicker {
+      margin: 8px 0 0;
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 750;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 8px 0 10px;
+      font-size: clamp(2rem, 6vw, 2.8rem);
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+    }
+    .updated {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .article p, .article li { color: var(--muted); }
+    .article .lead {
+      margin: 0 0 16px;
+      font-size: 1.08rem;
+      color: var(--text);
+    }
+    .article strong { color: var(--text); font-weight: 700; }
+    h2 {
+      margin: 32px 0 10px;
+      font-size: clamp(1.35rem, 3vw, 1.65rem);
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+    }
+    h3 {
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+    }
+    p { margin: 0 0 14px; }
+    .toc {
+      margin: 0 0 8px;
+      padding: 16px 18px 8px;
+      background: rgba(31, 20, 64, 0.85);
+      border: 1px solid rgba(255, 199, 44, 0.16);
+      border-radius: 16px;
+    }
+    .toc p {
+      margin: 0 0 8px;
+      color: var(--text);
+      font-weight: 700;
+    }
+    .toc ol {
+      margin: 0;
+      padding: 0 0 8px 1.2rem;
+    }
+    .toc a { text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+    figure.chart {
+      margin: 8px 0 18px;
+      padding: 16px 16px 4px;
+      background: rgba(31, 20, 64, 0.85);
+      border: 1px solid rgba(255, 199, 44, 0.16);
+      border-radius: 16px;
+    }
+    .plot {
+      position: relative;
+      height: 300px;
+    }
+    .plot svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .tag, .axis-time {
+      position: absolute;
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .tag-list { left: 2%; top: 4px; }
+    .tag-typical { left: 42%; top: 32%; }
+    .axis-time { right: 2%; bottom: 4px; font-weight: 650; }
+    .mark {
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      margin-left: -14px;
+      margin-top: -14px;
+      border-radius: 999px;
+      background: var(--gold);
+      color: var(--ink);
+      font-weight: 800;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mark-blip { background: var(--hot); }
+    figure.chart figcaption { margin: 12px 0 8px; }
+    figure.chart .chart-note {
+      margin: 0 0 6px;
+      color: var(--gold);
+      font-weight: 750;
+      font-size: 0.92rem;
+    }
+    figure.chart ol {
+      margin: 0 0 8px;
+      padding-left: 1.3rem;
+    }
+    figure.chart li { margin: 0 0 6px; }
+    .card {
+      background: rgba(31, 20, 64, 0.85);
+      border: 1px solid rgba(255, 199, 44, 0.16);
+      border-radius: 16px;
+      padding: 18px 18px 6px;
+      margin: 0 0 16px;
+    }
+    .checks {
+      margin: 0 0 14px;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+    .checks li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: start;
+      margin: 0;
+      padding: 12px;
+      background: rgba(31, 20, 64, 0.85);
+      border: 1px solid rgba(255, 199, 44, 0.16);
+      border-radius: 14px;
+    }
+    .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: var(--gold);
+      color: var(--ink);
+      font-weight: 800;
+      font-size: 0.9rem;
+    }
+    .cta {
+      border-color: rgba(255, 199, 44, 0.45);
+      background: rgba(255, 199, 44, 0.08);
+      padding-bottom: 18px;
+    }
+    .cta h2 { margin-top: 0; }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 4px;
+    }
+    a.btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 750;
+      letter-spacing: -0.01em;
+    }
+    a.btn-primary { background: var(--gold); color: var(--ink); }
+    a.btn-primary:hover { filter: brightness(1.05); }
+    a.btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+    a.btn-secondary:hover { background: rgba(255, 255, 255, 0.04); }
+    .faq { display: grid; gap: 10px; margin-bottom: 8px; }
+    details {
+      background: rgba(31, 20, 64, 0.85);
+      border: 1px solid rgba(255, 199, 44, 0.16);
+      border-radius: 14px;
+      padding: 4px 16px;
+    }
+    summary {
+      cursor: pointer;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+    }
+    details p { margin: 0 0 14px; }
+    footer {
+      padding: 8px 0 48px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    footer p { margin: 8px 0; }
+    @media (max-width: 640px) {
+      .nav { align-items: flex-start; flex-direction: column; }
+      .actions a.btn { flex: 1 1 100%; }
+      .plot { height: 260px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <nav class="nav" aria-label="Site">
+      <a class="brand" href="../about.html">
+        <img src="../extension/icons/icon128.png" width="36" height="36" alt="" />
+        DealBots
+      </a>
+      <div class="nav-links">
+        <a href="../about.html">About</a>
+        <a href="../index.html">Today's deals</a>
+        <a href="how-to-tell-if-a-sale-is-real.html">Is a sale real?</a>
+        <a href="are-black-friday-deals-real.html">Black Friday</a>
+        <a href="black-friday-vs-cyber-monday.html">Friday vs Monday</a>
+        <a href="#checklist">Checklist</a>
+        <a href="../privacy.html">Privacy</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="wrap article" id="top">
+    <p class="kicker">Guide</p>
+    <h1>How to read a price history chart</h1>
+    <p class="updated">Updated October 21, 2026</p>
+
+    <p class="lead">A price history chart is a line of prices shoppers were offered over time. The list price is a number on the product page. The chart is how you tell whether that number was ever real, and whether today's price is actually lower.</p>
+
+    <p>A price tracker is that chart, plus the habit of reading it before you buy. The name on the tool does not matter. The shape does. Read the usual price, also called the typical price, before you read the percent off.</p>
+
+    <p><a href="../about.html">DealBots</a> is a free browser extension that checks price history on one pick a day. The pick comes from what deal-hunter communities are upvoting. A price that only looks low next to a fake "was" price is filtered out, and the pick explains why it made the cut. There is no account and no tracking. For per-unit price and coupon fine print, see <a href="how-to-tell-if-a-sale-is-real.html">how to tell if a sale is real</a>.</p>
+
+    <nav class="toc" aria-label="On this page">
+      <p>On this page</p>
+      <ol>
+        <li><a href="#example">An example chart</a></li>
+        <li><a href="#typical-price">The usual price and the list price</a></li>
+        <li><a href="#markup">The inflate-then-discount pattern</a></li>
+        <li><a href="#seasonal">Seasonal dips</a></li>
+        <li><a href="#how-far">How far back to look</a></li>
+        <li><a href="#all-time-low">A real all-time low and a one-day blip</a></li>
+        <li><a href="#checklist">A short checklist before you buy</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="example">An example chart</h2>
+    <p>The drawing below is an example. The shape is invented so each mark is easy to point at. It is not a real product, and it has no prices. Use it to learn the names, then judge a real offer on a real chart.</p>
+
+    <figure class="chart">
+      <div class="plot" aria-hidden="true">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+          <line x1="0" y1="14" x2="100" y2="14" stroke="#c4b6ea" stroke-opacity="0.7" stroke-width="1.5" stroke-dasharray="5 6" vector-effect="non-scaling-stroke" />
+          <line x1="0" y1="46" x2="100" y2="46" stroke="#c4b6ea" stroke-opacity="0.7" stroke-width="1.5" stroke-dasharray="5 6" vector-effect="non-scaling-stroke" />
+          <polyline
+            fill="none"
+            stroke="#ffc72c"
+            stroke-width="2.5"
+            stroke-linejoin="round"
+            stroke-linecap="round"
+            vector-effect="non-scaling-stroke"
+            points="2,46 20,46 20,28 38,28 38,46 46,46 50,60 66,60 70,46 76,46 80,82 84,46 88,46 90,68 98,68"
+          />
+        </svg>
+        <span class="tag tag-list">List price</span>
+        <span class="tag tag-typical">Typical price</span>
+        <span class="mark" style="left:11%; top:46%">1</span>
+        <span class="mark" style="left:29%; top:28%">2</span>
+        <span class="mark" style="left:58%; top:60%">3</span>
+        <span class="mark mark-blip" style="left:80%; top:82%">4</span>
+        <span class="mark" style="left:92%; top:68%">5</span>
+        <span class="axis-time">Time</span>
+      </div>
+      <figcaption>
+        <p class="chart-note">Example only. Invented shape, not a real product's prices. The upper dashed line is the list price. The lower dashed line is the typical price.</p>
+        <ol>
+          <li><strong>Typical price.</strong> Where the line sits for most of the drawing.</li>
+          <li><strong>Inflate, then discount.</strong> A short step up, then a drop back onto the typical price.</li>
+          <li><strong>Seasonal dip.</strong> A lower stretch that lasts, the way a holiday sale or end-of-season clearance often looks.</li>
+          <li><strong>One-day blip.</strong> A single sharp drop that snaps back. Drawn in a different color so it does not look like a floor.</li>
+          <li><strong>A low that held.</strong> The line steps down and stays there.</li>
+        </ol>
+      </figcaption>
+    </figure>
+
+    <h2 id="typical-price">The usual price and the list price</h2>
+    <p>The useful line is the price shoppers were offered, point by point. The usual price — the typical price — is where that line spends most of its time. It is the flat stretch. It is not the average of a spike and a crash, and it is not the lowest dot.</p>
+    <p>The list price is a different kind of number. The page may call it list, was, compare at, or a suggested price. The seller chooses it. On a chart it is often a straight mark above the line, like the upper dashed line in the example. If the history never reaches it, shoppers were not paying it. A percent off that mark is arithmetic.</p>
+    <p>Compare the checkout total with the typical price, for the same count, size, color, condition, and model. Landing on the typical price means the regular price, whatever the badge says. Landing under it is the start of a real sale. A chart that mixes two variants can show a dip this item never had.</p>
+
+    <h2 id="markup">The inflate-then-discount pattern</h2>
+    <p>The pattern is a step. The line sits still, jumps, stays up for a short stretch, then a sale brings it back to the old level. Mark 2 on the example is that raised block. The percent off is measured from the top of the step. The amount due matches the price from before the jump.</p>
+    <p>A real discount falls through the typical price. Returning to it does not. Sometimes there is no jump at all: the list price just floats above a flat line, and the badge stays on while checkout never moves. Either way, compare today's total with the level the line occupied before anyone called it a sale.</p>
+    <p>The raised stretch can be a few days, or it can be the whole chart if the reference was never a selling price. A short window that starts after the jump hides the trick. That is a reason to look further back than the sale week.</p>
+
+    <h2 id="seasonal">Seasonal dips</h2>
+    <p>Holiday sales and end-of-season clearance show up as dips, usually lasting longer than a single point. Mark 3 on the example is that shape: down, across, and back. A holiday price that only falls to the typical price is the regular price with a seasonal name. A holiday price under the typical price, and under the lows already on the chart, is the one worth a second look.</p>
+    <p>Seasonal goods often get cheaper as the season ends. Outerwear, holiday decor, and outdoor gear are the usual cases. The line may step down more than once. A later step can be lower, and the size you want can sell out before you see it. A chart that covers the same season last year shows whether the dip is a habit. A chart that starts after the season began cannot.</p>
+    <p>Waiting is reasonable when you can see the earlier dip and you do not need the item yet. It is a guess when the chart is too short to show the season. For the named weekend — dips before and after the day, lookalike model numbers, and return windows — see <a href="are-black-friday-deals-real.html">are Black Friday deals actually real?</a> For which of the two named days is cheaper, see <a href="black-friday-vs-cyber-monday.html">Black Friday vs Cyber Monday</a>.</p>
+
+    <h2 id="how-far">How far back to look</h2>
+    <p>For most products, start with 60 to 90 days. Sixty days is enough to see past a short markup. Ninety days is safer when the item already goes on sale every month or two, because a short chart makes a routine low look special. That window is a recent low. It is the right test for an ordinary purchase.</p>
+    <p>Look further when the claim is bigger than the window. A page that says all-time low needs a chart that reaches earlier seasons — about a year for something that goes on sale every holiday. The lowest point in 90 days can be the best price since summer and still sit above last winter. Calling it all-time does not lengthen the chart.</p>
+    <p>Keep the same count, size, color, condition, and model the whole way. A longer chart of a different variant is not more history. If the line only covers a short stretch, search the product name plus "price" and read deal-community posts from the months the chart skips. Keep the dollar amounts. Set aside percentages copied from the product page.</p>
+
+    <h2 id="all-time-low">A real all-time low and a one-day blip</h2>
+    <p>A low that counts is a floor. The line reaches it and stays, or it leaves and comes back, on a chart long enough for the claim, for the item you can buy today. Mark 5 on the example is a floor: the line steps down and sits. Today's checkout price has to match that floor. A badge that says all-time low while the line is at its usual level is the list-price trick again.</p>
+    <p>A one-day blip is a needle. The line drops for a single reading and snaps back. Mark 4 on the example is that needle, and the numbered dot is a different color so it does not look like a floor. The point can be a pricing error that was corrected, a code that worked once, or a different condition mixed into the same line. You could not have planned on it, and a chart does not promise it will repeat. Matching the tip is not the same as matching a low that held.</p>
+    <p>If today's price is the lowest point on a long chart and checkout will honor it for this exact item, you are looking at a real low for that span. If today's price only ties a one-day spike from months ago, you are chasing a price that did not last. When you cannot tell the floor from the needle, skip the offer.</p>
+
+    <h2 id="checklist">A short checklist before you buy</h2>
+    <p>Answer these from the chart and from checkout.</p>
+    <ol class="checks">
+      <li><span class="num" aria-hidden="true">1</span><span>Is this chart the same count, size, color, condition, and model I will buy?</span></li>
+      <li><span class="num" aria-hidden="true">2</span><span>Where does the line spend most of its time, and does today's price beat that typical price, or only the list price?</span></li>
+      <li><span class="num" aria-hidden="true">3</span><span>Did the price step up and then fall back to where it already was?</span></li>
+      <li><span class="num" aria-hidden="true">4</span><span>If the item is seasonal, does the chart show an earlier holiday or end-of-season dip?</span></li>
+      <li><span class="num" aria-hidden="true">5</span><span>Does the chart go back 60 to 90 days, and further if the page says all-time low?</span></li>
+      <li><span class="num" aria-hidden="true">6</span><span>Is the low a floor that held, or a one-day blip that snapped back?</span></li>
+    </ol>
+    <p>When checkout is under the typical price, the comparison is the same item, and the low is a floor, the chart supports the sale. If you cannot see the typical price, skip the percent off.</p>
+
+    <section class="card cta" aria-labelledby="cta-heading">
+      <h2 id="cta-heading">One checked price, without opening a chart every morning</h2>
+      <p>You do not have to chart every tab. DealBots shows one deal a day from what deal-hunter communities are upvoting, checked against price history so a fake "was" price is filtered out. Each pick explains why it made the cut. It is free, it needs no account, and it does not track you. Add it on Chrome, Edge, or Firefox, and use the checklist when you want to read another chart yourself.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/hkldacoaflldjimcipkgliblaopnnioc" target="_blank" rel="noopener noreferrer">Add to Chrome</a>
+        <a class="btn btn-secondary" href="https://microsoftedge.microsoft.com/addons/detail/kemaapaonfjbkjflmkekgmngfobjjiic" target="_blank" rel="noopener noreferrer">Get it on Edge</a>
+        <a class="btn btn-secondary" href="https://addons.mozilla.org/en-US/firefox/addon/dealbots/" target="_blank" rel="noopener noreferrer">Get it on Firefox</a>
+        <a class="btn btn-secondary" href="../index.html">See today's deals</a>
+      </div>
+    </section>
+
+    <h2 id="faq">Questions people ask</h2>
+    <div class="faq">
+      <details open>
+        <summary>How do I read a price history chart?</summary>
+        <p>Find where the line spends most of its time. That level is the typical price. Compare today's checkout total for the same item with that level. A percent off the list price does not say whether the price is low.</p>
+      </details>
+      <details>
+        <summary>What is the typical price, and how is it different from the list price?</summary>
+        <p>The typical price is the level the chart sits on most days. The list price is a reference the seller prints, sometimes labeled was or compare at. If the line never reaches the list price, shoppers were not paying it.</p>
+      </details>
+      <details>
+        <summary>How do I spot an inflate-then-discount pattern?</summary>
+        <p>Look for a short step up, then a sale that lands back on the old typical price. The percent off uses the raised price as its starting point. A real discount falls below the typical price.</p>
+      </details>
+      <details>
+        <summary>How far back should a price history chart go?</summary>
+        <p>Use 60 to 90 days for most products. Sixty days gets past a short markup. Ninety days is safer when the item already goes on sale every month or two. Look back about a year when the item is seasonal or the page calls the price an all-time low.</p>
+      </details>
+      <details>
+        <summary>What is the difference between an all-time low and a one-day blip?</summary>
+        <p>A real low is the bottom of a chart that covers a long stretch, for the same item, and the line sits there or comes back to it. A one-day blip drops for a single point and snaps back. The lowest point on a 90-day chart is a recent low, not an all-time low, unless the chart goes back farther.</p>
+      </details>
+      <details>
+        <summary>How do holiday sales and end-of-season clearance look on a price history chart?</summary>
+        <p>They show up as dips that usually last more than a day. When the chart is long enough, seasonal goods often repeat a dip around the same time of year. A dip that only returns to the typical price is the regular price with a seasonal name.</p>
+      </details>
+    </div>
+  </main>
+
+  <footer class="wrap">
+    <p>Built by Lewie Senff. <a href="how-to-tell-if-a-sale-is-real.html">Is a sale real?</a> · <a href="are-black-friday-deals-real.html">Black Friday deals</a> · <a href="black-friday-vs-cyber-monday.html">Friday vs Monday</a> · <a href="../about.html">About</a> · <a href="../index.html">Today's deals</a> · <a href="../privacy.html">Privacy</a> · <a href="https://github.com/xeonproc/dealbots-extension" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+    <p>Install the extension: <a href="https://chromewebstore.google.com/detail/hkldacoaflldjimcipkgliblaopnnioc" target="_blank" rel="noopener noreferrer">Add to Chrome</a> · <a href="https://microsoftedge.microsoft.com/addons/detail/kemaapaonfjbkjflmkekgmngfobjjiic" target="_blank" rel="noopener noreferrer">Get it on Edge</a> · <a href="https://addons.mozilla.org/en-US/firefox/addon/dealbots/" target="_blank" rel="noopener noreferrer">Get it on Firefox</a></p>
+  </footer>
+</body>
+</html>
