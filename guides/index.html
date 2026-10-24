@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shopping Guides | DealBots</title>
+  <meta name="description" content="Shopping guides from DealBots: how to spot a real sale, read a price history chart, and decide whether an early Black Friday deal is worth buying." />
+  <link rel="canonical" href="https://xeonproc.github.io/dealbots-extension/guides/index.html" />
+  <link rel="icon" href="../extension/icons/icon48.png" type="image/png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Shopping Guides | DealBots" />
+  <meta property="og:description" content="Shopping guides from DealBots: how to spot a real sale, read a price history chart, and decide whether an early Black Friday deal is worth buying." />
+  <meta property="og:url" content="https://xeonproc.github.io/dealbots-extension/guides/index.html" />
+  <meta property="og:image" content="https://xeonproc.github.io/dealbots-extension/assets/landing/one-deal-a-day.webp" />
+  <meta property="og:image:width" content="1280" />
+  <meta property="og:image:height" content="800" />
+  <meta property="og:image:alt" content="DealBots graphic: one real deal a day, picked by AI, with fake was prices filtered using price history." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Shopping Guides | DealBots" />
+  <meta name="twitter:description" content="Shopping guides from DealBots: how to spot a real sale, read a price history chart, and decide whether an early Black Friday deal is worth buying." />
+  <meta name="twitter:image" content="https://xeonproc.github.io/dealbots-extension/assets/landing/one-deal-a-day.webp" />
+  <meta name="twitter:image:alt" content="DealBots graphic: one real deal a day, picked by AI, with fake was prices filtered using price history." />
+  <meta name="theme-color" content="#150c2e" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Shopping guides",
+    "description": "Shopping guides from DealBots: how to spot a real sale, read a price history chart, and decide whether an early Black Friday deal is worth buying.",
+    "url": "https://xeonproc.github.io/dealbots-extension/guides/index.html",
+    "numberOfItems": 7,
+    "itemListOrder": "https://schema.org/ItemListOrderAscending",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Early Black Friday deals: buy now or wait?",
+        "description": "Stores put a Black Friday label on prices weeks before November 27, 2026, and price history is how you decide what to buy now and what to leave until the weekend.",
+        "url": "https://xeonproc.github.io/dealbots-extension/guides/early-black-friday-deals.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Are Black Friday deals actually real?",
+        "description": "Some doorbusters are a real low, and others repeat a recent selling price under a holiday label, so compare checkout with the recent low, the model number, and the return rules.",
+        "url": "https://xeonproc.github.io/dealbots-extension/guides/are-black-friday-deals-real.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Black Friday vs Cyber Monday: which one has the real deals?",
+        "description": "Neither named day is automatically cheaper, so compare the item you want on both days with the price it has actually been selling for.",
+        "url": "https://xeonproc.github.io/dealbots-extension/guides/black-friday-vs-cyber-monday.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Black Friday 2026 prep checklist: what to do in the 5 weeks before",
+        "description": "A want list, a cap on what you will pay, and a note of the normal price turn the weekend into a comparison you can make at checkout.",
+        "url": "https://xeonproc.github.io/dealbots-extension/guides/black-friday-prep-checklist.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "name": "The best time to buy almost anything: a month-by-month guide (2026-2027)",
+        "description": "A month-by-month look at when categories commonly go on sale, from the late-November shopping weekend through the following October.",
+        "url": "https://xeonproc.github.io/dealbots-extension/guides/best-time-to-buy-calendar.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 6,
+        "name": "How to tell if a sale is real",
+        "description": "A sale badge is only as honest as the reference price behind it, so compare checkout with the recent low, the per-unit price, and the coupon fine print.",
+        "url": "https://xeonproc.github.io/dealbots-extension/guides/how-to-tell-if-a-sale-is-real.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 7,
+        "name": "How to read a price history chart",
+        "description": "A price history chart is a line of prices shoppers were offered, and the typical price and the recent low tell you whether today's price is actually lower.",
+        "url": "https://xeonproc.github.io/dealbots-extension/guides/how-to-read-a-price-history-chart.html"
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #150c2e;
+      --bg2: #0c0620;
+      --card: #1f1440;
+      --text: #f5f2ff;
+      --muted: #c4b6ea;
+      --gold: #ffc72c;
+      --ink: #1a1204;
+      --line: rgba(255, 199, 44, 0.28);
+      --hot: #ff6b93;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      background:
+        radial-gradient(circle at 12% 0%, #3a1a6b 0%, transparent 42%),
+        radial-gradient(circle at 88% 8%, #6b1a5a 0%, transparent 36%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+    }
+    a { color: var(--gold); }
+    a:hover { text-decoration: none; }
+    .wrap { width: min(960px, calc(100% - 32px)); margin: 0 auto; }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 0;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 750;
+      letter-spacing: -0.02em;
+    }
+    .brand img { width: 36px; height: 36px; border-radius: 8px; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .nav-links a:hover,
+    .nav-links a[aria-current="page"] { color: var(--text); }
+    a:focus-visible, summary:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 3px;
+    }
+    .article {
+      width: min(42rem, 100%);
+      padding-bottom: 12px;
+    }
+    .kicker {
+      margin: 8px 0 0;
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 750;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 8px 0 10px;
+      font-size: clamp(2rem, 6vw, 2.8rem);
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+    }
+    .updated {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .article p, .article li { color: var(--muted); }
+    .article .lead {
+      margin: 0 0 16px;
+      font-size: 1.08rem;
+      color: var(--text);
+    }
+    h2 {
+      margin: 32px 0 10px;
+      font-size: clamp(1.35rem, 3vw, 1.65rem);
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+    }
+    h3 {
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+    }
+    p { margin: 0 0 14px; }
+    .guide-list {
+      margin: 8px 0 16px;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+    .guide-list li {
+      margin: 0;
+      padding: 16px 18px 6px;
+      background: rgba(31, 20, 64, 0.85);
+      border: 1px solid rgba(255, 199, 44, 0.16);
+      border-radius: 16px;
+    }
+    .guide-list h2 {
+      margin: 0 0 6px;
+      font-size: 1.25rem;
+    }
+    .guide-list h2 a { text-decoration: none; }
+    .guide-list h2 a:hover { text-decoration: underline; }
+    .guide-list p { margin: 0 0 12px; }
+    .card {
+      background: rgba(31, 20, 64, 0.85);
+      border: 1px solid rgba(255, 199, 44, 0.16);
+      border-radius: 16px;
+      padding: 18px 18px 6px;
+      margin: 0 0 16px;
+    }
+    .cta {
+      border-color: rgba(255, 199, 44, 0.45);
+      background: rgba(255, 199, 44, 0.08);
+      padding-bottom: 18px;
+    }
+    .cta h2 { margin-top: 0; }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 4px;
+    }
+    a.btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 750;
+      letter-spacing: -0.01em;
+    }
+    a.btn-primary { background: var(--gold); color: var(--ink); }
+    a.btn-primary:hover { filter: brightness(1.05); }
+    a.btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+    a.btn-secondary:hover { background: rgba(255, 255, 255, 0.04); }
+    footer {
+      padding: 8px 0 48px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    footer p { margin: 8px 0; }
+    @media (max-width: 640px) {
+      .nav { align-items: flex-start; flex-direction: column; }
+      .actions a.btn { flex: 1 1 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <nav class="nav" aria-label="Site">
+      <a class="brand" href="../about.html">
+        <img src="../extension/icons/icon128.png" width="36" height="36" alt="" />
+        DealBots
+      </a>
+      <div class="nav-links">
+        <a href="../about.html">About</a>
+        <a href="../index.html">Today's deals</a>
+        <a href="index.html" aria-current="page">Guides</a>
+        <a href="early-black-friday-deals.html">Early Black Friday</a>
+        <a href="how-to-tell-if-a-sale-is-real.html">Is a sale real?</a>
+        <a href="how-to-read-a-price-history-chart.html">Price history</a>
+        <a href="are-black-friday-deals-real.html">Black Friday</a>
+        <a href="black-friday-vs-cyber-monday.html">Friday vs Monday</a>
+        <a href="black-friday-prep-checklist.html">Prep checklist</a>
+        <a href="best-time-to-buy-calendar.html">When to buy</a>
+        <a href="../privacy.html">Privacy</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="wrap article" id="top">
+    <p class="kicker">Guides</p>
+    <h1>Shopping guides</h1>
+    <p class="updated">Updated October 24, 2026</p>
+
+    <p class="lead">A sale label is a claim. These guides are the checks behind it: the checkout price, the recent low, and the fine print.</p>
+
+    <p>The first guide is for late October and early November, when stores start using the Black Friday name weeks before the day itself. In 2026, Black Friday is Friday, November 27, and Cyber Monday is Monday, November 30. The other guides cover that weekend, the rest of the year, and how to read a sale on an ordinary week.</p>
+
+    <p><a href="../about.html">DealBots</a> is a free browser extension that checks price history on one pick a day. The pick comes from what deal-hunter communities are upvoting. A price that only looks low next to a fake "was" price is filtered out, and the pick explains why it made the cut. There is no account and no tracking.</p>
+
+    <ol class="guide-list">
+      <li>
+        <h2><a href="early-black-friday-deals.html">Early Black Friday deals: buy now or wait?</a></h2>
+        <p>Stores put a Black Friday label on prices weeks before November 27, 2026, and price history is how you decide what to buy now and what to leave until the weekend.</p>
+      </li>
+      <li>
+        <h2><a href="are-black-friday-deals-real.html">Are Black Friday deals actually real?</a></h2>
+        <p>Some doorbusters are a real low, and others repeat a recent selling price under a holiday label, so compare checkout with the recent low, the model number, and the return rules.</p>
+      </li>
+      <li>
+        <h2><a href="black-friday-vs-cyber-monday.html">Black Friday vs Cyber Monday: which one has the real deals?</a></h2>
+        <p>Neither named day is automatically cheaper, so compare the item you want on both days with the price it has actually been selling for.</p>
+      </li>
+      <li>
+        <h2><a href="black-friday-prep-checklist.html">Black Friday 2026 prep checklist: what to do in the 5 weeks before</a></h2>
+        <p>A want list, a cap on what you will pay, and a note of the normal price turn the weekend into a comparison you can make at checkout.</p>
+      </li>
+      <li>
+        <h2><a href="best-time-to-buy-calendar.html">The best time to buy almost anything: a month-by-month guide (2026-2027)</a></h2>
+        <p>A month-by-month look at when categories commonly go on sale, from the late-November shopping weekend through the following October.</p>
+      </li>
+      <li>
+        <h2><a href="how-to-tell-if-a-sale-is-real.html">How to tell if a sale is real</a></h2>
+        <p>A sale badge is only as honest as the reference price behind it, so compare checkout with the recent low, the per-unit price, and the coupon fine print.</p>
+      </li>
+      <li>
+        <h2><a href="how-to-read-a-price-history-chart.html">How to read a price history chart</a></h2>
+        <p>A price history chart is a line of prices shoppers were offered, and the typical price and the recent low tell you whether today's price is actually lower.</p>
+      </li>
+    </ol>
+
+    <section class="card cta" aria-labelledby="cta-heading">
+      <h2 id="cta-heading">One checked price, without running the list every morning</h2>
+      <p>DealBots shows one deal a day from what deal-hunter communities upvote, checked against price history so a fake "was" price is filtered out. Each pick explains why it made the cut. It is free, with no account and no tracking, on Chrome, Edge, and Firefox.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/hkldacoaflldjimcipkgliblaopnnioc" target="_blank" rel="noopener noreferrer">Add to Chrome</a>
+        <a class="btn btn-secondary" href="https://microsoftedge.microsoft.com/addons/detail/kemaapaonfjbkjflmkekgmngfobjjiic" target="_blank" rel="noopener noreferrer">Get it on Edge</a>
+        <a class="btn btn-secondary" href="https://addons.mozilla.org/en-US/firefox/addon/dealbots/" target="_blank" rel="noopener noreferrer">Get it on Firefox</a>
+        <a class="btn btn-secondary" href="../index.html">See today's deals</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <p>Built by Lewie Senff. <a href="early-black-friday-deals.html">Early Black Friday</a> · <a href="how-to-tell-if-a-sale-is-real.html">Is a sale real?</a> · <a href="how-to-read-a-price-history-chart.html">Price history</a> · <a href="are-black-friday-deals-real.html">Black Friday deals</a> · <a href="black-friday-vs-cyber-monday.html">Friday vs Monday</a> · <a href="black-friday-prep-checklist.html">Prep checklist</a> · <a href="best-time-to-buy-calendar.html">When to buy</a> · <a href="../about.html">About</a> · <a href="../index.html">Today's deals</a> · <a href="../privacy.html">Privacy</a> · <a href="https://github.com/xeonproc/dealbots-extension" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+    <p>Install the extension: <a href="https://chromewebstore.google.com/detail/hkldacoaflldjimcipkgliblaopnnioc" target="_blank" rel="noopener noreferrer">Add to Chrome</a> · <a href="https://microsoftedge.microsoft.com/addons/detail/kemaapaonfjbkjflmkekgmngfobjjiic" target="_blank" rel="noopener noreferrer">Get it on Edge</a> · <a href="https://addons.mozilla.org/en-US/firefox/addon/dealbots/" target="_blank" rel="noopener noreferrer">Get it on Firefox</a></p>
+  </footer>
+</body>
+</html>
