@@ -180,7 +180,7 @@ async function writeSitemap(dates) {
     },
     {
       loc: `${siteOrigin}/guides/index.html`,
-      lastmod: "2026-10-25",
+      lastmod: "2026-10-26",
       changefreq: "monthly",
     },
     {
@@ -191,6 +191,11 @@ async function writeSitemap(dates) {
     {
       loc: `${siteOrigin}/guides/price-dropped-after-buying.html`,
       lastmod: "2026-10-25",
+      changefreq: "monthly",
+    },
+    {
+      loc: `${siteOrigin}/guides/is-deal-urgency-real.html`,
+      lastmod: "2026-10-26",
       changefreq: "monthly",
     },
   ];
