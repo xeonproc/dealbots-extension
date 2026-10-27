@@ -180,7 +180,7 @@ async function writeSitemap(dates) {
     },
     {
       loc: `${siteOrigin}/guides/index.html`,
-      lastmod: "2026-10-26",
+      lastmod: "2026-10-27",
       changefreq: "monthly",
     },
     {
@@ -196,6 +196,11 @@ async function writeSitemap(dates) {
     {
       loc: `${siteOrigin}/guides/is-deal-urgency-real.html`,
       lastmod: "2026-10-26",
+      changefreq: "monthly",
+    },
+    {
+      loc: `${siteOrigin}/guides/are-black-friday-bundles-worth-it.html`,
+      lastmod: "2026-10-27",
       changefreq: "monthly",
     },
   ];
