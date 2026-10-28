@@ -180,7 +180,7 @@ async function writeSitemap(dates) {
     },
     {
       loc: `${siteOrigin}/guides/index.html`,
-      lastmod: "2026-10-27",
+      lastmod: "2026-10-28",
       changefreq: "monthly",
     },
     {
@@ -201,6 +201,11 @@ async function writeSitemap(dates) {
     {
       loc: `${siteOrigin}/guides/are-black-friday-bundles-worth-it.html`,
       lastmod: "2026-10-27",
+      changefreq: "monthly",
+    },
+    {
+      loc: `${siteOrigin}/guides/black-friday-tv-model-numbers.html`,
+      lastmod: "2026-10-28",
       changefreq: "monthly",
     },
   ];
