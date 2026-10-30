@@ -180,7 +180,7 @@ async function writeSitemap(dates) {
     },
     {
       loc: `${siteOrigin}/guides/index.html`,
-      lastmod: "2026-10-29",
+      lastmod: "2026-10-30",
       changefreq: "monthly",
     },
     {
@@ -211,6 +211,11 @@ async function writeSitemap(dates) {
     {
       loc: `${siteOrigin}/guides/refurbished-vs-new-black-friday.html`,
       lastmod: "2026-10-29",
+      changefreq: "monthly",
+    },
+    {
+      loc: `${siteOrigin}/guides/black-friday-laptop-deals-specs.html`,
+      lastmod: "2026-10-30",
       changefreq: "monthly",
     },
   ];
