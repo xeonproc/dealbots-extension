@@ -223,11 +223,6 @@ async function writeSitemap(dates) {
       lastmod: "2026-10-31",
       changefreq: "monthly",
     },
-    {
-      loc: `${siteOrigin}/guides/early-black-friday-deals-buy-now-or-wait.html`,
-      lastmod: "2026-11-01",
-      changefreq: "monthly",
-    },
   ];
   const archiveUrls = dates.map((d) => ({
     loc: `${siteOrigin}/deals/${d}.html`,
