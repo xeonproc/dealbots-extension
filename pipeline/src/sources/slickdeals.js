@@ -48,7 +48,7 @@ function voteVelocity(thumbScore, pubDate) {
 
 function parseItem(itemXml) {
   const title = decodeEntities(extractTag(itemXml, "title"));
-  const link = extractTag(itemXml, "link");
+  const link = decodeEntities(extractTag(itemXml, "link"));
   const pubDate = extractTag(itemXml, "pubDate");
   const body = extractTag(itemXml, "content:encoded") || extractTag(itemXml, "description");
 

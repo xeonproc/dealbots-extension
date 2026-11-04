@@ -27,6 +27,8 @@ export function buildFeed(rankedDeals, { paused = false, now = new Date() } = {}
       discountPct: d.discountPct ?? null,
       priceClaim: d.priceClaim || null,
       priceHistoryChecked: d.priceHistoryChecked === true,
+      priceVerified: d.priceVerified === true && typeof d.verifiedAt === "string",
+      verifiedAt: d.priceVerified === true && typeof d.verifiedAt === "string" ? d.verifiedAt : null,
       // Fallback badge for items with zero price evidence of any kind —
       // grounded in real community engagement (upvotes/hour > 0), never
       // shown just because an item lacks a discount claim. Only set when
