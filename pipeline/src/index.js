@@ -20,8 +20,9 @@ const outputPath = path.join(__dirname, "..", "..", "extension", "deals.json");
 
 // Returns the final, ranked-and-blurbed deals ready for buildFeed().
 // Each source discovers and filters on its own. Prices and the
-// price-history flag are set before Claude runs; Claude only writes the
-// blurb (see rankWithClaude.js).
+// price-history flag are set before Claude runs. Slickdeals picks are
+// checked against the source thread and the product page before the
+// blurb is written. Claude only writes the blurb (see rankWithClaude.js).
 async function getRankedDeals() {
   if (config.dataSource === "slickdeals") {
     console.log("[pipeline] DATA_SOURCE=slickdeals — reading the public Slickdeals RSS feed.");

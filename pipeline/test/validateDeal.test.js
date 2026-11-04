@@ -49,3 +49,38 @@ test("drops a price-history verdict that is not backed by a real discount", () =
 test("drops a deal with no price", () => {
   assert.match(dealNumberError({ price: null, listPrice: 10, discountPct: 50 }), /invalid price/);
 });
+
+test("a verified price needs a timestamp, and an unverified price has none", () => {
+  assert.equal(
+    dealNumberError({
+      price: 9,
+      listPrice: null,
+      discountPct: null,
+      priceVerified: true,
+      verifiedAt: "2026-11-04T18:00:00.000Z",
+    }),
+    null
+  );
+  assert.equal(
+    dealNumberError({ price: 9, listPrice: null, discountPct: null, priceVerified: false, verifiedAt: null }),
+    null
+  );
+  assert.match(
+    dealNumberError({ price: 9, listPrice: null, discountPct: null, priceVerified: true }),
+    /verifiedAt/
+  );
+  assert.match(
+    dealNumberError({
+      price: 9,
+      listPrice: null,
+      discountPct: null,
+      priceVerified: false,
+      verifiedAt: "2026-11-04T18:00:00.000Z",
+    }),
+    /verifiedAt/
+  );
+  assert.match(
+    dealNumberError({ price: 9, listPrice: null, discountPct: null, priceVerified: "yes" }),
+    /priceVerified/
+  );
+});

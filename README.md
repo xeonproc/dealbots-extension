@@ -14,11 +14,13 @@ the rest of the day's picks. Live at:
 ```
 pipeline/  (run daily, e.g. via GitHub Actions)
   1. Fetch candidate posts        -> sources/slickdeals.js (Slickdeals' public RSS feed)
-  2. Parse price in code, blurb   -> parseDealText.js + rankSlickdeals.js (Claude writes only the blurb)
-  3. Write feed                   -> buildFeed.js -> extension/deals.json
-  4. Write archive + sitemap      -> archive.js -> deals/<date>.html, sitemap.xml, robots.txt
-  5. Post to socials (optional)   -> notify.js -> Telegram / Mastodon, if configured
-  6. `git push`                   -> GitHub Pages republishes everything
+  2. Parse price in code          -> parseDealText.js
+  3. Re-check before publishing   -> verifyDeal.js (thread still open; product-page price within 10%)
+  4. Blurb                        -> rankSlickdeals.js (Claude writes only the blurb)
+  5. Write feed                   -> buildFeed.js -> extension/deals.json
+  6. Write archive + sitemap      -> archive.js -> deals/<date>.html, sitemap.xml, robots.txt
+  7. Post to socials (optional)   -> notify.js -> Telegram / Mastodon, if configured
+  8. `git push`                   -> GitHub Pages republishes everything
 
 extension/  (Chrome Manifest V3 extension)
   popup.js fetches the live GitHub Pages feed (falls back to the bundled
@@ -74,7 +76,24 @@ written. Claude only writes the blurb under "Why this made the cut", and
 a dollar amount or "N% off" that doesn't match the parsed price fields is
 dropped. The "checked against
 price history" flag is set only by the Keepa/fixture path, which compares
-the price to the product's own 90-day average.
+the price to the product's own 90-day average. `sources/keepaLive.js` is
+still an unimplemented stub and needs a paid key; the daily path does not
+call it.
+
+Before the blurb is written, the pipeline re-fetches the source thread and
+drops the post when that thread is marked expired or sold out. Posts from
+the last 24 hours rank higher. It also fetches the product page and drops
+the pick when the price on that page is more than 10% above the parsed
+price. A coupon counts only when the page shows one: a percent off, a
+dollar amount, or a coupon price. A checkout code that appears only in the
+post is not applied, so the price printed on the page is the one compared.
+If the product page is blocked or the price cannot be read, the pick stays
+with `priceVerified: false` and ranks behind any pick whose price did
+verify, so an unverified pick is not first when a verified one exists.
+`verifiedAt` is set only when `priceVerified` is true. The check reads the
+price the product link itself shows, which can be a default variation, and
+it gives up when the page is a challenge or the markup has no single
+buy-box price.
 
 ## Status
 
@@ -254,8 +273,10 @@ well if you don't want the next scheduled run to fill it back in.
   verified against Slickdeals' Terms of Service. Worth revisiting before
   treating this as permanent rather than a bootstrap step.
 - **Price accuracy**: the Associates Operating Agreement requires displayed
-  prices to be accurate/current. Since the feed is only as fresh as the
-  last pipeline run, don't let it go stale — re-run at least daily.
+  prices to be accurate/current. The daily run drops a pick whose product
+  page is more than 10% above the feed price, and otherwise re-runs at
+  least daily so the feed does not sit stale. A blocked product page can
+  still leave `priceVerified` false.
 - **Chrome Web Store review**: this extension intentionally uses no
   `host_permissions` beyond the feed URL and never modifies pages the user
   visits, which keeps the review surface small. You'll still need a privacy

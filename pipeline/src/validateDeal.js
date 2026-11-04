@@ -15,6 +15,7 @@ export function discountPctFromPrices(price, listPrice) {
 // Null means the deal's numbers are safe to publish. A deal with no list
 // price and no discount is fine (nothing numeric is being claimed). A
 // price-history verdict is only allowed when that discount is real.
+// priceVerified is true only together with a verifiedAt timestamp.
 export function dealNumberError(deal) {
   if (!deal) return "missing deal";
 
@@ -32,7 +33,7 @@ export function dealNumberError(deal) {
     return "price-history verdict without a verified discount";
   }
 
-  if (!hasList && !hasPct) return null;
+  if (!hasList && !hasPct) return priceVerificationError(deal);
 
   if (!hasList || typeof listPrice !== "number" || !Number.isFinite(listPrice)) {
     return "discountPct set without a list price";
@@ -51,6 +52,29 @@ export function dealNumberError(deal) {
     return `discountPct ${discountPct} does not match price/listPrice (${expected})`;
   }
 
+  return priceVerificationError(deal);
+}
+
+// priceVerified and verifiedAt travel together. A confirmed price has a
+// timestamp. An unconfirmed price does not. Deals that never went through
+// the live check omit both, which stays valid.
+export function priceVerificationError(deal) {
+  if (!deal) return null;
+
+  const flagPresent = "priceVerified" in deal && deal.priceVerified != null;
+  if (flagPresent && typeof deal.priceVerified !== "boolean") {
+    return "priceVerified must be true or false";
+  }
+
+  const stamp = deal.verifiedAt;
+  const stampPresent = stamp != null && stamp !== "";
+  if (deal.priceVerified === true) {
+    if (typeof stamp !== "string" || Number.isNaN(Date.parse(stamp))) {
+      return "verified price missing verifiedAt";
+    }
+    return null;
+  }
+  if (stampPresent) return "verifiedAt set without a verified price";
   return null;
 }
 

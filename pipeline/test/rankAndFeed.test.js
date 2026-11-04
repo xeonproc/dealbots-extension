@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { rankSlickdealsDeterministic } from "../src/rankSlickdeals.js";
+import { orderVerifiedDeals, rankSlickdealsDeterministic } from "../src/rankSlickdeals.js";
 import { addBlurbs, buildBlurbPrompt, cleanWhy, titleForPrompt } from "../src/rankWithClaude.js";
 import { buildFeed } from "../src/buildFeed.js";
 import { findCandidates, findManualCandidates } from "../src/analyze.js";
@@ -60,6 +60,65 @@ test("slickdeals ranking uses parsed prices and never asks the model for them", 
   assert.equal(ranked[1].discountPct, 60);
   assert.equal(ranked[1].priceHistoryChecked, false);
   assert.ok(ranked.every((d) => dealNumberError({ ...d, price: d.currentPrice }) == null));
+});
+
+test("posts from the last day outrank an otherwise equal older post", () => {
+  const now = Date.parse("2026-11-04T18:00:00.000Z");
+  const ranked = rankSlickdealsDeterministic(
+    [
+      {
+        asin: "B0OLDPOST",
+        title: "Older Blanket $10",
+        rawText: "was $40",
+        image: "https://example.com/old.jpg",
+        voteVelocity: 5,
+        pubDate: "2026-11-03T17:59:59.000Z",
+      },
+      {
+        asin: "B0FRESH",
+        title: "Fresh Blanket $10",
+        rawText: "was $40",
+        image: "https://example.com/new.jpg",
+        voteVelocity: 5,
+        pubDate: "2026-11-03T18:00:00.000Z",
+      },
+    ],
+    2,
+    now
+  );
+  assert.equal(ranked[0].asin, "B0FRESH");
+});
+
+test("a verified price stays ahead of a stronger unverified card", () => {
+  const verifiedAt = "2026-11-04T18:00:00.000Z";
+  const ordered = orderVerifiedDeals([
+    {
+      asin: "B0UNVERIFIED",
+      currentPrice: 10,
+      listPrice: 40,
+      discountPct: 75,
+      priceClaim: null,
+      priceVerified: false,
+      verifiedAt: null,
+      image: "https://example.com/big.jpg",
+      voteVelocity: 80,
+      requiresCode: false,
+    },
+    {
+      asin: "B0VERIFIED",
+      currentPrice: 18,
+      listPrice: null,
+      discountPct: null,
+      priceClaim: null,
+      priceVerified: true,
+      verifiedAt,
+      image: "",
+      voteVelocity: 1,
+      requiresCode: false,
+    },
+  ]);
+  assert.equal(ordered[0].asin, "B0VERIFIED");
+  assert.equal(dealNumberError({ ...ordered[0], price: ordered[0].currentPrice }), null);
 });
 
 test("featured slot prefers an imaged discount over an imageless one", () => {
@@ -263,7 +322,27 @@ test("feed adds generatedAt, paused, and a per-pick date without dropping old fi
   assert.equal(feed.deals[0].listPrice, 49.99);
   assert.equal(feed.deals[0].discountPct, 50);
   assert.equal(feed.deals[0].priceHistoryChecked, true);
+  assert.equal(feed.deals[0].priceVerified, false);
+  assert.equal(feed.deals[0].verifiedAt, null);
   assert.equal(feed.deals[0].blurb, "Compact wireless earbuds with a charging case.");
+
+  const verified = buildFeed(
+    [
+      {
+        asin: "B0TEST0001",
+        title: "Wireless Earbuds",
+        currentPrice: 24.99,
+        listPrice: 49.99,
+        discountPct: 50,
+        priceVerified: true,
+        verifiedAt: "2026-10-13T15:04:00.000Z",
+        blurb: "Compact wireless earbuds with a charging case.",
+      },
+    ],
+    { now }
+  );
+  assert.equal(verified.deals[0].priceVerified, true);
+  assert.equal(verified.deals[0].verifiedAt, "2026-10-13T15:04:00.000Z");
   assert.equal(feed.deals[0].url, "https://www.amazon.com/dp/B0TEST0001?tag=dealbots00-20");
 
   // Fields the store build (popup 1.0.11) already reads.
