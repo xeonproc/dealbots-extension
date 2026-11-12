@@ -180,7 +180,7 @@ async function writeSitemap(dates) {
     },
     {
       loc: `${siteOrigin}/guides/index.html`,
-      lastmod: "2026-11-11",
+      lastmod: "2026-11-12",
       changefreq: "monthly",
     },
     {
@@ -271,6 +271,11 @@ async function writeSitemap(dates) {
     {
       loc: `${siteOrigin}/guides/black-friday-smartwatch-fitness-tracker-deals.html`,
       lastmod: "2026-11-11",
+      changefreq: "monthly",
+    },
+    {
+      loc: `${siteOrigin}/guides/black-friday-tablet-ereader-deals.html`,
+      lastmod: "2026-11-12",
       changefreq: "monthly",
     },
   ];
