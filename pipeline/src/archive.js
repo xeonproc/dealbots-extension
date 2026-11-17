@@ -298,6 +298,11 @@ async function writeSitemap(dates) {
       lastmod: "2026-11-16",
       changefreq: "monthly",
     },
+    {
+      loc: `${siteOrigin}/guides/black-friday-camera-deals.html`,
+      lastmod: "2026-11-17",
+      changefreq: "monthly",
+    },
   ];
   const archiveUrls = dates.map((d) => ({
     loc: `${siteOrigin}/deals/${d}.html`,
