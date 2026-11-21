@@ -318,6 +318,11 @@ async function writeSitemap(dates) {
       lastmod: "2026-11-20",
       changefreq: "monthly",
     },
+    {
+      loc: `${siteOrigin}/guides/black-friday-soundbar-speaker-deals.html`,
+      lastmod: "2026-11-21",
+      changefreq: "monthly",
+    },
   ];
   const archiveUrls = dates.map((d) => ({
     loc: `${siteOrigin}/deals/${d}.html`,
