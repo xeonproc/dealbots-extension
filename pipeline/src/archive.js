@@ -328,6 +328,11 @@ async function writeSitemap(dates) {
       lastmod: "2026-11-22",
       changefreq: "monthly",
     },
+    {
+      loc: `${siteOrigin}/guides/black-friday-air-purifier-heater-humidifier-deals.html`,
+      lastmod: "2026-11-23",
+      changefreq: "monthly",
+    },
   ];
   const archiveUrls = dates.map((d) => ({
     loc: `${siteOrigin}/deals/${d}.html`,
