@@ -333,6 +333,11 @@ async function writeSitemap(dates) {
       lastmod: "2026-11-23",
       changefreq: "monthly",
     },
+    {
+      loc: `${siteOrigin}/guides/black-friday-ebike-electric-scooter-deals.html`,
+      lastmod: "2026-11-24",
+      changefreq: "monthly",
+    },
   ];
   const archiveUrls = dates.map((d) => ({
     loc: `${siteOrigin}/deals/${d}.html`,
