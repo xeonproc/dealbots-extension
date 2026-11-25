@@ -338,6 +338,11 @@ async function writeSitemap(dates) {
       lastmod: "2026-11-24",
       changefreq: "monthly",
     },
+    {
+      loc: `${siteOrigin}/guides/black-friday-home-fitness-equipment-deals.html`,
+      lastmod: "2026-11-25",
+      changefreq: "monthly",
+    },
   ];
   const archiveUrls = dates.map((d) => ({
     loc: `${siteOrigin}/deals/${d}.html`,
