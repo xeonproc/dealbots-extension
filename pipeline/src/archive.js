@@ -343,6 +343,11 @@ async function writeSitemap(dates) {
       lastmod: "2026-11-25",
       changefreq: "monthly",
     },
+    {
+      loc: `${siteOrigin}/guides/black-friday-dash-cam-car-tech-deals.html`,
+      lastmod: "2026-11-26",
+      changefreq: "monthly",
+    },
   ];
   const archiveUrls = dates.map((d) => ({
     loc: `${siteOrigin}/deals/${d}.html`,
